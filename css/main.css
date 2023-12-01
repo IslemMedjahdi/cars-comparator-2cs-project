@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    height: 100vh;
+}
+
+.logo {
+    height: 50px;
+    width: 100px;
+    object-fit: contain;
+}
+
+.background-overlay {
+    opacity: 0.2;
+    background-image: url(/cars-comparer-2cs-project/assets/images/brands-background.png);
+    background-size: contain;
+    background-repeat: repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    filter: brightness(0) invert(1) blur(2px);
+}
