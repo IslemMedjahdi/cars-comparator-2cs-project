@@ -31,10 +31,11 @@ class SharedAdminView
                     <ul class="nav nav-pills flex-column mb-auto" style="z-index: 100">
                         <?php
                         foreach ($this->sidebarItems as $item) {
+                            $isActive = rtrim(explode("?", $_SERVER['REQUEST_URI'])[0], "/") === $item['url'] || ($item['url'] !== "/cars-comparer-2cs-project/admin" && str_starts_with(rtrim(explode("?", $_SERVER['REQUEST_URI'])[0]), $item['url']));
                             ?>
                             <li class="mt-2">
                                 <a href="<?= $item['url'] ?>"
-                                    class="nav-link text-white <?= $item['url'] === rtrim(explode("?", $_SERVER['REQUEST_URI'])[0], "/") ? "bg-primary" : "bg-secondary" ?>">
+                                    class="nav-link text-white <?= $isActive ? "bg-primary" : "bg-secondary" ?>">
                                     <i class="fas <?= $item['icon'] ?>"></i>
                                     <?= $item['name'] ?>
                                 </a>
@@ -46,7 +47,6 @@ class SharedAdminView
                 </div>
                 <main>
                     <?php
-
                     if ($mainContent) {
                         echo $mainContent;
                     }
