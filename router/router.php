@@ -1,7 +1,10 @@
 <?php
 require_once __DIR__ . '/../views/AuthView.php';
+
 require_once __DIR__ . '/../views/admin/AdminHomeView.php';
 require_once __DIR__ . '/../views/admin/VehiclesManagementView.php';
+require_once __DIR__ . '/../views/admin/BrandsManagementView.php';
+
 require_once __DIR__ . '/../utils/SessionUtils.php';
 
 SessionUtils::startSession();
@@ -14,6 +17,8 @@ $request = rtrim(explode("?", $_SERVER['REQUEST_URI'])[0], "/");
 $request = substr($request, strlen($base_path));
 
 $user = SessionUtils::getSessionVariable('user');
+
+ini_set('display_errors', 0);
 
 function checkRoles($roles)
 {
@@ -78,8 +83,32 @@ switch ($request) {
             header("Location: " . $base_path);
             exit();
         }
-        $authViews = new VehiclesManagementView();
-        $authViews->displayCreateVehiclePage();
+        $vehiclesManagementView = new VehiclesManagementView();
+        $vehiclesManagementView->displayCreateVehiclePage();
+        break;
+    case '/admin/brands':
+        if (!$user) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        if (!checkRoles(['admin'])) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        $brandsManagementView = new BrandsManagementView();
+        $brandsManagementView->displayBrandsPage();
+        break;
+    case '/admin/brands/create':
+        if (!$user) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        if (!checkRoles(['admin'])) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        $brandsManagementView = new BrandsManagementView();
+        $brandsManagementView->displayCreateBrandPage();
         break;
     default:
         echo "404";

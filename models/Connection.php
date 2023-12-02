@@ -30,5 +30,16 @@ class Connection
     {
         $connection = null;
     }
+
+    protected function uploadImage($file, $targetDirectory = "")
+    {
+        $targetFile = __DIR__ . "/../uploads" . $targetDirectory . "/" . basename($file["name"]);
+
+        if (move_uploaded_file($file["tmp_name"], $targetFile)) {
+            return "/uploads" . $targetDirectory . "/" . basename($file["name"]);
+        } else {
+            throw new ErrorException('Error uploading file.');
+        }
+    }
 }
 ?>

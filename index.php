@@ -13,7 +13,14 @@
 </head>
 
 <body>
+    <div id="loader" class="position-absolute align-items-center justify-content-center w-100"
+        style="height: 100vh;background-color: #343a404f;display: none;z-index: 9999;">
+        <div class="loader text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
     <?php require_once("./router/router.php") ?>
+
     <script src="/cars-comparer-2cs-project/js/main.js"></script>
     <script src="/cars-comparer-2cs-project/js/jquery-3.7.1.min.js"></script>
     <script src="/cars-comparer-2cs-project/js/bootstrap.min.js"></script>

@@ -15,6 +15,8 @@ class UserModel extends Connection
 
         $result = $stmt->fetch();
 
+        $this->disconnect($pdo);
+
         if ($result) {
             return true;
         } else {

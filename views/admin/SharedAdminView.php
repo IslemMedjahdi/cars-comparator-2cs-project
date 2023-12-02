@@ -10,6 +10,11 @@ class SharedAdminView
             'icon' => 'fa-house',
         ],
         [
+            'name' => 'Brands',
+            'url' => '/cars-comparer-2cs-project/admin/brands',
+            'icon' => 'fa-car-tunnel'
+        ],
+        [
             'name' => 'Vehicles',
             'url' => '/cars-comparer-2cs-project/admin/vehicles',
             'icon' => 'fa-car',
@@ -21,7 +26,7 @@ class SharedAdminView
         ?>
         <div class="container-fluid">
             <div class="row">
-                <div class=" position-relative d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
+                <div class="position-relative d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
                     style="width: 280px;height: 100vh">
                     <div class="background-overlay"></div>
                     <a href="/cars-comparer-2cs-project/admin" style="z-index: 100">
@@ -49,7 +54,7 @@ class SharedAdminView
                         <i class="fa-solid fa-right-from-bracket"></i> Logout
                     </button>
                 </div>
-                <main>
+                <main class="bg-light" style="width: calc(100% - 280px);height: 100vh; overflow-y: auto;">
                     <?php
                     if ($mainContent) {
                         echo $mainContent;
