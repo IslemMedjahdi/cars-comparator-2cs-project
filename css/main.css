@@ -21,7 +21,7 @@ body {
 .background-overlay {
     opacity: 0.2;
     background-image: url(/cars-comparer-2cs-project/assets/images/brands-background.png);
-    background-size: contain;
+    background-size: cover;
     background-repeat: repeat;
     position: absolute;
     top: 0;
@@ -29,4 +29,5 @@ body {
     height: 100%;
     width: 100%;
     filter: brightness(0) invert(1) blur(2px);
+    z-index: 0;
 }

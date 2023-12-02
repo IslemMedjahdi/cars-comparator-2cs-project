@@ -46,9 +46,9 @@ function login() {
     success: function (response) {
       response = JSON.parse(response);
       if (response.status === 200) {
-        $("#message").html(`<div class="alert alert-success" role="alert">
-        ${response.message}
-      </div>`);
+        if (response.user.role === "admin")
+          window.location.href = "/cars-comparer-2cs-project/admin/";
+        else window.location.href = "/cars-comparer-2cs-project/";
       } else {
         $("#message").html(`<div class="alert alert-danger" role="alert">
         ${response.message}
