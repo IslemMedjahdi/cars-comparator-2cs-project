@@ -68,6 +68,19 @@ class UserController
         }
     }
 
+    public function logout()
+    {
+        SessionUtils::destroySession();
+
+        echo json_encode(
+            array(
+                'status' => 200,
+                'message' => 'Logout successfully'
+            )
+        );
+
+    }
+
 }
 
 ?>

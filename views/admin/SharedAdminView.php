@@ -25,7 +25,8 @@ class SharedAdminView
                     style="width: 280px;height: 100vh">
                     <div class="background-overlay"></div>
                     <a href="/cars-comparer-2cs-project/admin" style="z-index: 100">
-                        <img src="/cars-comparer-2cs-project/assets/images/logo.svg" alt="logo" class="logo  w-100" />
+                        <img src="/cars-comparer-2cs-project/assets/images/logo.svg" alt="logo"
+                            class="logo  w-100 white-filter" />
                     </a>
                     <hr>
                     <ul class="nav nav-pills flex-column mb-auto" style="z-index: 100">
@@ -44,6 +45,9 @@ class SharedAdminView
                         }
                         ?>
                     </ul>
+                    <button onclick="logout()" class="btn btn-danger text-start" style="z-index: 100">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>
                 </div>
                 <main>
                     <?php

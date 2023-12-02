@@ -57,3 +57,16 @@ function login() {
     },
   });
 }
+
+function logout() {
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/auth/logout.php",
+    method: "GET",
+    success: function (response) {
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        window.location.href = "/cars-comparer-2cs-project/auth/login";
+      }
+    },
+  });
+}

@@ -12,7 +12,7 @@ class AuthView
                     <div class="col-md-8">
                         <div class="card shadow-sm">
                             <div class="card-header text-center">
-                                <img src="/cars-comparer-2cs-project/assets/images/logo.svg" alt="Your Logo" class="img-fluid"
+                                <img src="/cars-comparer-2cs-project/assets/images/logo.svg" alt="logo" class="img-fluid"
                                     style="max-height: 50px;">
                             </div>
                             <div class="card-body text-center border-bottom">
@@ -83,7 +83,7 @@ class AuthView
                     <div class="col-md-8">
                         <div class="card shadow-sm">
                             <div class="card-header text-center">
-                                <img src="/cars-comparer-2cs-project/assets/images/logo.svg" alt="Your Logo" class="img-fluid"
+                                <img src="/cars-comparer-2cs-project/assets/images/logo.svg" alt="logo" class="img-fluid"
                                     style="max-height: 50px;">
                             </div>
                             <div class="card-body text-center border-bottom">
