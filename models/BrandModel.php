@@ -20,7 +20,7 @@ class BrandModel extends Connection
         }
 
         if (isset($LogoImage) && $LogoImage['error'] === 0) {
-            $LogoImageURL = $this->uploadImage($LogoImage);
+            $LogoImageURL = $this->uploadImage($LogoImage, "/brands");
         } else {
             throw new ErrorException("Logo image is required");
         }
