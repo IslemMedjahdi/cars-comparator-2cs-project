@@ -3,5 +3,8 @@ require_once(__DIR__ . "/../../controllers/BrandController.php");
 
 $brandController = new BrandController();
 
-$brandController->createBrand();
+$response = $brandController->createBrand();
+
+echo json_encode($response);
+
 ?>

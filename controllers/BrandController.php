@@ -11,13 +11,10 @@ class BrandController
     {
 
         if (SessionUtils::getSessionVariable('user')['role'] != 'admin') {
-            echo json_encode(
-                array(
-                    'status' => 400,
-                    'message' => "You must be an admin in to create a brand"
-                )
+            return array(
+                'status' => 400,
+                'message' => "You must be an admin in to create a brand"
             );
-            return;
         }
 
         $brandModel = new BrandModel();
@@ -32,18 +29,36 @@ class BrandController
         try {
             $brandModel->addBrand($name, $countryOfOrigin, $yearFounded, $websiteURL, $description, $logoImage);
 
-            echo json_encode(
-                array(
-                    'status' => 200,
-                    'message' => 'Brand created successfully'
-                )
+            return array(
+                'status' => 200,
+                'message' => 'Brand created successfully'
             );
+
         } catch (ErrorException $e) {
-            echo json_encode(
-                array(
-                    'status' => 400,
-                    'message' => $e->getMessage()
-                )
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+
+        }
+    }
+
+    public function getBrands()
+    {
+        $brandModel = new BrandModel();
+
+        try {
+            $brands = $brandModel->getBrands();
+
+            return array(
+                'status' => 200,
+                'data' => $brands
+            );
+
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
             );
         }
     }

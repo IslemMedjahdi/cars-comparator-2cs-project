@@ -22,18 +22,14 @@ class UserController
         try {
             $userModel->signup($name, $lastName, $email, $gender, $birthDate, $password);
 
-            echo json_encode(
-                array(
-                    'status' => 200,
-                    'message' => 'User created successfully, Wait for the admin to approve your account'
-                )
+            return array(
+                'status' => 200,
+                'message' => 'User created successfully, Wait for the admin to approve your account'
             );
         } catch (ErrorException $e) {
-            echo json_encode(
-                array(
-                    'status' => 400,
-                    'message' => $e->getMessage()
-                )
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
             );
         }
     }
@@ -50,20 +46,15 @@ class UserController
 
             SessionUtils::setSessionVariable('user', $user);
 
-            echo json_encode(
-                array(
-                    'status' => 200,
-                    'message' => 'Login successfully',
-                    'user' => $user
-                )
+            return array(
+                'status' => 200,
+                'message' => 'Login successfully',
+                'user' => $user
             );
-
         } catch (ErrorException $e) {
-            echo json_encode(
-                array(
-                    'status' => 400,
-                    'message' => $e->getMessage()
-                )
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
             );
         }
     }
@@ -72,11 +63,9 @@ class UserController
     {
         SessionUtils::destroySession();
 
-        echo json_encode(
-            array(
-                'status' => 200,
-                'message' => 'Logout successfully'
-            )
+        return array(
+            'status' => 200,
+            'message' => 'Logout successfully'
         );
 
     }

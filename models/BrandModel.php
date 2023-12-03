@@ -40,6 +40,25 @@ class BrandModel extends Connection
         }
     }
 
+    public function getBrands()
+    {
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT * FROM brand";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+
+            $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $this->disconnect($pdo);
+
+            return $brands;
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
 
 }
 

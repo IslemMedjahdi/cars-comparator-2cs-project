@@ -4,6 +4,9 @@ require_once("../../controllers/UserController.php");
 
 $userController = new UserController();
 
-$userController->login();
+$response = $userController->login();
+
+echo json_encode($response);
+
 
 ?>
