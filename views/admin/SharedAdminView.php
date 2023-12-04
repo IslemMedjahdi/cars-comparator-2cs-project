@@ -7,17 +7,17 @@ class SharedAdminView
         [
             'name' => 'Home',
             'url' => '/cars-comparer-2cs-project/admin',
-            'icon' => 'fa-house',
+            'icon' => 'bi bi-house-door-fill',
         ],
         [
             'name' => 'Brands',
             'url' => '/cars-comparer-2cs-project/admin/brands',
-            'icon' => 'fa-car-tunnel'
+            'icon' => 'bi bi-building'
         ],
         [
             'name' => 'Vehicles',
             'url' => '/cars-comparer-2cs-project/admin/vehicles',
-            'icon' => 'fa-car',
+            'icon' => 'bi bi-car-front',
         ],
     ];
 
@@ -42,7 +42,7 @@ class SharedAdminView
                             <li class="mt-2">
                                 <a href="<?= $item['url'] ?>"
                                     class="nav-link text-white <?= $isActive ? "bg-primary" : "bg-secondary" ?>">
-                                    <i class="fas <?= $item['icon'] ?>"></i>
+                                    <i class="<?= $item['icon'] ?>"></i>
                                     <?= $item['name'] ?>
                                 </a>
                             </li>
@@ -51,7 +51,7 @@ class SharedAdminView
                         ?>
                     </ul>
                     <button onclick="logout()" class="btn btn-danger text-start" style="z-index: 100">
-                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                        <i class="bi bi-box-arrow-right"></i> Logout
                     </button>
                 </div>
                 <main class="bg-light" style="width: calc(100% - 280px);height: 100vh; overflow-y: auto;">

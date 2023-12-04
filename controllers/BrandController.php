@@ -19,12 +19,12 @@ class BrandController
 
         $brandModel = new BrandModel();
 
-        $name = $_POST['name'];
-        $countryOfOrigin = $_POST['countryOfOrigin'];
-        $yearFounded = $_POST['yearFounded'];
-        $websiteURL = $_POST['websiteURL'];
-        $description = $_POST['description'];
-        $logoImage = $_FILES['logoImage'];
+        $name = $_POST['name'] ?? null;
+        $countryOfOrigin = $_POST['countryOfOrigin'] ?? null;
+        $yearFounded = $_POST['yearFounded'] ?? null;
+        $websiteURL = $_POST['websiteURL'] ?? null;
+        $description = $_POST['description'] ?? null;
+        $logoImage = $_FILES['logoImage'] ?? null;
 
         try {
             $brandModel->addBrand($name, $countryOfOrigin, $yearFounded, $websiteURL, $description, $logoImage);

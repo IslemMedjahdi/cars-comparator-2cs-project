@@ -33,10 +33,14 @@ class Connection
 
     protected function uploadImage($file, $targetDirectory = "")
     {
-        $targetFile = __DIR__ . "/../uploads" . $targetDirectory . "/" . basename($file["name"]);
+        $uniqueFilename = uniqid() . '_' . time();
+
+        $fileExtension = pathinfo($file["name"], PATHINFO_EXTENSION);
+
+        $targetFile = __DIR__ . "/../uploads" . $targetDirectory . "/" . $uniqueFilename . "." . $fileExtension;
 
         if (move_uploaded_file($file["tmp_name"], $targetFile)) {
-            return "/uploads" . $targetDirectory . "/" . basename($file["name"]);
+            return "/uploads" . $targetDirectory . "/" . $uniqueFilename . "." . $fileExtension;
         } else {
             throw new ErrorException('Error uploading file.');
         }

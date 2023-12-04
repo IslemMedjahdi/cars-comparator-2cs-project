@@ -18,7 +18,7 @@ $request = substr($request, strlen($base_path));
 
 $user = SessionUtils::getSessionVariable('user');
 
-ini_set('display_errors', 0);
+
 
 function checkRoles($roles)
 {

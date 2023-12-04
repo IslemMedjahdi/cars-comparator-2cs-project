@@ -12,12 +12,12 @@ class UserController
     {
         $userModel = new UserModel();
 
-        $name = $_POST['firstName'];
-        $lastName = $_POST['lastName'];
-        $email = $_POST['email'];
-        $gender = $_POST['gender'];
-        $birthDate = $_POST['birthDate'];
-        $password = $_POST['password'];
+        $name = $_POST['firstName'] ?? null;
+        $lastName = $_POST['lastName'] ?? null;
+        $email = $_POST['email'] ?? null;
+        $gender = $_POST['gender'] ?? null;
+        $birthDate = $_POST['birthDate'] ?? null;
+        $password = $_POST['password'] ?? null;
 
         try {
             $userModel->signup($name, $lastName, $email, $gender, $birthDate, $password);
@@ -38,8 +38,8 @@ class UserController
     {
         $userModel = new UserModel();
 
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $email = $_POST['email'] ?? null;
+        $password = $_POST['password'] ?? null;
 
         try {
             $user = $userModel->login($email, $password);

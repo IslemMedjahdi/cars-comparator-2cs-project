@@ -7,8 +7,17 @@ class BrandModel extends Connection
 {
     public function addBrand($name, $CountryOfOrigin, $YearFounded, $WebsiteURL = null, $Description = null, $LogoImage)
     {
-        if (empty($name) || empty($CountryOfOrigin) || empty($YearFounded)) {
-            throw new ErrorException("All fields are required");
+
+        if (empty($name)) {
+            throw new ErrorException("Name is required");
+        }
+
+        if (empty($CountryOfOrigin)) {
+            throw new ErrorException("Country of origin is required");
+        }
+
+        if (empty($YearFounded)) {
+            throw new ErrorException("Year founded is required");
         }
 
         if (!is_numeric($YearFounded)) {
