@@ -62,5 +62,35 @@ class BrandController
             );
         }
     }
+
+    public function deleteBrand()
+    {
+        if (SessionUtils::getSessionVariable('user')['role'] != 'admin') {
+            return array(
+                'status' => 400,
+                'message' => "You must be an admin in to delete a brand"
+            );
+        }
+
+        $brandModel = new BrandModel();
+
+        $id = $_POST['id'] ?? null;
+
+        try {
+            $brandModel->deleteBrand($id);
+
+            return array(
+                'status' => 200,
+                'message' => 'Brand deleted successfully'
+            );
+
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+
+        }
+    }
 }
 ?>

@@ -68,6 +68,21 @@ class BrandModel extends Connection
         }
     }
 
+    public function deleteBrand($id)
+    {
+        $pdo = $this->connect();
+
+        try {
+            $sql = "DELETE FROM brand WHERE id = :id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['id' => $id]);
+
+            $this->disconnect($pdo);
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
 
 }
 

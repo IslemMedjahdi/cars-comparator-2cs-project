@@ -81,8 +81,6 @@ class BrandsManagementView extends SharedAdminView
 
         $brands = $response["data"];
 
-        $status = $response["status"];
-
         ?>
         <div class="container-fluid">
             <div class="row">
