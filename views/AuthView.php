@@ -90,7 +90,6 @@ class AuthView
                                 <h3><strong>Login</strong></h3>
                             </div>
                             <div id="message">
-                                <!-- You can display any login-related messages here -->
                             </div>
                             <div class="card-body">
                                 <div>
