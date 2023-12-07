@@ -18,6 +18,7 @@ body {
     object-fit: contain;
 }
 
+
 .background-overlay {
     opacity: 0.2;
     background-image: url(/cars-comparer-2cs-project/assets/images/brands-background.png);
@@ -88,4 +89,18 @@ body {
 
 .gap-4 {
     gap: 1rem; /* 16px */
+}
+
+main {
+    padding: 10px 12px;
+}
+
+.unit {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #007bff; 
+}
+
+.table td {
+    vertical-align: middle !important;
 }

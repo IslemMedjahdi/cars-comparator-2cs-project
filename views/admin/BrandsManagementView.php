@@ -105,7 +105,6 @@ class BrandsManagementView extends SharedAdminView
         </div>
         </div>
         <?php
-        return;
     }
 
 
@@ -159,7 +158,7 @@ class BrandsManagementView extends SharedAdminView
                             </td>
                             <td><img src="/cars-comparer-2cs-project<?= $brand["LogoImageURL"] ?>" class="logo" /></td>
                             <td>
-                                <div class="d-flex justify-content-between gap-2">
+                                <div class="d-flex gap-2">
                                     <a href="/cars-comparer-2cs-project/admin/brands/edit?id=<?= $brand["id"] ?>"
                                         class="btn btn-primary btn-sm">
                                         <i class="bi bi-pencil-square"></i>
