@@ -70,12 +70,15 @@ class VehicleModel extends Connection
             throw new ErrorException($e->getMessage());
         }
     }
-    public function getVehicles()
+    public function getVehicles($page = 1, $perPage = 10)
     {
         $pdo = $this->connect();
 
         try {
-            $sql = "SELECT vehicle.id, vehicle.model, vehicle.version, vehicle.year, vehicle.height, vehicle.width, vehicle.length, vehicle.consumption, vehicle.engine, vehicle.speed, vehicle.notes, vehicle.fuel_type, vehicle.pricing_range_from, vehicle.pricing_range_to, vehicle.ImageURL, vehicle.acceleration, brand.name as brand_name FROM vehicle INNER JOIN brand ON vehicle.brand_id = brand.id";
+
+            $offset = ($page - 1) * 1;
+
+            $sql = "SELECT vehicle.id, vehicle.model, vehicle.version, vehicle.year, vehicle.height, vehicle.width, vehicle.length, vehicle.consumption, vehicle.engine, vehicle.speed, vehicle.notes, vehicle.fuel_type, vehicle.pricing_range_from, vehicle.pricing_range_to, vehicle.ImageURL, vehicle.acceleration, brand.name as brand_name FROM vehicle INNER JOIN brand ON vehicle.brand_id = brand.id LIMIT $perPage OFFSET $offset";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -83,6 +86,24 @@ class VehicleModel extends Connection
             $this->disconnect($pdo);
 
             return $vehicles;
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
+    public function getVehiclesCount()
+    {
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT COUNT(*) FROM vehicle";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $count = $stmt->fetchColumn();
+
+            $this->disconnect($pdo);
+
+            return $count;
         } catch (PDOException $e) {
             throw new ErrorException($e->getMessage());
         }

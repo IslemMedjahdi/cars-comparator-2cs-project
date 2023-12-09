@@ -144,6 +144,11 @@ class VehiclesManagementView extends SharedAdminView
 
         $vehicles = $response["data"];
 
+        $currentPage = $response["currentPage"];
+
+        $totalPages = $response["totalPages"];
+
+
         ?>
         <div class="container-fluid">
             <div class="row">
@@ -159,8 +164,13 @@ class VehiclesManagementView extends SharedAdminView
                                     Vehicle</a>
                             </div>
                             <?php
-                            $this->displayVehiclesTable($vehicles)
+                            $this->displayVehiclesTable($vehicles);
+                            ?>
+                            <div class="d-flex justify-content-center">
+                                <?php
+                                $this->displayVehicleTablePagination($totalPages, $currentPage);
                                 ?>
+                            </div>
                         </div>
                     </div>
                 </main>
@@ -238,6 +248,35 @@ class VehiclesManagementView extends SharedAdminView
                 </tbody>
             </table>
         </div>
+        <?php
+    }
+
+    private function displayVehicleTablePagination($totalPages, $currentPage)
+    {
+        ?>
+        <nav>
+            <ul class="pagination">
+                <li class="page-item <?php echo $currentPage == 1 ? "disabled" : ""; ?>">
+                    <a class="page-link"
+                        href="/cars-comparer-2cs-project/admin/vehicles?page=<?php echo $currentPage - 1; ?>">Previous</a>
+                </li>
+                <?php
+                for ($i = 1; $i <= $totalPages; $i++) {
+                    ?>
+                    <li class="page-item <?php echo $i == $currentPage ? "active" : ""; ?>">
+                        <a class="page-link" href="/cars-comparer-2cs-project/admin/vehicles?page=<?php echo $i; ?>">
+                            <?php echo $i; ?>
+                        </a>
+                    </li>
+                    <?php
+                }
+                ?>
+                <li class="page-item <?php echo $totalPages == $currentPage ? "disabled" : ""; ?>">
+                    <a class="page-link"
+                        href="/cars-comparer-2cs-project/admin/vehicles?page=<?php echo $currentPage + 1; ?>">Next</a>
+                </li>
+            </ul>
+        </nav>
         <?php
     }
 

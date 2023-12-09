@@ -55,12 +55,24 @@ class VehicleController
     {
         $vehicleModel = new VehicleModel();
 
+        $page = $_GET['page'] ?? 1;
+
+        if ($page < 1) {
+            $page = 1;
+        }
+
+        $perPage = 10;
+
         try {
-            $vehicles = $vehicleModel->getVehicles();
+            $vehicles = $vehicleModel->getVehicles($page, $perPage);
+
+            $totalPages = ceil($vehicleModel->getVehiclesCount() / $perPage);
 
             return array(
                 'status' => 200,
-                'data' => $vehicles
+                'data' => $vehicles,
+                'totalPages' => $totalPages,
+                'currentPage' => $page
             );
         } catch (ErrorException $e) {
             return array(
