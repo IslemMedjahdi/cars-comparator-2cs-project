@@ -68,7 +68,7 @@ class BrandController
         if (SessionUtils::getSessionVariable('user')['role'] != 'admin') {
             return array(
                 'status' => 400,
-                'message' => "You must be an admin in to delete a brand"
+                'message' => "You must be an admin to delete a brand"
             );
         }
 

@@ -206,3 +206,21 @@ function createVehicle() {
     },
   });
 }
+
+function deleteVehicle(id) {
+  startLoading();
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/vehicles/delete.php",
+    method: "POST",
+    data: {
+      id: id,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        window.location.reload();
+      }
+    },
+  });
+}

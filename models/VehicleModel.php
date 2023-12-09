@@ -108,5 +108,20 @@ class VehicleModel extends Connection
             throw new ErrorException($e->getMessage());
         }
     }
+
+    public function deleteVehicle($id)
+    {
+        $pdo = $this->connect();
+
+        try {
+            $sql = "DELETE FROM vehicle WHERE id = :id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['id' => $id]);
+
+            $this->disconnect($pdo);
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
 }
 ?>

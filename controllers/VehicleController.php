@@ -12,7 +12,7 @@ class VehicleController
         if (SessionUtils::getSessionVariable('user')['role'] != 'admin') {
             return array(
                 'status' => 400,
-                'message' => "You must be an admin in to create a brand"
+                'message' => "You must be an admin to create a vehicle"
             );
         }
 
@@ -73,6 +73,34 @@ class VehicleController
                 'data' => $vehicles,
                 'totalPages' => $totalPages,
                 'currentPage' => $page
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
+
+    public function deleteVehicle()
+    {
+        if (SessionUtils::getSessionVariable('user')['role'] != 'admin') {
+            return array(
+                'status' => 400,
+                'message' => "You must be an admin to delete a vehicle"
+            );
+        }
+
+        $vehicleModel = new VehicleModel();
+
+        $id = $_POST['id'] ?? null;
+
+        try {
+            $vehicleModel->deleteVehicle($id);
+
+            return array(
+                'status' => 200,
+                'message' => "Vehicle deleted successfully"
             );
         } catch (ErrorException $e) {
             return array(
