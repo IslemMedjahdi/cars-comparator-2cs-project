@@ -98,5 +98,47 @@ class UserModel extends Connection
             throw new ErrorException($e->getMessage());
         }
     }
+
+    public function getUsers($page, $perPage)
+    {
+
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT * FROM user LIMIT :page, :perPage";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':page', (int) ($page - 1) * $perPage, PDO::PARAM_INT);
+            $stmt->bindValue(':perPage', (int) $perPage, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $result = $stmt->fetchAll();
+
+            $this->disconnect($pdo);
+
+            return $result;
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
+    public function getUsersCount()
+    {
+
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT COUNT(*) FROM user";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+
+            $result = $stmt->fetchColumn();
+
+            $this->disconnect($pdo);
+
+            return $result;
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
 }
 ?>

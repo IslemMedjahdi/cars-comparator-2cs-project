@@ -10,6 +10,11 @@ class SharedAdminView
             'icon' => 'bi bi-house-door-fill',
         ],
         [
+            'name' => 'Users',
+            'url' => '/cars-comparer-2cs-project/admin/users',
+            'icon' => 'bi bi-people-fill',
+        ],
+        [
             'name' => 'Brands',
             'url' => '/cars-comparer-2cs-project/admin/brands',
             'icon' => 'bi bi-building'

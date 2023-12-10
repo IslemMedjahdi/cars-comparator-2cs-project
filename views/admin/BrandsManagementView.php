@@ -129,9 +129,9 @@ class BrandsManagementView extends SharedAdminView
                     foreach ($brands as $brand) {
                         ?>
                         <tr>
-                            <td>
+                            <th scope="row">
                                 <?= $brand["id"] ?>
-                            </td>
+                            </th>
                             <td>
                                 <?= $brand["name"] ?>
                             </td>

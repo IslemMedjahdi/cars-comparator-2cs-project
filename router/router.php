@@ -4,6 +4,7 @@ require_once __DIR__ . '/../views/AuthView.php';
 require_once __DIR__ . '/../views/admin/AdminHomeView.php';
 require_once __DIR__ . '/../views/admin/VehiclesManagementView.php';
 require_once __DIR__ . '/../views/admin/BrandsManagementView.php';
+require_once __DIR__ . '/../views/admin/UsersManagementView.php';
 require_once __DIR__ . '/../views/user/HomeView.php';
 require_once __DIR__ . '/../views/user/SharedUserView.php';
 require_once __DIR__ . '/../views/user/BrandsView.php';
@@ -112,6 +113,18 @@ switch ($request) {
         }
         $brandsManagementView = new BrandsManagementView();
         $brandsManagementView->displayCreateBrandPage();
+        break;
+    case '/admin/users':
+        if (!$user) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        if (!checkRoles(['admin'])) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        $usersManagementView = new UsersManagementView();
+        $usersManagementView->displayUsersPage();
         break;
     case '':
         $homeView = new HomeView();

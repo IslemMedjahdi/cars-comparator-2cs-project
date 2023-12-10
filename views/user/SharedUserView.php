@@ -65,7 +65,7 @@ class SharedUserView
     {
         $userController = new UserController();
 
-        $user = $userController->getSessionUser()["user"] ?? null;
+        $user = $userController->getSessionUser()["data"] ?? null;
 
         if ($user) {
             ?>

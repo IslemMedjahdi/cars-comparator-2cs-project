@@ -177,7 +177,6 @@ class VehiclesManagementView extends SharedAdminView
                 </main>
             </div>
         </div>
-        </div>
         <?php
 
     }
@@ -206,9 +205,9 @@ class VehiclesManagementView extends SharedAdminView
                     foreach ($vehicles as $vehicle) {
                         ?>
                         <tr>
-                            <td>
+                            <th scope="row">
                                 <?php echo $vehicle["id"]; ?>
-                            </td>
+                            </th>
                             <td>
                                 <?php echo $vehicle["brand_name"]; ?>
                             </td>

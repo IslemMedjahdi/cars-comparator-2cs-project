@@ -101,6 +101,7 @@ main {
     color: #007bff; 
 }
 
-.table td {
+.table td, .table th {
     vertical-align: middle !important;
 }
+

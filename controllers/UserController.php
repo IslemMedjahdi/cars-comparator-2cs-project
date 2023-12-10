@@ -77,12 +77,42 @@ class UserController
         if ($user) {
             return array(
                 'status' => 200,
-                'user' => $user
+                'data' => $user
             );
         } else {
             return array(
                 'status' => 400,
                 'message' => 'User not found'
+            );
+        }
+    }
+
+    public function getUsers()
+    {
+        $userModel = new UserModel();
+
+        $page = $_GET['page'] ?? 1;
+        $perPage = 10;
+
+        if ($page < 1) {
+            $page = 1;
+        }
+
+        try {
+            $users = $userModel->getUsers($page, $perPage);
+
+            $totalPages = ceil($userModel->getUsersCount() / $perPage);
+
+            return array(
+                'status' => 200,
+                'data' => $users,
+                'currentPage' => $page,
+                'totalPages' => $totalPages
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
             );
         }
     }
