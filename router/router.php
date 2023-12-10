@@ -119,11 +119,11 @@ switch ($request) {
         break;
     case '/brands':
         $brandsView = new BrandsView();
-        if (isset($_GET['id'])) {
+        if (!isset($_GET['id'])) {
             $brandsView->displayBrandsPage();
             break;
         }
-        $brandsView->displayBrandsPage();
+        $brandsView->displayBrandByIdPage();
         break;
     default:
         $sharedView = new SharedUserView();

@@ -58,6 +58,65 @@ class BrandsView extends SharedUserView
         <?php
     }
 
+    public function displayBrandByIdPage()
+    {
+        $brandController = new BrandController();
+
+        $brand = $brandController->getBrandById()["data"] ?? null;
+
+        if ($brand == null) {
+            header("Location: /cars-comparer-2cs-project/brands");
+            exit();
+        }
+
+        $this->displayHeader();
+        $this->displayHorizontalMenu();
+        $this->displayBrandDetails($brand);
+        $this->displayFooter();
+    }
+
+    private function displayBrandDetails($brand)
+    {
+        ?>
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <div class="mt-4">
+                <h2 class="head">Brand Details</h2>
+            </div>
+            <div class="w-100 mt-4" style="max-width: 1377px;">
+                <btn class="rounded-0 bg-light border p-4 d-flex gap-4">
+                    <div>
+                        <img class="logo d-flex" style="height: 5rem"
+                            src="/cars-comparer-2cs-project/<?php echo $brand["LogoImageURL"]; ?>"
+                            alt="<?php echo $brand["name"]; ?>">
+                    </div>
+                    <div class="d-flex align-items-start gap-2 flex-column">
+                        <h1 class="font-weight-bold">
+                            <?php echo $brand["name"]; ?>
+                        </h1>
+                        <p class="text-justify">
+                            <?php echo $brand["Description"]; ?>
+                        </p>
+                        <p class="text-justify">
+                            <span class="font-weight-bold">Country of origin: </span>
+                            <?php echo $brand["CountryOfOrigin"]; ?>
+                        </p>
+                        <p class="text-justify">
+                            <span class="font-weight-bold">Year founded: </span>
+                            <?php echo $brand["YearFounded"]; ?>
+                        </p>
+                        <p class="text-justify">
+                            <span class="font-weight-bold">Website URL: </span>
+                            <a href="<?php echo $brand["WebsiteURL"]; ?>">
+                                <?php echo $brand["WebsiteURL"]; ?>
+                            </a>
+                        </p>
+                    </div>
+                </btn>
+            </div>
+        </div>
+        <?php
+    }
+
 }
 
 ?>

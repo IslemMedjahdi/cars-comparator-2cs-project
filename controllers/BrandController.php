@@ -92,5 +92,27 @@ class BrandController
 
         }
     }
+
+    public function getBrandById()
+    {
+        $brandModel = new BrandModel();
+
+        $id = $_GET['id'] ?? null;
+
+        try {
+            $brand = $brandModel->getBrandById($id);
+
+            return array(
+                'status' => 200,
+                'data' => $brand
+            );
+
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
 }
 ?>
