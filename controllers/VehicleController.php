@@ -28,7 +28,7 @@ class VehicleController
         $consumption = $_POST['consumption'] ?? null;
         $engine = $_POST['engine'] ?? null;
         $speed = $_POST['speed'] ?? null;
-        $notes = $_POST['notes'] ?? null;
+        $description = $_POST['description'] ?? null;
         $fuel_type = $_POST['fuel_type'] ?? null;
         $pricing_range_from = $_POST['pricing_range_from'] ?? null;
         $pricing_range_to = $_POST['pricing_range_to'] ?? null;
@@ -37,7 +37,7 @@ class VehicleController
 
 
         try {
-            $vehicleModel->addVehicle($brand_id, $model, $version, $year, $height, $width, $length, $consumption, $engine, $speed, $notes, $fuel_type, $pricing_range_from, $pricing_range_to, $Image, $acceleration);
+            $vehicleModel->addVehicle($brand_id, $model, $version, $year, $height, $width, $length, $consumption, $engine, $speed, $description, $fuel_type, $pricing_range_from, $pricing_range_to, $Image, $acceleration);
 
             return array(
                 'status' => 200,
@@ -101,6 +101,25 @@ class VehicleController
             return array(
                 'status' => 200,
                 'message' => "Vehicle deleted successfully"
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
+
+    public function getVehiclesByBrandId($brandId)
+    {
+        $vehicleModel = new VehicleModel();
+
+        try {
+            $vehicles = $vehicleModel->getVehiclesByBrandId($brandId);
+
+            return array(
+                'status' => 200,
+                'data' => $vehicles
             );
         } catch (ErrorException $e) {
             return array(

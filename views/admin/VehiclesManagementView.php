@@ -118,8 +118,9 @@ class VehiclesManagementView extends SharedAdminView
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="notes">Notes:</label>
-                                            <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+                                            <label for="description">Description:</label>
+                                            <textarea class="form-control" id="description" name="description"
+                                                rows="3"></textarea>
                                         </div>
                                     </div>
                                 </div>

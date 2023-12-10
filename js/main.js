@@ -155,7 +155,7 @@ function createVehicle() {
   const model = $("#model").val();
   const year = $("#year").val();
   const image = $("#Image")[0].files[0];
-  const notes = $("#notes").val();
+  const description = $("#description").val();
   const engine = $("#engine").val();
   const speed = $("#speed").val();
   const height = $("#height").val();
@@ -172,7 +172,7 @@ function createVehicle() {
   dataForm.append("model", model);
   dataForm.append("year", year);
   dataForm.append("Image", image);
-  dataForm.append("notes", notes);
+  dataForm.append("description", description);
   dataForm.append("engine", engine);
   dataForm.append("speed", speed);
   dataForm.append("height", height);

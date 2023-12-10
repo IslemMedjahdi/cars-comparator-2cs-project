@@ -4,7 +4,7 @@ require_once('Connection.php');
 
 class VehicleModel extends Connection
 {
-    public function addVehicle($brand_id, $model, $version, $year, $height, $width, $length, $consumption, $engine, $speed, $notes, $fuel_type, $pricing_range_from, $pricing_range_to, $Image, $acceleration)
+    public function addVehicle($brand_id, $model, $version, $year, $height, $width, $length, $consumption, $engine, $speed, $description, $fuel_type, $pricing_range_from, $pricing_range_to, $Image, $acceleration)
     {
         if (empty($brand_id)) {
             throw new ErrorException("Brand is required");
@@ -36,8 +36,8 @@ class VehicleModel extends Connection
         if (empty($speed)) {
             throw new ErrorException("Speed is required");
         }
-        if (empty($notes)) {
-            throw new ErrorException("Notes is required");
+        if (empty($description)) {
+            throw new ErrorException("Description is required");
         }
         if (empty($fuel_type)) {
             throw new ErrorException("Fuel type is required");
@@ -60,9 +60,9 @@ class VehicleModel extends Connection
         $pdo = $this->connect();
 
         try {
-            $sql = "INSERT INTO vehicle (brand_id,model,version,year,height,width,length,consumption,engine,speed,notes,fuel_type,pricing_range_from,pricing_range_to,ImageURL,acceleration) VALUES (:brand_id,:model,:version,:year,:height,:width,:length,:consumption,:engine,:speed,:notes,:fuel_type,:pricing_range_from,:pricing_range_to,:ImageURL,:acceleration)";
+            $sql = "INSERT INTO vehicle (brand_id,model,version,year,height,width,length,consumption,engine,speed,description,fuel_type,pricing_range_from,pricing_range_to,ImageURL,acceleration) VALUES (:brand_id,:model,:version,:year,:height,:width,:length,:consumption,:engine,:speed,:description,:fuel_type,:pricing_range_from,:pricing_range_to,:ImageURL,:acceleration)";
             $stmt = $pdo->prepare($sql);
-            $stmt->execute(['brand_id' => $brand_id, 'model' => $model, 'version' => $version, 'year' => $year, 'height' => $height, 'width' => $width, 'length' => $length, 'consumption' => $consumption, 'engine' => $engine, 'speed' => $speed, 'notes' => $notes, 'fuel_type' => $fuel_type, 'pricing_range_from' => $pricing_range_from, 'pricing_range_to' => $pricing_range_to, 'ImageURL' => $ImageURL, 'acceleration' => $acceleration]);
+            $stmt->execute(['brand_id' => $brand_id, 'model' => $model, 'version' => $version, 'year' => $year, 'height' => $height, 'width' => $width, 'length' => $length, 'consumption' => $consumption, 'engine' => $engine, 'speed' => $speed, 'description' => $description, 'fuel_type' => $fuel_type, 'pricing_range_from' => $pricing_range_from, 'pricing_range_to' => $pricing_range_to, 'ImageURL' => $ImageURL, 'acceleration' => $acceleration]);
 
             $this->disconnect($pdo);
 
@@ -78,7 +78,7 @@ class VehicleModel extends Connection
 
             $offset = ($page - 1) * 1;
 
-            $sql = "SELECT vehicle.id, vehicle.model, vehicle.version, vehicle.year, vehicle.height, vehicle.width, vehicle.length, vehicle.consumption, vehicle.engine, vehicle.speed, vehicle.notes, vehicle.fuel_type, vehicle.pricing_range_from, vehicle.pricing_range_to, vehicle.ImageURL, vehicle.acceleration, brand.name as brand_name FROM vehicle INNER JOIN brand ON vehicle.brand_id = brand.id LIMIT $perPage OFFSET $offset";
+            $sql = "SELECT vehicle.id, vehicle.model, vehicle.version, vehicle.year, vehicle.height, vehicle.width, vehicle.length, vehicle.consumption, vehicle.engine, vehicle.speed, vehicle.description, vehicle.fuel_type, vehicle.pricing_range_from, vehicle.pricing_range_to, vehicle.ImageURL, vehicle.acceleration, brand.name as brand_name FROM vehicle INNER JOIN brand ON vehicle.brand_id = brand.id LIMIT $perPage OFFSET $offset";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -129,8 +129,8 @@ class VehicleModel extends Connection
         $pdo = $this->connect();
 
         try {
-            $sql = "SELECT vehicle.id, vehicle.model, vehicle.version, vehicle.year, vehicle.height, vehicle.width, vehicle.length, vehicle.consumption, vehicle.engine, vehicle.speed, vehicle.notes, vehicle.fuel_type, vehicle.pricing_range_from, vehicle.pricing_range_to, vehicle.ImageURL, vehicle.acceleration, brand.name as brand_name FROM vehicle INNER JOIN brand ON vehicle.brand_id = $brandId";
-
+            // inner join with brand table
+            $sql = "SELECT vehicle.id, vehicle.model, vehicle.version, vehicle.year, vehicle.height, vehicle.width, vehicle.length, vehicle.consumption, vehicle.engine, vehicle.speed, vehicle.description, vehicle.fuel_type, vehicle.pricing_range_from, vehicle.pricing_range_to, vehicle.ImageURL, vehicle.acceleration, brand.name as brand_name FROM vehicle INNER JOIN brand ON vehicle.brand_id = brand.id WHERE brand_id = :brandId";
             $stmt = $pdo->prepare($sql);
             $stmt->execute(['brandId' => $brandId]);
             $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
