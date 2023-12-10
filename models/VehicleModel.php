@@ -123,5 +123,24 @@ class VehicleModel extends Connection
             throw new ErrorException($e->getMessage());
         }
     }
+
+    public function getVehiclesByBrandId($brandId)
+    {
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT vehicle.id, vehicle.model, vehicle.version, vehicle.year, vehicle.height, vehicle.width, vehicle.length, vehicle.consumption, vehicle.engine, vehicle.speed, vehicle.notes, vehicle.fuel_type, vehicle.pricing_range_from, vehicle.pricing_range_to, vehicle.ImageURL, vehicle.acceleration, brand.name as brand_name FROM vehicle INNER JOIN brand ON vehicle.brand_id = $brandId";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['brandId' => $brandId]);
+            $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $this->disconnect($pdo);
+
+            return $vehicles;
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
 }
 ?>
