@@ -81,7 +81,7 @@ function logout() {
       stopLoading();
       response = JSON.parse(response);
       if (response.status === 200) {
-        window.location.href = "/cars-comparer-2cs-project/auth/login";
+        window.location.reload();
       }
     },
   });

@@ -11,9 +11,11 @@ class AuthView
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card shadow-sm">
-                            <div class="card-header text-center">
-                                <img src="/cars-comparer-2cs-project/assets/images/logo.svg" alt="logo" class="img-fluid"
-                                    style="max-height: 50px;">
+                            <div class="card-header text-center p-4">
+                                <a href="/cars-comparer-2cs-project">
+                                    <img src="/cars-comparer-2cs-project/assets/images/logo.svg" alt="logo" class="img-fluid"
+                                        style="max-height: 30px;">
+                                </a>
                             </div>
                             <div class="card-body text-center border-bottom">
                                 <h3><strong>Register</strong></h3>
@@ -82,9 +84,11 @@ class AuthView
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card shadow-sm">
-                            <div class="card-header text-center">
-                                <img src="/cars-comparer-2cs-project/assets/images/logo.svg" alt="logo" class="img-fluid"
-                                    style="max-height: 50px;">
+                            <div class="card-header text-center p-4">
+                                <a href="/cars-comparer-2cs-project">
+                                    <img src="/cars-comparer-2cs-project/assets/images/logo.svg" alt="logo" class="img-fluid"
+                                        style="max-height: 30px;">
+                                </a>
                             </div>
                             <div class="card-body text-center border-bottom">
                                 <h3><strong>Login</strong></h3>

@@ -4,6 +4,8 @@ require_once __DIR__ . '/../views/AuthView.php';
 require_once __DIR__ . '/../views/admin/AdminHomeView.php';
 require_once __DIR__ . '/../views/admin/VehiclesManagementView.php';
 require_once __DIR__ . '/../views/admin/BrandsManagementView.php';
+require_once __DIR__ . '/../views/user/HomeView.php';
+require_once __DIR__ . '/../views/user/SharedUserView.php';
 
 require_once __DIR__ . '/../utils/SessionUtils.php';
 
@@ -110,7 +112,14 @@ switch ($request) {
         $brandsManagementView = new BrandsManagementView();
         $brandsManagementView->displayCreateBrandPage();
         break;
+    case '':
+        $homeView = new HomeView();
+        $homeView->displayHomePage();
+        break;
     default:
-        echo "404";
+        $sharedView = new SharedUserView();
+        $sharedView->displayNotFoundPage();
+        break;
+
 }
 ?>

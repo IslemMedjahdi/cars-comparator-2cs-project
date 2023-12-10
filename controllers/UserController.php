@@ -67,9 +67,24 @@ class UserController
             'status' => 200,
             'message' => 'Logout successfully'
         );
-
     }
 
+    public function getSessionUser()
+    {
+        $user = SessionUtils::getSessionVariable('user');
+
+        if ($user) {
+            return array(
+                'status' => 200,
+                'user' => $user
+            );
+        } else {
+            return array(
+                'status' => 400,
+                'message' => 'User not found'
+            );
+        }
+    }
 }
 
 ?>
