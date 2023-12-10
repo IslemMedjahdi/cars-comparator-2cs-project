@@ -88,6 +88,33 @@ class SharedUserView
         <?php
     }
 
+    protected function displayHorizontalMenu()
+    {
+        ?>
+        <div class="w-100 d-flex justify-content-center bg-primary">
+            <div style="max-width: 1377px;" class="w-100">
+                <ul class="nav nav-pills nav-fill">
+                    <li class="nav-item border-right border-left">
+                        <a class="nav-link text-white" href="/cars-comparer-2cs-project">Home</a>
+                    </li>
+                    <li class="nav-item border-right">
+                        <a class="nav-link text-white" href="#">News</a>
+                    </li>
+                    <li class="nav-item border-right">
+                        <a class="nav-link text-white" href="#">Reviews</a>
+                    </li>
+                    <li class="nav-item border-right">
+                        <a class="nav-link text-white" href="#">Buying guides</a>
+                    </li>
+                    <li class="nav-item border-right">
+                        <a class="nav-link text-white" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <?php
+    }
+
     protected function displayFooter()
     {
         ?>

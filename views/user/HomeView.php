@@ -30,32 +30,7 @@ class HomeView extends SharedUserView
         <?php
     }
 
-    private function displayHorizontalMenu()
-    {
-        ?>
-        <div class="w-100 d-flex justify-content-center bg-primary">
-            <div style="max-width: 1377px;" class="w-100">
-                <ul class="nav nav-pills nav-fill">
-                    <li class="nav-item border-right border-left">
-                        <a class="nav-link text-white" href="/cars-comparer-2cs-project">Home</a>
-                    </li>
-                    <li class="nav-item border-right">
-                        <a class="nav-link text-white" href="#">News</a>
-                    </li>
-                    <li class="nav-item border-right">
-                        <a class="nav-link text-white" href="#">Reviews</a>
-                    </li>
-                    <li class="nav-item border-right">
-                        <a class="nav-link text-white" href="#">Buying guides</a>
-                    </li>
-                    <li class="nav-item border-right">
-                        <a class="nav-link text-white" href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <?php
-    }
+
 
     private function displayBrands()
     {
@@ -70,7 +45,7 @@ class HomeView extends SharedUserView
             </div>
             <div class="row w-100 mt-4" style="max-width: 1377px;">
                 <?php foreach ($brands as $brand) { ?>
-                    <a href="/cars-comparer-2cs-project/brand/<?php echo $brand["id"]; ?>"
+                    <a href="/cars-comparer-2cs-project/brands?id=<?php echo $brand["id"]; ?>"
                         class="col-md-3 bg-light border d-flex justify-content-center align-items-center"
                         style="width: 5rem;height: 5rem;">
                         <img class="logo" src="/cars-comparer-2cs-project/<?php echo $brand["LogoImageURL"]; ?>"
