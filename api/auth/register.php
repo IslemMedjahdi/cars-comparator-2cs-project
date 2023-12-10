@@ -4,6 +4,8 @@ require_once("../../controllers/UserController.php");
 
 $userController = new UserController();
 
-$userController->register();
+$response = $userController->register();
+
+echo json_encode($response);
 
 ?>
