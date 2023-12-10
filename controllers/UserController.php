@@ -14,13 +14,14 @@ class UserController
 
         $name = $_POST['firstName'] ?? null;
         $lastName = $_POST['lastName'] ?? null;
+        $username = $_POST['username'] ?? null;
         $email = $_POST['email'] ?? null;
         $gender = $_POST['gender'] ?? null;
         $birthDate = $_POST['birthDate'] ?? null;
         $password = $_POST['password'] ?? null;
 
         try {
-            $userModel->signup($name, $lastName, $email, $gender, $birthDate, $password);
+            $userModel->signup($username, $name, $lastName, $email, $gender, $birthDate, $password);
 
             return array(
                 'status' => 200,
@@ -38,11 +39,11 @@ class UserController
     {
         $userModel = new UserModel();
 
-        $email = $_POST['email'] ?? null;
+        $username = $_POST['username'] ?? null;
         $password = $_POST['password'] ?? null;
 
         try {
-            $user = $userModel->login($email, $password);
+            $user = $userModel->login($username, $password);
 
             SessionUtils::setSessionVariable('user', $user);
 

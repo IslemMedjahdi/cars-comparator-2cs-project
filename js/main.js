@@ -13,6 +13,7 @@ function register() {
   const password = $("#password").val();
   const birthDate = $("#birthDate").val();
   const gender = $("#gender").val();
+  const username = $("#username").val();
 
   startLoading();
 
@@ -20,6 +21,7 @@ function register() {
     url: "/cars-comparer-2cs-project/api/auth/register.php",
     method: "POST",
     data: {
+      username: username,
       firstName: firstName,
       lastName: lastName,
       email: email,
@@ -44,7 +46,7 @@ function register() {
 }
 
 function login() {
-  const email = $("#email").val();
+  const username = $("#username").val();
   const password = $("#password").val();
 
   startLoading();
@@ -53,7 +55,7 @@ function login() {
     url: "/cars-comparer-2cs-project/api/auth/login.php",
     method: "POST",
     data: {
-      email: email,
+      username: username,
       password: password,
     },
     success: function (response) {
