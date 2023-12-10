@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../../controllers/BrandController.php";
+require_once __DIR__ . "/../../controllers/VehicleController.php";
 
 require_once __DIR__ . "/SharedUserView.php";
 
@@ -72,6 +73,7 @@ class BrandsView extends SharedUserView
         $this->displayHeader();
         $this->displayHorizontalMenu();
         $this->displayBrandDetails($brand);
+        $this->displayVehiclesList($brand['id']);
         $this->displayFooter();
     }
 
@@ -112,6 +114,65 @@ class BrandsView extends SharedUserView
                         </p>
                     </div>
                 </btn>
+            </div>
+        </div>
+        <?php
+    }
+
+    private function displayVehiclesList($brandId)
+    {
+        $vehicleController = new VehicleController();
+
+        $vehicles = $vehicleController->getVehiclesByBrandId($brandId)["data"] ?? [];
+
+        ?>
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <div class="mt-4">
+                <h2 class="head">Vehicles</h2>
+            </div>
+            <div class="w-100 mt-4 row" style="max-width: 1377px;">
+                <?php foreach ($vehicles as $vehicle) { ?>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="card">
+                            <img style="height: 10rem;object-fit: cover;" class="card-img-top d-flex"
+                                src="/cars-comparer-2cs-project/<?= $vehicle["ImageURL"]; ?>" alt="<?= $vehicle["model"]; ?>">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <?= $vehicle["model"]; ?>
+                                </h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    <?= $vehicle["brand_name"]; ?>
+                                </h6>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Version :
+                                    <span class="text-primary">
+                                        <?= $vehicle["version"]; ?>
+                                    </span>
+                                </li>
+                                <li class="list-group-item">
+                                    Year :
+                                    <span class="text-primary">
+                                        <?= $vehicle["year"]; ?>
+                                    </span>
+                                </li>
+                                <li class="list-group-item">
+                                    Dimensions :
+                                    <span class="text-primary">
+                                        <?= $vehicle["length"]; ?>m x
+                                        <?= $vehicle["width"]; ?>m x
+                                        <?= $vehicle["height"]; ?>m
+                                    </span>
+                                </li>
+                            </ul>
+                            <div class="card-body justify-content-end d-flex">
+                                <a href="/cars-comparer-2cs-project/vehicles?id=<?= $vehicle["id"]; ?>" class="btn btn-primary">Show
+                                    more</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
         </div>
         <?php
