@@ -75,6 +75,13 @@ class SharedUserView
                 <a href="/cars-comparer-2cs-project/auth/profile" class="btn btn-primary btn-outline-primary">
                     My Profile
                 </a>
+
+                <?php if ($user["role"] == "admin") { ?>
+                    <a href="/cars-comparer-2cs-project/admin" class="btn btn-primary btn-outline-primary">
+                        Admin
+                    </a>
+                <?php } ?>
+
                 <button onclick="logout()" class="btn btn-danger"><i class="bi bi-box-arrow-right"></i> Logout</button>
             </div>
             <?php
