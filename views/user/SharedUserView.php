@@ -118,7 +118,7 @@ class SharedUserView
     protected function displayFooter()
     {
         ?>
-        <footer class="bg-dark text-white mt-4">
+        <footer class="bg-primary text-white mt-4">
             <div class="container py-5">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
@@ -133,18 +133,18 @@ class SharedUserView
                     <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
                         <h6 class="text-uppercase font-weight-bold mb-4">Useful links</h6>
                         <ul class="list-unstyled mb-0">
-                            <li class="mb-2"><a href="/cars-comparer-2cs-project" class="text-muted">Home</a></li>
-                            <li class="mb-2"><a href="#" class="text-muted">News</a></li>
-                            <li class="mb-2"><a href="#" class="text-muted">Reviews</a></li>
-                            <li class="mb-2"><a href="#" class="text-muted">Buying Guides</a></li>
-                            <li class="mb-2"><a href="#" class="text-muted">Contact</a></li>
+                            <li class="mb-2"><a href="/cars-comparer-2cs-project" class="text-white">Home</a></li>
+                            <li class="mb-2"><a href="#" class="text-white">News</a></li>
+                            <li class="mb-2"><a href="#" class="text-white">Reviews</a></li>
+                            <li class="mb-2"><a href="#" class="text-white">Buying Guides</a></li>
+                            <li class="mb-2"><a href="#" class="text-white">Contact</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
                         <h6 class="text-uppercase font-weight-bold mb-4">Company</h6>
                         <ul class="list-unstyled mb-0">
-                            <li class="mb-2"><a href="#" class="text-muted">Terms of Use</a></li>
-                            <li class="mb-2"><a href="#" class="text-muted">Privacy Policy</a></li>
+                            <li class="mb-2"><a href="#" class="text-white">Terms of Use</a></li>
+                            <li class="mb-2"><a href="#" class="text-white">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>
