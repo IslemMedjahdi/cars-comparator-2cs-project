@@ -77,7 +77,7 @@ class SharedUserView
                 </a>
 
                 <?php if ($user["role"] == "admin") { ?>
-                    <a href="/cars-comparer-2cs-project/admin" class="btn btn-primary btn-outline-primary">
+                    <a href="/cars-comparer-2cs-project/admin" target="_blank" class="btn btn-primary btn-outline-primary">
                         Admin
                     </a>
                 <?php } ?>
