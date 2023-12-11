@@ -105,7 +105,8 @@ class UserModel extends Connection
         $pdo = $this->connect();
 
         try {
-            $sql = "SELECT * FROM user LIMIT :page, :perPage";
+            // dont get admin
+            $sql = "SELECT * FROM user WHERE role != 'admin' LIMIT :page, :perPage";
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(':page', (int) ($page - 1) * $perPage, PDO::PARAM_INT);
             $stmt->bindValue(':perPage', (int) $perPage, PDO::PARAM_INT);
