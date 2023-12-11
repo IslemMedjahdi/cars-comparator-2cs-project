@@ -26,9 +26,9 @@ class AuthView
                                 <div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <label for="username">User name</label>
+                                            <label for="username">Username</label>
                                             <input type="text" class="form-control" id="username"
-                                                placeholder="Enter your User name" required>
+                                                placeholder="Enter your Username" required>
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -105,7 +105,7 @@ class AuthView
                             <div class="card-body">
                                 <div>
                                     <div class="form-group">
-                                        <label for="username">User name</label>
+                                        <label for="username">Username</label>
                                         <input class="form-control" id="username" placeholder="Enter your username" required>
                                     </div>
                                     <div class="form-group">
