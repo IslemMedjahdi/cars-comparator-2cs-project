@@ -158,6 +158,69 @@ class UserController
             );
         }
     }
+
+    public function rejectUser()
+    {
+        $userModel = new UserModel();
+
+        $id = $_POST['id'] ?? null;
+
+        try {
+            $userModel->rejectUser($id);
+
+            return array(
+                'status' => 200,
+                'message' => 'User rejected successfully'
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
+
+    public function blockUser()
+    {
+        $userModel = new UserModel();
+
+        $id = $_POST['id'] ?? null;
+
+        try {
+            $userModel->blockUser($id);
+
+            return array(
+                'status' => 200,
+                'message' => 'User blocked successfully'
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
+
+    public function activateUser()
+    {
+        $userModel = new UserModel();
+
+        $id = $_POST['id'] ?? null;
+
+        try {
+            $userModel->activateUser($id);
+
+            return array(
+                'status' => 200,
+                'message' => 'User activated successfully'
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
 }
 
 ?>

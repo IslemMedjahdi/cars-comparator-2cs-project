@@ -89,16 +89,19 @@ class UsersManagementView extends SharedAdminView
                                 </a>
                             </td>
 
-                            <td class="position-relative">
-                                <?php
-                                $statusColor = ($user['status'] === 'accepted') ? 'success' : (($user['status'] === 'pending') ? 'warning' : (($user['status'] == 'blocked') ? 'danger' : 'dark'));
-                                ?>
-                                <div class="badge badge-pill badge-<?= $statusColor ?> text-uppercase">
-                                    <?= $user['status'] ?>
+                            <td>
+                                <div>
+
+                                    <?php
+                                    $statusColor = ($user['status'] === 'accepted') ? 'success' : (($user['status'] === 'pending') ? 'warning' : (($user['status'] == 'blocked') ? 'danger' : 'dark'));
+                                    ?>
+                                    <div class="badge badge-pill badge-<?= $statusColor ?> text-uppercase">
+                                        <?= $user['status'] ?>
+                                    </div>
+                                    <p class="text-muted" style="font-size: 0.7rem">
+                                        <?= date_format(date_create($user['statusDate']), "Y/m/d H:i:s"); ?>
+                                    </p>
                                 </div>
-                                <p class="text-muted position-absolute" style="font-size: 0.7rem">
-                                    <?= date_format(date_create($user['statusDate']), "Y/m/d H:i:s"); ?>
-                                </p>
                             </td>
                             <td>
                                 <div class="dropdown">
@@ -119,11 +122,11 @@ class UsersManagementView extends SharedAdminView
                                             <?php
                                         } else if ($user['status'] === 'blocked') {
                                             ?>
-                                                    <div class="dropdown-item btn" onclick="activateeUser(<?= $user["id"] ?>)">Activate</div>
+                                                    <div class="dropdown-item btn" onclick="activateUser(<?= $user["id"] ?>)">Activate</div>
                                             <?php
                                         } else if ($user['status'] === 'rejected') {
                                             ?>
-                                                        <div class="dropdown-item btn" onclick="activateeUser(<?= $user["id"] ?>)">Activate</div>
+                                                        <div class="dropdown-item btn" onclick="activateUser(<?= $user["id"] ?>)">Activate</div>
                                             <?php
                                         }
                                         ?>

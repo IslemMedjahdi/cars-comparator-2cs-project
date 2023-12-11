@@ -248,3 +248,69 @@ function acceptUser(id) {
     },
   });
 }
+
+function rejectUser(id) {
+  startLoading();
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/users/reject.php",
+    method: "POST",
+    data: {
+      id: id,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}
+
+function blockUser(id) {
+  startLoading();
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/users/block.php",
+    method: "POST",
+    data: {
+      id: id,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}
+
+function activateUser(id) {
+  startLoading();
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/users/activate.php",
+    method: "POST",
+    data: {
+      id: id,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}
