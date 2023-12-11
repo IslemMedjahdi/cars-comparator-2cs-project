@@ -99,13 +99,16 @@ class SharedUserView
     {
         ?>
         <div class="w-100 d-flex justify-content-center bg-primary">
-            <div style="max-width: 1377px;" class="w-100">
+            <nav style="max-width: 1377px;" class="w-100">
                 <ul class="nav nav-pills nav-fill">
                     <li class="nav-item border-right border-left">
                         <a class="nav-link text-white" href="/cars-comparer-2cs-project">Home</a>
                     </li>
                     <li class="nav-item border-right">
                         <a class="nav-link text-white" href="#">News</a>
+                    </li>
+                    <li class="nav-item border-right">
+                        <a class="nav-link text-white" href="/cars-comparer-2cs-project/brands">Brands</a>
                     </li>
                     <li class="nav-item border-right">
                         <a class="nav-link text-white" href="#">Reviews</a>
@@ -117,7 +120,7 @@ class SharedUserView
                         <a class="nav-link text-white" href="#">Contact</a>
                     </li>
                 </ul>
-            </div>
+            </nav>
         </div>
         <?php
     }
