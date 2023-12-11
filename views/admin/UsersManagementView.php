@@ -31,6 +31,8 @@ class UsersManagementView extends SharedAdminView
                             <div class="d-flex justify-content-between align-items-center">
                                 <h3 class="head">Users</h3>
                             </div>
+                            <div id="message">
+                            </div>
                             <?php
                             $this->displayUsersTable($users);
                             ?>
@@ -60,7 +62,6 @@ class UsersManagementView extends SharedAdminView
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Role</th>
                         <th scope="col">Status</th>
                         <th scope="col" class="text-center">Actions</th>
                     </tr>
@@ -87,25 +88,22 @@ class UsersManagementView extends SharedAdminView
                                     <?= $user['email'] ?>
                                 </a>
                             </td>
-                            <td>
-                                <div class="badge badge-pill badge-primary text-uppercase">
-                                    <?= $user['role'] ?>
-                                </div>
-                            </td>
-                            <td>
-                                <div <?php
+
+                            <td class="position-relative">
+                                <?php
                                 $statusColor = ($user['status'] === 'accepted') ? 'success' : (($user['status'] === 'pending') ? 'warning' : (($user['status'] == 'blocked') ? 'danger' : 'dark'));
                                 ?>
-                                    class="badge badge-pill badge-<?= $statusColor ?> text-uppercase">
+                                <div class="badge badge-pill badge-<?= $statusColor ?> text-uppercase">
                                     <?= $user['status'] ?>
                                 </div>
+                                <p class="text-muted position-absolute" style="font-size: 0.7rem">
+                                    <?= date_format(date_create($user['statusDate']), "Y/m/d H:i:s"); ?>
+                                </p>
                             </td>
                             <td>
-                                <!-- show a dropdown with accepte reject and block -->
                                 <div class="dropdown">
-                                    <button class="btn btn-secondary <?= $user['role'] === "admin" ? 'disabled' : '' ?>"
-                                        type="button" id="dropdownMenuButton<?= $user['id'] ?>" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn btn-secondary btn-sm" type="button" id="dropdownMenuButton<?= $user['id'] ?>"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="bi bi-three-dots"></i>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton<?= $user['id'] ?>">

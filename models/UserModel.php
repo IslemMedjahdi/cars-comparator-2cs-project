@@ -140,5 +140,157 @@ class UserModel extends Connection
             throw new ErrorException($e->getMessage());
         }
     }
+
+    public function getUserById($id)
+    {
+
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT * FROM user WHERE id = :id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['id' => $id]);
+
+            $result = $stmt->fetch();
+
+            $this->disconnect($pdo);
+
+            return $result;
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
+    public function acceptUser($id)
+    {
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT * FROM user WHERE id = :id AND status = 'pending'";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['id' => $id]);
+
+            $result = $stmt->fetch();
+
+            $this->disconnect($pdo);
+
+            if ($result) {
+                $pdo = $this->connect();
+
+                try {
+                    $sql = "UPDATE user SET status = 'accepted' ,statusDate = NOW() WHERE id = :id";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute(['id' => $id]);
+
+                    $this->disconnect($pdo);
+                } catch (PDOException $e) {
+                    throw new ErrorException($e->getMessage());
+                }
+            } else {
+                throw new ErrorException("User not found or already accepted");
+            }
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
+    public function rejectUser($id)
+    {
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT * FROM user WHERE id = :id AND status = 'pending'";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['id' => $id]);
+
+            $result = $stmt->fetch();
+
+            $this->disconnect($pdo);
+
+            if ($result) {
+                $pdo = $this->connect();
+
+                try {
+                    $sql = "UPDATE user SET status = 'rejected',statusDate = NOW() WHERE id = :id";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute(['id' => $id]);
+
+                    $this->disconnect($pdo);
+                } catch (PDOException $e) {
+                    throw new ErrorException($e->getMessage());
+                }
+            } else {
+                throw new ErrorException("User not found or already rejected");
+            }
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
+    public function blockUser($id)
+    {
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT * FROM user WHERE id = :id AND status = 'accepted'";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['id' => $id]);
+
+            $result = $stmt->fetch();
+
+            $this->disconnect($pdo);
+
+            if ($result) {
+                $pdo = $this->connect();
+
+                try {
+                    $sql = "UPDATE user SET status = 'blocked',statusDate = NOW() WHERE id = :id";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute(['id' => $id]);
+
+                    $this->disconnect($pdo);
+                } catch (PDOException $e) {
+                    throw new ErrorException($e->getMessage());
+                }
+            } else {
+                throw new ErrorException("User not found or already blocked");
+            }
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
+    public function activateUser($id)
+    {
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT * FROM user WHERE id = :id AND status = 'blocked' OR status = 'rejected'";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['id' => $id]);
+
+            $result = $stmt->fetch();
+
+            $this->disconnect($pdo);
+
+            if ($result) {
+                $pdo = $this->connect();
+
+                try {
+                    $sql = "UPDATE user SET status = 'accepted', statusDate = NOW() WHERE id = :id";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute(['id' => $id]);
+
+                    $this->disconnect($pdo);
+                } catch (PDOException $e) {
+                    throw new ErrorException($e->getMessage());
+                }
+            } else {
+                throw new ErrorException("User not found or already activated");
+            }
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
 }
 ?>

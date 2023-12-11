@@ -116,6 +116,48 @@ class UserController
             );
         }
     }
+
+    public function getUserById()
+    {
+        $userModel = new UserModel();
+
+        $id = $_GET['id'] ?? null;
+
+        try {
+            $user = $userModel->getUserById($id);
+
+            return array(
+                'status' => 200,
+                'data' => $user
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
+
+    public function acceptUser()
+    {
+        $userModel = new UserModel();
+
+        $id = $_POST['id'] ?? null;
+
+        try {
+            $userModel->acceptUser($id);
+
+            return array(
+                'status' => 200,
+                'message' => 'User accepted successfully'
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
 }
 
 ?>
