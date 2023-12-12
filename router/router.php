@@ -8,6 +8,7 @@ require_once __DIR__ . '/../views/admin/UsersManagementView.php';
 require_once __DIR__ . '/../views/user/HomeView.php';
 require_once __DIR__ . '/../views/user/SharedUserView.php';
 require_once __DIR__ . '/../views/user/BrandsView.php';
+require_once __DIR__ . '/../views/user/MyProfileView.php';
 
 require_once __DIR__ . '/../utils/SessionUtils.php';
 
@@ -137,6 +138,14 @@ switch ($request) {
             break;
         }
         $brandsView->displayBrandByIdPage();
+        break;
+    case '/auth/profile':
+        if (!$user) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        $myProfileView = new MyProfileView();
+        $myProfileView->displayProfilePage();
         break;
     default:
         $sharedView = new SharedUserView();
