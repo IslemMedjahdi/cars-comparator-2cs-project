@@ -37,7 +37,22 @@ class Connection
 
         $fileExtension = pathinfo($file["name"], PATHINFO_EXTENSION);
 
-        $targetFile = __DIR__ . "/../uploads" . $targetDirectory . "/" . $uniqueFilename . "." . $fileExtension;
+        $targetDirectoryPath = __DIR__ . "/../uploads" . $targetDirectory;
+        if (!file_exists($targetDirectoryPath)) {
+            mkdir($targetDirectoryPath, 0777, true);
+        }
+
+        $targetFile = $targetDirectoryPath . "/" . $uniqueFilename . "." . $fileExtension;
+
+        $imageInfo = getimagesize($file["tmp_name"]);
+        if ($imageInfo === false) {
+            throw new ErrorException('Invalid image file.');
+        }
+
+        $allowedImageTypes = array(IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_GIF);
+        if (!in_array($imageInfo[2], $allowedImageTypes)) {
+            throw new ErrorException('Unsupported image type. Only JPEG, PNG, and GIF are allowed.');
+        }
 
         if (move_uploaded_file($file["tmp_name"], $targetFile)) {
             return "/uploads" . $targetDirectory . "/" . $uniqueFilename . "." . $fileExtension;
@@ -45,5 +60,6 @@ class Connection
             throw new ErrorException('Error uploading file.');
         }
     }
+
 }
 ?>
