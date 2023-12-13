@@ -38,7 +38,7 @@ class BrandsView extends SharedUserView
                                 alt="<?php echo $brand["name"]; ?>">
                         </div>
                         <div class="d-flex align-items-start gap-2 flex-column">
-                            <h1 class="font-weight-bold">
+                            <h1 class="font-weight-bold head">
                                 <?php echo $brand["name"]; ?>
                             </h1>
                             <p class="text-justify">
