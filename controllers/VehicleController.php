@@ -112,6 +112,13 @@ class VehicleController
 
     public function getVehiclesByBrandId($brandId)
     {
+        if (!$brandId) {
+            return array(
+                'status' => 400,
+                'message' => "Brand id is required"
+            );
+        }
+
         $vehicleModel = new VehicleModel();
 
         try {
