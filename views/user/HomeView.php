@@ -69,6 +69,8 @@ class HomeView extends SharedUserView
                 <h2 class="head">Compare up to 4 vehicles </h2>
             </div>
             <div class="w-100 d-flex justify-content-center flex-column align-items-center bg-light  mt-4 p-4">
+                <div id="message" class="w-100">
+                </div>
                 <div class="row w-100">
                     <div class="col-md-3 border-right">
                         <?php

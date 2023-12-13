@@ -135,5 +135,59 @@ class VehicleController
             );
         }
     }
+
+    public function compareVehicles()
+    {
+
+        $vehicleModel = new VehicleModel();
+
+        $vehicleIds = $_GET['id'] ?? null;
+
+        if (!$vehicleIds) {
+            return array(
+                'status' => 400,
+                'message' => "Vehicle ids are required"
+            );
+        }
+
+        // check that there is more then two vehicles
+        if (count($vehicleIds) < 2) {
+            return array(
+                'status' => 400,
+                'message' => "You must select at least two vehicles"
+            );
+        }
+
+        try {
+            $vehicles = array();
+            foreach ($vehicleIds as $vehicleId) {
+                $vehicle = $vehicleModel->getVehicleById($vehicleId);
+                if (!$vehicle) {
+                    return array(
+                        'status' => 400,
+                        'message' => "Vehicle with id $vehicleId does not exist"
+                    );
+                }
+                array_push($vehicles, $vehicle);
+            }
+
+            return array(
+                'status' => 200,
+                'data' => $vehicles
+            );
+
+
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+
+
+
+
+    }
+
 }
 ?>

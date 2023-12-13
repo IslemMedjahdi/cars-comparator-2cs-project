@@ -356,3 +356,38 @@ function onBrandChange(formIndex) {
     },
   });
 }
+
+function onCompareClick() {
+  const vehicle1 = $("#vehicle-1").val();
+  const vehicle2 = $("#vehicle-2").val();
+  const vehicle3 = $("#vehicle-3").val();
+  const vehicle4 = $("#vehicle-4").val();
+
+  const selectedVehicles = [];
+
+  vehicle1 && selectedVehicles.push(vehicle1);
+
+  vehicle2 && selectedVehicles.push(vehicle2);
+
+  vehicle3 && selectedVehicles.push(vehicle3);
+
+  vehicle4 && selectedVehicles.push(vehicle4);
+
+  if (selectedVehicles.length < 2) {
+    $("#message").html(`<div class="alert alert-danger" role="alert">
+    Please select at least 2 vehicles to compare
+  </div>`);
+    return;
+  }
+
+  const url = new URL(
+    "/cars-comparer-2cs-project/compare/",
+    window.location.href
+  );
+
+  selectedVehicles.forEach((vehicleId) => {
+    url.searchParams.append("id[]", vehicleId);
+  });
+
+  window.location.href = url.href;
+}
