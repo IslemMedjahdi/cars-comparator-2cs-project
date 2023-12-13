@@ -92,7 +92,8 @@ class HomeView extends SharedUserView
                     </div>
                 </div>
                 <div class="mt-4 w-100">
-                    <button class="btn btn-primary btn-block" onclick="onCompareClick()">Compare</button>
+                    <button class="btn btn-primary btn-block" onclick="onCompareClick()"><i class="bi bi-card-list"></i>
+                        Compare</button>
                 </div>
             </div>
         </div>

@@ -73,6 +73,7 @@ class SharedUserView
             <div class="d-flex gap-2 align-items-center">
 
                 <a href="/cars-comparer-2cs-project/auth/profile" class="btn btn-primary btn-outline-primary">
+                    <i class="bi bi-person-circle"></i>
                     My Profile
                 </a>
 
