@@ -20,6 +20,7 @@ function register() {
   $.ajax({
     url: "/cars-comparer-2cs-project/api/auth/register.php",
     method: "POST",
+
     data: {
       username: username,
       firstName: firstName,
@@ -54,6 +55,7 @@ function login() {
   $.ajax({
     url: "/cars-comparer-2cs-project/api/auth/login.php",
     method: "POST",
+
     data: {
       username: username,
       password: password,
@@ -79,6 +81,7 @@ function logout() {
   $.ajax({
     url: "/cars-comparer-2cs-project/api/auth/logout.php",
     method: "GET",
+
     success: function (response) {
       stopLoading();
       response = JSON.parse(response);
@@ -111,6 +114,7 @@ function createBrand() {
   $.ajax({
     url: "/cars-comparer-2cs-project/api/brands/create.php",
     method: "POST",
+
     data: dataForm,
     contentType: false,
     processData: false,
@@ -135,6 +139,7 @@ function deleteBrand(id) {
   $.ajax({
     url: "/cars-comparer-2cs-project/api/brands/delete.php",
     method: "POST",
+
     data: {
       id: id,
     },
@@ -190,6 +195,7 @@ function createVehicle() {
   $.ajax({
     url: "/cars-comparer-2cs-project/api/vehicles/create.php",
     method: "POST",
+
     data: dataForm,
     contentType: false,
     processData: false,
@@ -214,6 +220,7 @@ function deleteVehicle(id) {
   $.ajax({
     url: "/cars-comparer-2cs-project/api/vehicles/delete.php",
     method: "POST",
+
     data: {
       id: id,
     },
@@ -232,6 +239,7 @@ function acceptUser(id) {
   $.ajax({
     url: "/cars-comparer-2cs-project/api/users/accept.php",
     method: "POST",
+
     data: {
       id: id,
     },
@@ -254,6 +262,7 @@ function rejectUser(id) {
   $.ajax({
     url: "/cars-comparer-2cs-project/api/users/reject.php",
     method: "POST",
+
     data: {
       id: id,
     },
@@ -276,6 +285,7 @@ function blockUser(id) {
   $.ajax({
     url: "/cars-comparer-2cs-project/api/users/block.php",
     method: "POST",
+
     data: {
       id: id,
     },
@@ -298,6 +308,7 @@ function activateUser(id) {
   $.ajax({
     url: "/cars-comparer-2cs-project/api/users/activate.php",
     method: "POST",
+
     data: {
       id: id,
     },
@@ -310,6 +321,37 @@ function activateUser(id) {
         $("#message").html(`<div class="alert alert-danger" role="alert">
         ${response.message}
       </div>`);
+      }
+    },
+  });
+}
+
+function onBrandChange(formIndex) {
+  const brandId = $(`#brand-${formIndex}`).val();
+
+  if (brandId === "") {
+    $(`#vehicle-${formIndex}`).html(`<option value="">Select Vehicle</option>`);
+    $(`#vehicle-${formIndex}`).attr("disabled", "disabled");
+    return;
+  }
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/vehicles/get-vehicles-by-brand.php",
+    method: "GET",
+
+    data: {
+      brandId: brandId,
+    },
+    success: function (response) {
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        let options = "";
+        response.data.forEach((vehicle) => {
+          options += `<option value="${vehicle.id}">${vehicle.model}-${vehicle.version}-${vehicle.year}</option>`;
+        });
+        $(`#vehicle-${formIndex}`).html(options);
+
+        $(`#vehicle-${formIndex}`).removeAttr("disabled");
       }
     },
   });
