@@ -172,9 +172,60 @@ class VehicleController
                 array_push($vehicles, $vehicle);
             }
 
+            // determine what value is the best for each property
+            $bestValues = array();
+            foreach ($vehicles as $vehicle) {
+                foreach ($vehicle as $key => $value) {
+                    if ($key === "year" || $key === "speed" || $key === "acceleration") {
+                        if (!isset($bestValues[$key])) {
+                            $bestValues[$key] = $value;
+                        } else {
+                            if ($value > $bestValues[$key]) {
+                                $bestValues[$key] = $value;
+                            }
+                        }
+                    }
+                    if ($key === "consumption" || $key === "pricing_range_from" || $key === "pricing_range_to") {
+                        if (!isset($bestValues[$key])) {
+                            $bestValues[$key] = $value;
+                        } else {
+                            if ($value < $bestValues[$key]) {
+                                $bestValues[$key] = $value;
+                            }
+                        }
+                    }
+                }
+            }
+
+            $worstValues = array();
+            foreach ($vehicles as $vehicle) {
+                foreach ($vehicle as $key => $value) {
+                    if ($key === "year" || $key === "speed" || $key === "acceleration") {
+                        if (!isset($worstValues[$key])) {
+                            $worstValues[$key] = $value;
+                        } else {
+                            if ($value < $worstValues[$key]) {
+                                $worstValues[$key] = $value;
+                            }
+                        }
+                    }
+                    if ($key === "consumption" || $key === "pricing_range_from" || $key === "pricing_range_to") {
+                        if (!isset($worstValues[$key])) {
+                            $worstValues[$key] = $value;
+                        } else {
+                            if ($value > $worstValues[$key]) {
+                                $worstValues[$key] = $value;
+                            }
+                        }
+                    }
+                }
+            }
+
             return array(
                 'status' => 200,
-                'data' => $vehicles
+                'data' => $vehicles,
+                'bestValues' => $bestValues,
+                'worstValues' => $worstValues
             );
 
 

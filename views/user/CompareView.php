@@ -27,6 +27,8 @@ class CompareView extends SharedUserView
         }
 
         $vehicles = $response['data'];
+        $bestValues = $response['bestValues'];
+        $worstValues = $response['worstValues'];
 
         $this->displayHeader();
         $this->displayHorizontalMenu();
@@ -39,7 +41,7 @@ class CompareView extends SharedUserView
             <div class="row w-100 mt-4">
                 <?php
                 foreach ($vehicles as $vehicle) {
-                    $this->displayVehicleInfo($vehicle);
+                    $this->displayVehicleInfo($vehicle, $bestValues, $worstValues);
                 }
                 ?>
             </div>
@@ -50,7 +52,7 @@ class CompareView extends SharedUserView
         $this->displayFooter();
     }
 
-    function displayVehicleInfo($vehicle)
+    function displayVehicleInfo($vehicle, $bestValues, $worstValues)
     {
         ?>
         <div class="col-md-3 col-sm-6">
@@ -72,7 +74,8 @@ class CompareView extends SharedUserView
                             <?= $vehicle["version"]; ?>
                         </span>
                     </li>
-                    <li class="list-group-item">
+                    <li style="background-color: <?= $bestValues["year"] === $vehicle["year"] ? "#d4edda" : ($worstValues["year"] === $vehicle["year"] ? "#f8d7da" : "#fff3cd"); ?>;"
+                        class="list-group-item">
                         Year :
                         <span class="text-primary">
                             <?= $vehicle["year"]; ?>
@@ -86,13 +89,15 @@ class CompareView extends SharedUserView
                             <?= $vehicle["height"]; ?>m
                         </span>
                     </li>
-                    <li class="list-group-item">
+                    <li style="background-color: <?= $bestValues["speed"] === $vehicle["speed"] ? "#d4edda" : ($worstValues["speed"] === $vehicle["speed"] ? "#f8d7da" : "#fff3cd"); ?>;"
+                        class="list-group-item">
                         Speed :
                         <span class="text-primary">
                             <?= $vehicle["speed"]; ?>km/h
                         </span>
                     </li>
-                    <li class="list-group-item">
+                    <li style="background-color: <?= $bestValues["acceleration"] === $vehicle["acceleration"] ? "#d4edda" : ($worstValues["acceleration"] === $vehicle["acceleration"] ? "#f8d7da" : "#fff3cd"); ?>;"
+                        class="list-group-item">
                         Acceleration :
                         <span class="text-primary">
                             <?= $vehicle["acceleration"]; ?>m/s²
@@ -111,13 +116,15 @@ class CompareView extends SharedUserView
                             <?= $vehicle["fuel_type"]; ?>hp
                         </span>
                     </li>
-                    <li class="list-group-item">
+                    <li style="background-color: <?= $bestValues["consumption"] === $vehicle["consumption"] ? "#d4edda" : ($worstValues["consumption"] === $vehicle["consumption"] ? "#f8d7da" : "#fff3cd"); ?>;"
+                        class="list-group-item">
                         Consumption :
                         <span class="text-primary">
                             <?= $vehicle["consumption"]; ?>hp
                         </span>
                     </li>
-                    <li class="list-group-item">
+                    <li style="background-color: <?= $bestValues["pricing_range_from"] === $vehicle["pricing_range_from"] ? "#d4edda" : ($worstValues["pricing_range_from"] === $vehicle["pricing_range_from"] ? "#f8d7da" : "#fff3cd"); ?>;"
+                        class="list-group-item">
                         Pricing range :
                         <span class="text-primary">
                             <?= $vehicle["pricing_range_from"]; ?>DZD -
