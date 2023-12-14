@@ -150,7 +150,8 @@ class VehicleController
             );
         }
 
-        // check that there is more then two vehicles
+        $vehicleIds = array_unique($vehicleIds);
+
         if (count($vehicleIds) < 2) {
             return array(
                 'status' => 400,

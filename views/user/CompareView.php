@@ -26,12 +26,116 @@ class CompareView extends SharedUserView
             header("Location: /cars-comparer-2cs-project/compare");
         }
 
+        $vehicles = $response['data'];
+
         $this->displayHeader();
         $this->displayHorizontalMenu();
 
-        print_r($response['data']);
+        ?>
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <div class="mt-4">
+                <h2 class="head">Comparison result</h2>
+            </div>
+            <div class="row w-100 mt-4">
+                <?php
+                foreach ($vehicles as $vehicle) {
+                    $this->displayVehicleInfo($vehicle);
+                }
+                ?>
+            </div>
+        </div>
+
+        <?php
 
         $this->displayFooter();
+    }
+
+    function displayVehicleInfo($vehicle)
+    {
+        ?>
+        <div class="col-md-3 col-sm-6">
+            <div class="card bg-light">
+                <img style="height: 10rem;object-fit: cover;" class="card-img-top d-flex"
+                    src="/cars-comparer-2cs-project/<?= $vehicle["ImageURL"]; ?>" alt="<?= $vehicle["model"]; ?>">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <?= $vehicle["model"]; ?>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        <?= $vehicle["brand_name"]; ?>
+                    </h6>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        Version :
+                        <span class="text-primary">
+                            <?= $vehicle["version"]; ?>
+                        </span>
+                    </li>
+                    <li class="list-group-item">
+                        Year :
+                        <span class="text-primary">
+                            <?= $vehicle["year"]; ?>
+                        </span>
+                    </li>
+                    <li class="list-group-item">
+                        Dimensions :
+                        <span class="text-primary">
+                            <?= $vehicle["length"]; ?>m x
+                            <?= $vehicle["width"]; ?>m x
+                            <?= $vehicle["height"]; ?>m
+                        </span>
+                    </li>
+                    <li class="list-group-item">
+                        Speed :
+                        <span class="text-primary">
+                            <?= $vehicle["speed"]; ?>km/h
+                        </span>
+                    </li>
+                    <li class="list-group-item">
+                        Acceleration :
+                        <span class="text-primary">
+                            <?= $vehicle["acceleration"]; ?>m/s²
+                        </span>
+                    </li>
+                    <li class="list-group-item">
+                        Engine :
+                        <span class="text-primary">
+                            <?= $vehicle["engine"]; ?>L
+                        </span>
+                    </li>
+
+                    <li class="list-group-item">
+                        Fuel type :
+                        <span class="text-primary">
+                            <?= $vehicle["fuel_type"]; ?>hp
+                        </span>
+                    </li>
+                    <li class="list-group-item">
+                        Consumption :
+                        <span class="text-primary">
+                            <?= $vehicle["consumption"]; ?>hp
+                        </span>
+                    </li>
+                    <li class="list-group-item">
+                        Pricing range :
+                        <span class="text-primary">
+                            <?= $vehicle["pricing_range_from"]; ?>DZD -
+                            <?= $vehicle["pricing_range_to"]; ?>DZD
+                        </span>
+                    </li>
+                    <li class="list-group-item">
+                        More Info :
+                        <span class="text-primary">
+                            <a href="/cars-comparer-2cs-project/vehicles?id=<?= $vehicle["id"]; ?>" target="_blank">Click
+                                here</a>
+                        </span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <?php
     }
 
 }

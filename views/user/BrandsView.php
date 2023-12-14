@@ -165,6 +165,7 @@ class BrandsView extends SharedUserView
                                         <?= $vehicle["height"]; ?>m
                                     </span>
                                 </li>
+
                             </ul>
                             <div class="card-body justify-content-end d-flex">
                                 <a href="/cars-comparer-2cs-project/vehicles?id=<?= $vehicle["id"]; ?>" class="btn btn-primary">Show

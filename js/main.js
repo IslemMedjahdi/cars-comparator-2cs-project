@@ -365,17 +365,25 @@ function onCompareClick() {
 
   const selectedVehicles = [];
 
-  vehicle1 && selectedVehicles.push(vehicle1);
+  vehicle1 &&
+    selectedVehicles.indexOf(vehicle1) === -1 &&
+    selectedVehicles.push(vehicle1);
 
-  vehicle2 && selectedVehicles.push(vehicle2);
+  vehicle2 &&
+    selectedVehicles.indexOf(vehicle2) === -1 &&
+    selectedVehicles.push(vehicle2);
 
-  vehicle3 && selectedVehicles.push(vehicle3);
+  vehicle3 &&
+    selectedVehicles.indexOf(vehicle3) === -1 &&
+    selectedVehicles.push(vehicle3);
 
-  vehicle4 && selectedVehicles.push(vehicle4);
+  vehicle4 &&
+    selectedVehicles.indexOf(vehicle4) === -1 &&
+    selectedVehicles.push(vehicle4);
 
   if (selectedVehicles.length < 2) {
     $("#message").html(`<div class="alert alert-danger" role="alert">
-    Please select at least 2 vehicles to compare
+    Please select at least 2 different vehicles to compare
   </div>`);
     return;
   }
