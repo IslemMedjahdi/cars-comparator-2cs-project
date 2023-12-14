@@ -345,7 +345,7 @@ function onBrandChange(formIndex) {
     success: function (response) {
       response = JSON.parse(response);
       if (response.status === 200) {
-        let options = "";
+        let options = "<option value=''>Select Vehicle</option>";
         response.data.forEach((vehicle) => {
           options += `<option value="${vehicle.id}">${vehicle.model}-${vehicle.version}-${vehicle.year}</option>`;
         });
@@ -398,4 +398,40 @@ function onCompareClick() {
   });
 
   window.location.href = url.href;
+}
+
+function onVehicleChange(formIndex) {
+  const vehicleId = $(`#vehicle-${formIndex}`).val();
+
+  // get the vehicle then set the image src
+  if (!vehicleId) {
+    $(`#vehicle-image-${formIndex}`).attr(
+      "src",
+      "/cars-comparer-2cs-project/assets/images/vehicle-placeholder.png"
+    );
+    return;
+  }
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/vehicles/get-by-id.php",
+    method: "GET",
+
+    data: {
+      id: vehicleId,
+    },
+    success: function (response) {
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        $(`#vehicle-image-${formIndex}`).attr(
+          "src",
+          "/cars-comparer-2cs-project" + response.data.ImageURL
+        );
+      } else {
+        $(`#vehicle-image-${formIndex}`).attr(
+          "src",
+          "/cars-comparer-2cs-project/assets/images/vehicle-placeholder.png"
+        );
+      }
+    },
+  });
 }

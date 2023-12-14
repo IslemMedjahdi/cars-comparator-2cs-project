@@ -105,10 +105,11 @@ class HomeView extends SharedUserView
     private function selectVehicleToCompareForm($brands, $index)
     {
         ?>
-        <div class="form-group">
-            <div id="vehicle-logo-<?= $index ?>">
-
-            </div>
+        <div>
+            <img style="height: 10rem;object-fit: cover;width: 100%;" id="vehicle-image-<?= $index ?>"
+                src="/cars-comparer-2cs-project/assets/images/vehicle-placeholder.png" />
+        </div>
+        <div class="form-group mt-4">
             <label>Brand:</label>
             <select onchange="onBrandChange(<?= $index ?>)" class="form-control" id="brand-<?= $index ?>" name="brand" required>
                 <option value="">Select Brand</option>
@@ -125,7 +126,8 @@ class HomeView extends SharedUserView
         </div>
         <div class="form-group">
             <label>Vehicle:</label>
-            <select disabled class="form-control" id="vehicle-<?= $index ?>" name="brand" required>
+            <select onchange="onVehicleChange(<?= $index ?>)" disabled class="form-control" id="vehicle-<?= $index ?>"
+                name="brand" required>
                 <option value="">Select Vehicle</option>
             </select>
         </div>

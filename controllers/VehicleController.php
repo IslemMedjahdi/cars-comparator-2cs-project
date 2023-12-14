@@ -235,11 +235,45 @@ class VehicleController
                 'message' => $e->getMessage()
             );
         }
+    }
 
+    public function getVehicleById()
+    {
 
+        $id = $_GET['id'] ?? null;
 
+        if (!$id) {
+            return array(
+                'status' => 400,
+                'message' => "Vehicle id is required"
+            );
+        }
+
+        $vehicleModel = new VehicleModel();
+
+        try {
+            $vehicle = $vehicleModel->getVehicleById($id);
+
+            if (!$vehicle) {
+                return array(
+                    'status' => 400,
+                    'message' => "Vehicle with id $id does not exist"
+                );
+            }
+
+            return array(
+                'status' => 200,
+                'data' => $vehicle
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
 
     }
+
 
 }
 ?>
