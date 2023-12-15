@@ -112,6 +112,9 @@ class SharedUserView
                         <a class="nav-link text-white" href="/cars-comparer-2cs-project/brands">Brands</a>
                     </li>
                     <li class="nav-item border-right">
+                        <a class="nav-link text-white" href="/cars-comparer-2cs-project/compare">Comparator</a>
+                    </li>
+                    <li class="nav-item border-right">
                         <a class="nav-link text-white" href="#">Reviews</a>
                     </li>
                     <li class="nav-item border-right">
@@ -146,6 +149,8 @@ class SharedUserView
                         <ul class="list-unstyled mb-0">
                             <li class="mb-2"><a href="/cars-comparer-2cs-project" class="text-white">Home</a></li>
                             <li class="mb-2"><a href="#" class="text-white">News</a></li>
+                            <li class="mb-2"><a href="/cars-comparer-2cs-project/brands" class="text-white">Brands</a></li>
+                            <li class="mb-2"><a href="/cars-comparer-2cs-project/compare" class="text-white">Comparator</a></li>
                             <li class="mb-2"><a href="#" class="text-white">Reviews</a></li>
                             <li class="mb-2"><a href="#" class="text-white">Buying Guides</a></li>
                             <li class="mb-2"><a href="#" class="text-white">Contact</a></li>
