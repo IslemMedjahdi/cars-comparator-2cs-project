@@ -174,9 +174,10 @@ class VehicleController
 
             // determine what value is the best for each property
             $bestValues = array();
+            $worstValues = array();
             foreach ($vehicles as $vehicle) {
                 foreach ($vehicle as $key => $value) {
-                    if ($key === "year" || $key === "speed" || $key === "acceleration") {
+                    if ($key === "year" || $key === "speed") {
                         if (!isset($bestValues[$key])) {
                             $bestValues[$key] = $value;
                         } else {
@@ -184,23 +185,7 @@ class VehicleController
                                 $bestValues[$key] = $value;
                             }
                         }
-                    }
-                    if ($key === "consumption" || $key === "pricing_range_from" || $key === "pricing_range_to") {
-                        if (!isset($bestValues[$key])) {
-                            $bestValues[$key] = $value;
-                        } else {
-                            if ($value < $bestValues[$key]) {
-                                $bestValues[$key] = $value;
-                            }
-                        }
-                    }
-                }
-            }
 
-            $worstValues = array();
-            foreach ($vehicles as $vehicle) {
-                foreach ($vehicle as $key => $value) {
-                    if ($key === "year" || $key === "speed" || $key === "acceleration") {
                         if (!isset($worstValues[$key])) {
                             $worstValues[$key] = $value;
                         } else {
@@ -209,7 +194,15 @@ class VehicleController
                             }
                         }
                     }
-                    if ($key === "consumption" || $key === "pricing_range_from" || $key === "pricing_range_to") {
+                    if ($key === "consumption" || $key === "pricing_range_from" || $key === "pricing_range_to" || $key === "acceleration") {
+                        if (!isset($bestValues[$key])) {
+                            $bestValues[$key] = $value;
+                        } else {
+                            if ($value < $bestValues[$key]) {
+                                $bestValues[$key] = $value;
+                            }
+                        }
+
                         if (!isset($worstValues[$key])) {
                             $worstValues[$key] = $value;
                         } else {
@@ -220,6 +213,8 @@ class VehicleController
                     }
                 }
             }
+
+
 
             return array(
                 'status' => 200,
