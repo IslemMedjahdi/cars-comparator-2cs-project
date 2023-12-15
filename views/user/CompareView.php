@@ -82,9 +82,9 @@ class CompareView extends SharedUserView
                     <li class="list-group-item">
                         Dimensions :
                         <span class="text-primary">
-                            <?= $vehicle["length"]; ?>m x
-                            <?= $vehicle["width"]; ?>m x
-                            <?= $vehicle["height"]; ?>m
+                            <?= $vehicle["length"]; ?>cm x
+                            <?= $vehicle["width"]; ?>cm x
+                            <?= $vehicle["height"]; ?>cm
                         </span>
                     </li>
                     <li style="background-color: <?= $bestValues["speed"] === $vehicle["speed"] ? "#d4edda" : ($worstValues["speed"] === $vehicle["speed"] ? "#f8d7da" : "#fff3cd"); ?>;"
@@ -96,9 +96,9 @@ class CompareView extends SharedUserView
                     </li>
                     <li style="background-color: <?= $bestValues["acceleration"] === $vehicle["acceleration"] ? "#d4edda" : ($worstValues["acceleration"] === $vehicle["acceleration"] ? "#f8d7da" : "#fff3cd"); ?>;"
                         class="list-group-item">
-                        Acceleration :
+                        Acceleration (0-100 km/h) :
                         <span class="text-primary">
-                            <?= $vehicle["acceleration"]; ?>m/s²
+                            <?= $vehicle["acceleration"]; ?>s
                         </span>
                     </li>
                     <li class="list-group-item">
@@ -111,22 +111,22 @@ class CompareView extends SharedUserView
                     <li class="list-group-item">
                         Fuel type :
                         <span class="text-primary">
-                            <?= $vehicle["fuel_type"]; ?>hp
+                            <?= $vehicle["fuel_type"]; ?>
                         </span>
                     </li>
                     <li style="background-color: <?= $bestValues["consumption"] === $vehicle["consumption"] ? "#d4edda" : ($worstValues["consumption"] === $vehicle["consumption"] ? "#f8d7da" : "#fff3cd"); ?>;"
                         class="list-group-item">
                         Consumption :
                         <span class="text-primary">
-                            <?= $vehicle["consumption"]; ?>hp
+                            <?= $vehicle["consumption"]; ?> L/100km
                         </span>
                     </li>
                     <li style="background-color: <?= $bestValues["pricing_range_from"] === $vehicle["pricing_range_from"] ? "#d4edda" : ($worstValues["pricing_range_from"] === $vehicle["pricing_range_from"] ? "#f8d7da" : "#fff3cd"); ?>;"
                         class="list-group-item">
                         Pricing range :
                         <span class="text-primary">
-                            <?= $vehicle["pricing_range_from"]; ?>DZD -
-                            <?= $vehicle["pricing_range_to"]; ?>DZD
+                            <?= $vehicle["pricing_range_from"]; ?>EUR -
+                            <?= $vehicle["pricing_range_to"]; ?>EUR
                         </span>
                     </li>
                     <li class="list-group-item">

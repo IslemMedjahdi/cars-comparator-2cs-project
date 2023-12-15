@@ -60,7 +60,7 @@ class VehiclesManagementView extends SharedAdminView
                                             <input type="number" class="form-control" id="speed" name="speed" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="acceleration">Acceleration:</label>
+                                            <label for="acceleration">Acceleration (0-100 km/h):</label>
                                             <input type="number" class="form-control" id="acceleration" name="acceleration"
                                                 required>
                                         </div>

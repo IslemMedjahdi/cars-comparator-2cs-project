@@ -160,9 +160,9 @@ class BrandsView extends SharedUserView
                                 <li class="list-group-item">
                                     Dimensions :
                                     <span class="text-primary">
-                                        <?= $vehicle["length"]; ?>m x
-                                        <?= $vehicle["width"]; ?>m x
-                                        <?= $vehicle["height"]; ?>m
+                                        <?= $vehicle["length"]; ?>cm x
+                                        <?= $vehicle["width"]; ?>cm x
+                                        <?= $vehicle["height"]; ?>cm
                                     </span>
                                 </li>
 
