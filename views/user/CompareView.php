@@ -10,9 +10,7 @@ class CompareView extends SharedUserView
     {
         $this->displayHeader();
         $this->displayHorizontalMenu();
-
-        echo "Compare Home page";
-
+        $this->displayComparator();
         $this->displayFooter();
     }
 

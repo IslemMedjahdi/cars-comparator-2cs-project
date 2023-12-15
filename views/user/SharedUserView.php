@@ -174,5 +174,82 @@ class SharedUserView
         </footer>
         <?php
     }
+
+    public function displayComparator()
+    {
+
+        $brandController = new BrandController();
+        $brands = $brandController->getBrands()["data"] ?? [];
+
+        ?>
+        <div class="d-flex justify-content-center align-items-center flex-column ">
+            <div class="mt-5">
+                <h2 class="head">Compare up to 4 vehicles </h2>
+            </div>
+            <div class="w-100 d-flex justify-content-center flex-column align-items-center bg-light  mt-4 p-4">
+                <div id="message" class="w-100">
+                </div>
+                <div class="row w-100">
+                    <div class="col-md-3 border-right">
+                        <?php
+                        $this->selectVehicleToCompareForm($brands, 1);
+                        ?>
+                    </div>
+                    <div class="col-md-3 border-right">
+                        <?php
+                        $this->selectVehicleToCompareForm($brands, 2);
+                        ?>
+                    </div>
+                    <div class="col-md-3 border-right">
+                        <?php
+                        $this->selectVehicleToCompareForm($brands, 3);
+                        ?>
+                    </div>
+                    <div class="col-md-3">
+                        <?php
+                        $this->selectVehicleToCompareForm($brands, 4);
+                        ?>
+                    </div>
+                </div>
+                <div class="mt-4 w-100">
+                    <button class="btn btn-primary btn-block" onclick="onCompareClick()"><i class="bi bi-card-list"></i>
+                        Compare</button>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+
+    private function selectVehicleToCompareForm($brands, $index)
+    {
+        ?>
+        <div>
+            <img style="height: 10rem;object-fit: cover;width: 100%;" id="vehicle-image-<?= $index ?>"
+                src="/cars-comparer-2cs-project/assets/images/vehicle-placeholder.png" />
+        </div>
+        <div class="form-group mt-4">
+            <label>Brand:</label>
+            <select onchange="onBrandChange(<?= $index ?>)" class="form-control" id="brand-<?= $index ?>" name="brand" required>
+                <option value="">Select Brand</option>
+                <?php
+                foreach ($brands as $brand) {
+                    ?>
+                    <option value="<?php echo $brand["id"]; ?>">
+                        <?php echo $brand["name"]; ?>
+                    </option>
+                    <?php
+                }
+                ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Vehicle:</label>
+            <select onchange="onVehicleChange(<?= $index ?>)" disabled class="form-control" id="vehicle-<?= $index ?>"
+                name="brand" required>
+                <option value="">Select Vehicle</option>
+            </select>
+        </div>
+        <?php
+    }
 }
 ?>
