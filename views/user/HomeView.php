@@ -69,14 +69,7 @@ class HomeView extends SharedUserView
         <?php
     }
 
-    private function displayMostComparedCars()
-    {
-        ?>
-        <div class="d-flex align-items-center justify-content-center bg-light mt-4" style="height: 24rem;">
-            <h1>Most Compared Cars</h1>
-        </div>
-        <?php
-    }
+
 
 }
 ?>

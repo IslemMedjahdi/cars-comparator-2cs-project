@@ -11,6 +11,7 @@ class CompareView extends SharedUserView
         $this->displayHeader();
         $this->displayHorizontalMenu();
         $this->displayComparator();
+        $this->displayMostComparedCars();
         $this->displayFooter();
     }
 

@@ -175,7 +175,7 @@ class SharedUserView
         <?php
     }
 
-    public function displayComparator()
+    protected function displayComparator()
     {
 
         $brandController = new BrandController();
@@ -248,6 +248,15 @@ class SharedUserView
                 name="brand" required>
                 <option value="">Select Vehicle</option>
             </select>
+        </div>
+        <?php
+    }
+
+    protected function displayMostComparedCars()
+    {
+        ?>
+        <div class="d-flex align-items-center justify-content-center bg-light mt-4" style="height: 24rem;">
+            <h1>Most Compared Cars</h1>
         </div>
         <?php
     }
