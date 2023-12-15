@@ -1,7 +1,7 @@
 <?php
 return [
     'server' => 'localhost',
-    'dbname' => 'cars_comparer',
+    'dbname' => 'TDW',
     'db_pass' => '',
     'db_user' => 'root'
 ]
