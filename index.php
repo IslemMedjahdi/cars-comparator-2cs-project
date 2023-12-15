@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="/cars-comparer-2cs-project/css/main.css">
     <link rel="stylesheet" href="/cars-comparer-2cs-project/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
+    <link rel="icon" type="image/x-icon" href="/cars-comparer-2cs-project/assets/images/favicon.png">
+
 </head>
 
 <body>
