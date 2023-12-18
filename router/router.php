@@ -10,6 +10,7 @@ require_once __DIR__ . '/../views/user/SharedUserView.php';
 require_once __DIR__ . '/../views/user/BrandsView.php';
 require_once __DIR__ . '/../views/user/MyProfileView.php';
 require_once __DIR__ . '/../views/user/CompareView.php';
+require_once __DIR__ . '/../views/user/VehiclesView.php';
 
 require_once __DIR__ . '/../utils/SessionUtils.php';
 
@@ -155,6 +156,14 @@ switch ($request) {
             break;
         }
         $compareView->displayComparePage();
+        break;
+    case '/vehicles':
+        $vehiclesView = new VehiclesView();
+        if (!isset($_GET['id'])) {
+            $vehiclesView->displayVehiclesPage();
+            break;
+        }
+        $vehiclesView->displayVehicleByIdPage();
         break;
     default:
         $sharedView = new SharedUserView();

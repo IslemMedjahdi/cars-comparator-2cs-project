@@ -34,7 +34,7 @@ class MyProfileView extends SharedUserView
                 <h2 class="head">Profile</h2>
             </div>
             <div class="w-100 mt-4" style="max-width: 1377px;">
-                <btn class="rounded-0 bg-light border p-4 d-flex gap-4">
+                <div class="rounded-0 bg-light border p-4 d-flex gap-4">
                     <ul class="list-group list-group-flush w-100">
                         <li class="list-group-item">
                             Full Name :
@@ -67,7 +67,7 @@ class MyProfileView extends SharedUserView
                             </span>
                         </li>
                     </ul>
-                </btn>
+                </div>
             </div>
         </div>
         <?php
