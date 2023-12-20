@@ -1,7 +1,7 @@
 <?php
 
-require_once(__DIR__ . "/../models/UserModel.php");
 require_once __DIR__ . '/../utils/SessionUtils.php';
+require_once(__DIR__ . "/../models/NewsModel.php");
 
 SessionUtils::startSession();
 
@@ -45,28 +45,46 @@ class NewsController
 
         return array(
             'status' => 200,
-            'news' => $news
+            'data' => $news
         );
     }
 
-    public function getNewsById($id)
+    public function getNewsById()
     {
         $newsModel = new NewsModel();
+
+        $id = $_GET['id'] ?? null;
+
+        if (!$id) {
+            return array(
+                'status' => 400,
+                'message' => "You must provide an id"
+            );
+        }
 
         $news = $newsModel->getNewsById($id);
 
         return array(
             'status' => 200,
-            'news' => $news
+            'data' => $news
         );
     }
 
-    public function updateNews($id)
+    public function updateNews()
     {
         if (SessionUtils::getSessionVariable('user')['role'] != 'admin') {
             return array(
                 'status' => 400,
                 'message' => "You must be an admin to update a news"
+            );
+        }
+
+        $id = $_POST['id'] ?? null;
+
+        if (!$id) {
+            return array(
+                'status' => 400,
+                'message' => "You must provide an id"
             );
         }
 
@@ -91,12 +109,21 @@ class NewsController
         }
     }
 
-    public function deleteNews($id)
+    public function deleteNews()
     {
         if (SessionUtils::getSessionVariable('user')['role'] != 'admin') {
             return array(
                 'status' => 400,
                 'message' => "You must be an admin to delete a news"
+            );
+        }
+
+        $id = $_POST['id'] ?? null;
+
+        if (!$id) {
+            return array(
+                'status' => 400,
+                'message' => "You must provide an id"
             );
         }
 

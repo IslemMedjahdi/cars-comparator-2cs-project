@@ -435,3 +435,58 @@ function onVehicleChange(formIndex) {
     },
   });
 }
+
+function createNews() {
+  const dataForm = new FormData();
+
+  const title = $("#title").val();
+  const description = $("#description").val();
+  const image = $("#Image")[0].files[0];
+
+  dataForm.append("title", title);
+  dataForm.append("description", description);
+  dataForm.append("Image", image);
+
+  startLoading();
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/news/create.php",
+    method: "POST",
+
+    data: dataForm,
+    contentType: false,
+    processData: false,
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        $("#message").html(`<div class="alert alert-success" role="alert">
+        ${response.message}
+      </div>`);
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}
+
+function deleteNewsById(id) {
+  startLoading();
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/news/delete.php",
+    method: "POST",
+
+    data: {
+      id: id,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        window.location.reload();
+      }
+    },
+  });
+}

@@ -20,12 +20,12 @@ class NewsModel extends Connection
         }
 
         $pdo = $this->connect();
-        $sql = "INSERT INTO news (title, description, image) VALUES (:title, :description, :image)";
+        $sql = "INSERT INTO news (title, description, ImageURL) VALUES (:title, :description, :ImageURL)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             'title' => $title,
             'description' => $description,
-            'image' => $ImageURL
+            'ImageURL' => $ImageURL
         ]);
         return $stmt->rowCount();
     }
