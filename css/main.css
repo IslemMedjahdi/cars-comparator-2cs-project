@@ -42,7 +42,7 @@ body {
     width: 48px;
     height: 48px;
     border: 5px solid #FFF;
-    border-bottom-color: #007bff;
+    border-bottom-color: var(--primary);
     border-radius: 50%;
     display: inline-block;
     box-sizing: border-box;
@@ -72,7 +72,7 @@ body {
     content: "";
     width: 100%;
     height: 4px;
-    background-color: #007bff;
+    background-color: var(--primary);
     display: block;
     position: absolute;
     bottom: -2px;
@@ -100,7 +100,7 @@ main {
 .unit {
     font-size: 0.8rem;
     font-weight: 500;
-    color: #007bff; 
+    color: var(--primary); 
 }
 
 .table td, .table th {

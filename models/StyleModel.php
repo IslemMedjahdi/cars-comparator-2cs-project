@@ -22,18 +22,45 @@ class StyleModel extends Connection
 
             $pdo = $this->connect();
 
-            $sql = "UPDATE style SET logoUrl = :logoUrl, faviconUrl = :faviconUrl, primary_color = :primaryColor, facebook_url = :facebook, linkedin_url = :linkedin, instagram_url = :instagram WHERE id = 1";
+            $sql = "UPDATE style SET ";
+            $params = [];
+
+            if ($logoUrl !== null) {
+                $sql .= "logoUrl = :logoUrl, ";
+                $params['logoUrl'] = $logoUrl;
+            }
+
+            if ($faviconUrl !== null) {
+                $sql .= "faviconUrl = :faviconUrl, ";
+                $params['faviconUrl'] = $faviconUrl;
+            }
+
+            if ($primaryColor !== null) {
+                $sql .= "primary_color = :primaryColor, ";
+                $params['primaryColor'] = $primaryColor;
+            }
+
+            if ($facebook !== null) {
+                $sql .= "facebook_url = :facebook, ";
+                $params['facebook'] = $facebook;
+            }
+
+            if ($linkedin !== null) {
+                $sql .= "linkedin_url = :linkedin, ";
+                $params['linkedin'] = $linkedin;
+            }
+
+            if ($instagram !== null) {
+                $sql .= "instagram_url = :instagram, ";
+                $params['instagram'] = $instagram;
+            }
+
+            $sql = rtrim($sql, ", ");
+            $sql .= " WHERE id = 1";
 
             $stmt = $pdo->prepare($sql);
 
-            $stmt->execute([
-                'logoUrl' => $logoUrl,
-                'faviconUrl' => $faviconUrl,
-                'primaryColor' => $primaryColor,
-                'facebook' => $facebook,
-                'linkedin' => $linkedin,
-                'instagram' => $instagram
-            ]);
+            $stmt->execute($params);
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -59,7 +86,7 @@ class StyleModel extends Connection
 
     public function getPrimaryColor()
     {
-        $sql = "SELECT primary_color as PrimaryColor FROM style";
+        $sql = "SELECT primary_color  FROM style";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch();

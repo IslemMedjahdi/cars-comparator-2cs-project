@@ -78,13 +78,13 @@ class SharedUserView
 
             <div class="d-flex gap-2 align-items-center">
 
-                <a href="/cars-comparer-2cs-project/auth/profile" class="btn btn-primary btn-outline-primary">
+                <a href="/cars-comparer-2cs-project/auth/profile" class="btn btn-outline-primary">
                     <i class="bi bi-person-circle"></i>
                     My Profile
                 </a>
 
                 <?php if ($user["role"] == "admin") { ?>
-                    <a href="/cars-comparer-2cs-project/admin" target="_blank" class="btn btn-primary btn-outline-primary">
+                    <a href="/cars-comparer-2cs-project/admin" target="_blank" class="btn btn-outline-primary">
                         Admin
                     </a>
                 <?php } ?>
@@ -96,7 +96,7 @@ class SharedUserView
         }
         ?>
         <div class="d-flex gap-2 align-items-center">
-            <a href="/cars-comparer-2cs-project/auth/login" class="btn btn-primary btn-outline-primary">Login</a>
+            <a href="/cars-comparer-2cs-project/auth/login" class="btn btn-outline-primary">Login</a>
             <a href="/cars-comparer-2cs-project/auth/register" class="btn btn-outline-primary">Register</a>
         </div>
         <?php

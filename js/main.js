@@ -498,9 +498,11 @@ function updateStyles() {
 
   const logo = $("#logo")[0].files[0];
   const favicon = $("#favicon")[0].files[0];
+  const primaryColor = $("#primaryColor").val();
 
   dataForm.append("logo", logo);
   dataForm.append("favicon", favicon);
+  dataForm.append("primaryColor", primaryColor);
 
   $.ajax({
     url: "/cars-comparer-2cs-project/api/styles/update.php",
@@ -511,7 +513,9 @@ function updateStyles() {
     success: function (response) {
       stopLoading();
       response = JSON.parse(response);
+
       if (response.status === 200) {
+        window.location.reload();
       } else {
         $("#message").html(`<div class="alert alert-danger" role="alert">
         ${response.message}

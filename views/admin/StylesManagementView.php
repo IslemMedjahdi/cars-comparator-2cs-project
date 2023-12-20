@@ -8,11 +8,7 @@ class StylesManagementView extends SharedAdminView
     {
         $styleController = new StyleController();
 
-        $logo = $styleController->getLogo();
-
-        $favicon = $styleController->getFavicon();
-
-        $primaryColor = $styleController->getPrimaryColor();
+        $primaryColor = $styleController->getPrimaryColor()["data"]["primary_color"] ?? "#007bff";
 
         ?>
         <div class="container-fluid">
@@ -43,6 +39,15 @@ class StylesManagementView extends SharedAdminView
                                             <input type="file" class="custom-file-input" id="favicon" name="favicon"
                                                 accept="image/*" required>
                                             <label class="custom-file-label" for="favicon">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="primaryColor">Primary Color:</label>
+                                        <div class="input-group">
+                                            <input type="color" class="form-control" id="primaryColor" name="primaryColor"
+                                                value="<?= $primaryColor ?>" required>
                                         </div>
                                     </div>
                                 </div>

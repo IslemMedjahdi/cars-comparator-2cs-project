@@ -13,8 +13,76 @@
     require_once(__DIR__ . "/controllers/StyleController.php");
     $styleController = new StyleController();
     $faviconUrl = $styleController->getFavicon()['data']["faviconUrl"] ?? "/assets/images/favicon.png";
+    $primaryColor = $styleController->getPrimaryColor()['data']["primary_color"] ?? "#0d6efd";
     ?>
     <link rel="icon" type="image/x-icon" href="/cars-comparer-2cs-project<?= $faviconUrl ?>">
+
+
+
+    <style>
+        :root {
+            --primary:
+                <?= $primaryColor ?>
+            ;
+        }
+
+        .btn-primary,
+        .btn-primary:hover,
+        .btn-primary:active,
+        .btn-primary:focus {
+            background-color: var(--primary) !important;
+            border-color: var(--primary) !important;
+            box-shadow: unset !important;
+        }
+
+        .btn-outline-primary,
+        .btn-outline-primary:active,
+        .btn-outline-primary:focus {
+            color: var(--primary) !important;
+            border-color: var(--primary) !important;
+            box-shadow: unset !important;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary) !important;
+            color: white !important;
+        }
+
+
+        .text-primary,
+        .text-primary:hover,
+        .text-primary:active,
+        .text-primary:focus {
+            color: var(--primary) !important;
+        }
+
+        .bg-primary,
+        .bg-primary:hover,
+        .bg-primary:active,
+        .bg-primary:focus {
+            background-color: var(--primary) !important;
+        }
+
+        a.bg-primary:hover,
+        a.bg-primary:active,
+        a.bg-primary:focus {
+            background-color: var(--primary) !important;
+        }
+
+        .page-item.active .page-link {
+            background-color: var(--primary) !important;
+            border-color: var(--primary) !important;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary) !important;
+            box-shadow: unset !important;
+        }
+
+        .badge-primary {
+            background-color: var(--primary) !important;
+        }
+    </style>
 
 </head>
 
