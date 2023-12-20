@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../controllers/UserController.php';
+require_once __DIR__ . '/../../controllers/StyleController.php';
 
 class SharedUserView
 {
@@ -22,11 +23,16 @@ class SharedUserView
 
     protected function displayHeader()
     {
+
+        $styleController = new StyleController();
+
+        $logo = $styleController->getLogo()["data"]["logoUrl"] ?? "/assets/images/logo.svg";
+
         ?>
         <div class="d-flex justify-content-center border-bottom">
             <header style="max-width: 1377px;" class="p-2 d-flex justify-content-between w-100 align-items-center">
                 <a href="/cars-comparer-2cs-project">
-                    <img src="/cars-comparer-2cs-project/assets/images/logo.svg" alt="logo" class="logo"
+                    <img src="/cars-comparer-2cs-project/<?= $logo ?>" alt="logo" class="logo"
                         style="width: 12rem; height: 4rem;object-fit: contain;" />
                 </a>
                 <?php

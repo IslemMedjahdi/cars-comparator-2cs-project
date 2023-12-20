@@ -490,3 +490,33 @@ function deleteNewsById(id) {
     },
   });
 }
+
+function updateStyles() {
+  startLoading();
+
+  const dataForm = new FormData();
+
+  const logo = $("#logo")[0].files[0];
+  const favicon = $("#favicon")[0].files[0];
+
+  dataForm.append("logo", logo);
+  dataForm.append("favicon", favicon);
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/styles/update.php",
+    method: "POST",
+    data: dataForm,
+    contentType: false,
+    processData: false,
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}

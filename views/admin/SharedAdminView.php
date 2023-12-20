@@ -29,10 +29,15 @@ class SharedAdminView
             'url' => '/cars-comparer-2cs-project/admin/news',
             'icon' => 'bi bi-newspaper',
         ],
+        [
+            'name' => 'Styles',
+            'url' => '/cars-comparer-2cs-project/admin/styles',
+            'icon' => 'bi bi-palette',
+        ]
 
     ];
 
-    public function displaySideBar()
+    protected function displaySideBar()
     {
         ?>
         <div class="position-relative d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"

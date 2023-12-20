@@ -130,7 +130,6 @@ class VehiclesManagementView extends SharedAdminView
                                             class="bi bi-plus-circle-fill"></i>
                                         Submit</button>
                                 </div>
-                                </d>
                             </div>
                 </main>
             </div>

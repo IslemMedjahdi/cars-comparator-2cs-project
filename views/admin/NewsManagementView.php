@@ -44,10 +44,10 @@ class NewsManagementView extends SharedAdminView
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <a href="/cars-comparer-2cs-project/admin/news" class="btn btn-secondary">Back</a>
-                                    <button onclick="createNews()" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i>
+                                    <button onclick="createNews()" class="btn btn-primary"><i
+                                            class="bi bi-plus-circle-fill"></i>
                                         Submit</button>
                                 </div>
-                                </d>
                             </div>
                 </main>
             </div>

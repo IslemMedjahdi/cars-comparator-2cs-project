@@ -5,6 +5,7 @@ require_once __DIR__ . '/../views/admin/AdminHomeView.php';
 require_once __DIR__ . '/../views/admin/VehiclesManagementView.php';
 require_once __DIR__ . '/../views/admin/BrandsManagementView.php';
 require_once __DIR__ . '/../views/admin/UsersManagementView.php';
+require_once __DIR__ . '/../views/admin/StylesManagementView.php';
 require_once __DIR__ . '/../views/user/HomeView.php';
 require_once __DIR__ . '/../views/user/SharedUserView.php';
 require_once __DIR__ . '/../views/user/BrandsView.php';
@@ -155,6 +156,19 @@ switch ($request) {
         $newsManagementView = new NewsManagementView();
         $newsManagementView->displayCreateNewsPage();
         break;
+    case '/admin/styles':
+        if (!$user) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        if (!checkRoles(['admin'])) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        $stylesManagementView = new StylesManagementView();
+        $stylesManagementView->displayUpdateStylesPage();
+        break;
+
     case '':
         $homeView = new HomeView();
         $homeView->displayHomePage();
