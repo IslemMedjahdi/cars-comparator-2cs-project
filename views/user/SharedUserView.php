@@ -299,7 +299,7 @@ class SharedUserView
                         </div>
                         <div class="form-group mt-4">
                             <label>Brand:</label>
-                            <input disabled class="form-control" value="Hello world" />
+                            <input disabled class="form-control" value=<?= $vehicle["brand_name"] ?> />
                         </div>
                         <div class="form-group">
                             <label>Vehicle:</label>

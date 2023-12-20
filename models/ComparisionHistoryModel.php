@@ -52,7 +52,7 @@ class ComparisionHistoryModel extends Connection
         try {
             $sql = "SELECT 
             vh1.id as id1, 
-            vh1.brand_id as brand_id1, 
+            b1.name as brand_name1, 
             vh1.model as model1, 
             vh1.version as version1, 
             vh1.year as year1, 
@@ -70,7 +70,7 @@ class ComparisionHistoryModel extends Connection
             vh1.ImageURL as ImageURL1,
             
             vh2.id as id2, 
-            vh2.brand_id as brand_id2, 
+            b2.name as brand_name2, 
             vh2.model as model2, 
             vh2.version as version2, 
             vh2.year as year2, 
@@ -92,12 +92,16 @@ class ComparisionHistoryModel extends Connection
             comparison_history ch
             INNER JOIN vehicle vh1 ON ch.vehicle1Id = vh1.id
             INNER JOIN vehicle vh2 ON ch.vehicle2Id = vh2.id
+            INNER JOIN brand b1 ON vh1.brand_id = b1.id
+            INNER JOIN brand b2 ON vh2.brand_id = b2.id
         GROUP BY 
             vh1.id, vh2.id
         ORDER BY 
             count DESC
         LIMIT 4;
         ";
+
+
 
             $stmt = $pdo->prepare($sql);
 
@@ -113,7 +117,7 @@ class ComparisionHistoryModel extends Connection
                 $result[$key] = [
                     'vehicle_1' => [
                         'id' => $value['id1'],
-                        'brand_id' => $value['brand_id1'],
+                        'brand_name' => $value['brand_name1'],
                         'model' => $value['model1'],
                         'version' => $value['version1'],
                         'year' => $value['year1'],
@@ -133,7 +137,7 @@ class ComparisionHistoryModel extends Connection
                     ],
                     'vehicle_2' => [
                         'id' => $value['id2'],
-                        'brand_id' => $value['brand_id2'],
+                        'brand_name' => $value['brand_name2'],
                         'model' => $value['model2'],
                         'version' => $value['version2'],
                         'year' => $value['year2'],
@@ -154,7 +158,6 @@ class ComparisionHistoryModel extends Connection
                     'count' => $value['count']
                 ];
             }
-
 
 
             return $result;
