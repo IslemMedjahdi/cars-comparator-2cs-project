@@ -254,9 +254,70 @@ class SharedUserView
 
     protected function displayMostComparedCars()
     {
+
+        $vehicleController = new VehicleController();
+
+        $mostComparedVehiclesPairs = $vehicleController->getMostComparedVehicles()["data"] ?? [];
+
+
+        if (count($mostComparedVehiclesPairs) == 0) {
+            return;
+        }
+
         ?>
-        <div class="d-flex align-items-center justify-content-center bg-light mt-4" style="height: 24rem;">
-            <h1>Most Compared Cars</h1>
+        <div class="d-flex justify-content-center align-items-center flex-column ">
+            <div class="mt-5">
+                <h2 class="head">Most Compared Vehicles </h2>
+            </div>
+            <div class="w-100 row">
+                <?php
+                foreach ($mostComparedVehiclesPairs as $pair) {
+                    $this->displayMostComparedCarsRow($pair["vehicle_1"], $pair["vehicle_2"], $pair["count"]);
+                }
+                ?>
+            </div>
+
+        </div>
+        <?php
+    }
+
+    private function displayMostComparedCarsRow($vehicle1, $vehicle2, $count)
+    {
+
+        $vehicles = [$vehicle1, $vehicle2];
+
+        ?>
+        <div class=" mt-4 w-100 col-md-6 box-shadow-lg p-4">
+            <div class="row">
+                <?php
+                foreach ($vehicles as $vehicle) {
+                    ?>
+                    <div class="col-md-6">
+                        <div style="overflow: hidden;">
+                            <img class="img-hover-transition" style="height: 10rem;object-fit: cover;width: 100%;"
+                                src="/cars-comparer-2cs-project<?= $vehicle["ImageURL"] ?>" />
+                        </div>
+                        <div class="form-group mt-4">
+                            <label>Brand:</label>
+                            <input disabled class="form-control" value="Hello world" />
+                        </div>
+                        <div class="form-group">
+                            <label>Vehicle:</label>
+                            <input disabled class="form-control"
+                                value="<?= $vehicle["model"] ?>-<?= $vehicle["version"] ?>-<?= $vehicle["year"] ?>" />
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>
+            <div>
+                <a href="/cars-comparer-2cs-project/compare?id[]=<?= $vehicle1["id"] ?>&id[]=<?= $vehicle2["id"] ?>"
+                    class="btn btn-primary btn-block"><i class="bi bi-card-list"></i> Preview</a>
+                <span class="text-muted" style="font-size: 0.8em;">Compared
+                    <?= $count ?> times
+                </span>
+            </div>
         </div>
         <?php
     }

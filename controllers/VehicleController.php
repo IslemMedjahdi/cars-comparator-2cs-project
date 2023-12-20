@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../utils/SessionUtils.php';
 require_once __DIR__ . '/../models/VehicleModel.php';
+require_once __DIR__ . '/../utils/SessionUtils.php';
+require_once __DIR__ . '/../models/ComparisionHistoryModel.php';
 
 SessionUtils::startSession();
 
@@ -172,7 +174,18 @@ class VehicleController
                 array_push($vehicles, $vehicle);
             }
 
-            // determine what value is the best for each property
+            $comparisionHistoryModel = new ComparisionHistoryModel();
+
+            for ($i = 0; $i < count($vehicles); $i++) {
+                for ($j = $i + 1; $j < count($vehicles); $j++) {
+                    try {
+                        $comparisionHistoryModel->addComparision(SessionUtils::getSessionVariable('user')['id'], $vehicles[$i]['id'], $vehicles[$j]['id']);
+                    } catch (ErrorException $e) {
+                        // do nothing
+                    }
+                }
+            }
+
             $bestValues = array();
             $worstValues = array();
             foreach ($vehicles as $vehicle) {
@@ -259,6 +272,26 @@ class VehicleController
             return array(
                 'status' => 200,
                 'data' => $vehicle
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+
+    }
+
+    public function getMostComparedVehicles()
+    {
+        $comparisionHistoryModel = new ComparisionHistoryModel();
+
+        try {
+            $mostComparedVehicles = $comparisionHistoryModel->getMostComparedVehicles();
+
+            return array(
+                'status' => 200,
+                'data' => $mostComparedVehicles
             );
         } catch (ErrorException $e) {
             return array(
