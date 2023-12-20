@@ -12,6 +12,7 @@ require_once __DIR__ . '/../views/user/MyProfileView.php';
 require_once __DIR__ . '/../views/user/CompareView.php';
 require_once __DIR__ . '/../views/user/VehiclesView.php';
 require_once __DIR__ . '/../views/admin/NewsManagementView.php';
+require_once __DIR__ . '/../views/user/NewsView.php';
 
 require_once __DIR__ . '/../utils/SessionUtils.php';
 
@@ -189,6 +190,14 @@ switch ($request) {
             break;
         }
         $vehiclesView->displayVehicleByIdPage();
+        break;
+    case '/news':
+        $newsView = new NewsView();
+        if (!isset($_GET['id'])) {
+            $newsView->displayNewsHomePage();
+            break;
+        }
+        $newsView->displayNewsByIdPage();
         break;
     default:
         $sharedView = new SharedUserView();

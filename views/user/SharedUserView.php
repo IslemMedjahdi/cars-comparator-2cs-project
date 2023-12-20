@@ -106,7 +106,7 @@ class SharedUserView
                         <a class="nav-link text-white" href="/cars-comparer-2cs-project">Home</a>
                     </li>
                     <li class="nav-item border-right">
-                        <a class="nav-link text-white" href="#">News</a>
+                        <a class="nav-link text-white" href="/cars-comparer-2cs-project/news">News</a>
                     </li>
                     <li class="nav-item border-right">
                         <a class="nav-link text-white" href="/cars-comparer-2cs-project/brands">Brands</a>
