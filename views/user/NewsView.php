@@ -49,12 +49,14 @@ class NewsView extends SharedUserView
                     <h6 class="card-subtitle mb-2 text-muted" style="font-size: 0.8em;">
                         <?= $newsItem["createdAt"]; ?>
                     </h6>
+                    <p class="card-text" style="font-size: 0.8em;">
+                        <?= substr($newsItem["description"], 0, 100) . '...'; ?>
+                        <a href="/cars-comparer-2cs-project/news?id=<?= $newsItem["id"]; ?>">Show
+                            more</a>
+                    </p>
                 </div>
 
-                <div class="card-body justify-content-end d-flex">
-                    <a href="/cars-comparer-2cs-project/news?id=<?= $newsItem["id"]; ?>" class="btn btn-primary">Show
-                        more</a>
-                </div>
+
             </div>
         </div>
         <?php
