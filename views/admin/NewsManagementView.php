@@ -44,7 +44,8 @@ class NewsManagementView extends SharedAdminView
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <a href="/cars-comparer-2cs-project/admin/news" class="btn btn-secondary">Back</a>
-                                    <button onclick="createNews()" class="btn btn-primary">Submit</button>
+                                    <button onclick="createNews()" class="btn btn-primary"><i class="bi bi-plus-circle"></i>
+                                        Submit</button>
                                 </div>
                                 </d>
                             </div>
@@ -74,7 +75,8 @@ class NewsManagementView extends SharedAdminView
                         <div class="container mt-5">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h3 class="head">News</h3>
-                                <a href="/cars-comparer-2cs-project/admin/news/create" class="btn btn-primary">Create
+                                <a href="/cars-comparer-2cs-project/admin/news/create" class="btn btn-primary"><i
+                                        class="bi bi-plus-circle"></i> Create
                                     News</a>
                             </div>
                             <?php

@@ -16,7 +16,9 @@ class BrandsManagementView extends SharedAdminView
                 <main class="bg-light" style="width: calc(100% - 280px);height: 100vh; overflow-y: auto;">
                     <div class="d-flex justify-content-center w-100">
                         <div class="container mt-5">
-                            <h3 class="head">Create Brand:</h3>
+                            <h3 class="head">
+                                Create Brand:
+                            </h3>
                             <div id="message"></div>
                             <div>
                                 <div class="row">
@@ -61,7 +63,8 @@ class BrandsManagementView extends SharedAdminView
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <a href="/cars-comparer-2cs-project/admin/brands" class="btn btn-secondary">Back</a>
-                                    <button onclick="createBrand()" class="btn btn-primary">Submit</button>
+                                    <button onclick="createBrand()" class="btn btn-primary"><i class="bi bi-plus-circle"></i>
+                                        Submit</button>
                                 </div>
                                 </d>
                             </div>
@@ -92,7 +95,8 @@ class BrandsManagementView extends SharedAdminView
                         <div class="container mt-5">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h3 class="head">Brands</h3>
-                                <a href="/cars-comparer-2cs-project/admin/brands/create" class="btn btn-primary">Create
+                                <a href="/cars-comparer-2cs-project/admin/brands/create" class="btn btn-primary"><i
+                                        class="bi bi-plus-circle"></i> Create
                                     Brand</a>
                             </div>
                             <?php
