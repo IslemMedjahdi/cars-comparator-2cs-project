@@ -63,7 +63,8 @@ class BrandsManagementView extends SharedAdminView
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <a href="/cars-comparer-2cs-project/admin/brands" class="btn btn-secondary">Back</a>
-                                    <button onclick="createBrand()" class="btn btn-primary"><i class="bi bi-plus-circle"></i>
+                                    <button onclick="createBrand()" class="btn btn-primary"><i
+                                            class="bi bi-plus-circle-fill"></i>
                                         Submit</button>
                                 </div>
                                 </d>
@@ -96,7 +97,7 @@ class BrandsManagementView extends SharedAdminView
                             <div class="d-flex justify-content-between align-items-center">
                                 <h3 class="head">Brands</h3>
                                 <a href="/cars-comparer-2cs-project/admin/brands/create" class="btn btn-primary"><i
-                                        class="bi bi-plus-circle"></i> Create
+                                        class="bi bi-plus-circle-fill"></i> Create
                                     Brand</a>
                             </div>
                             <?php
