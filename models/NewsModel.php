@@ -1,0 +1,91 @@
+<?php
+
+require_once('Connection.php');
+
+class NewsModel extends Connection
+{
+
+    public function addNews($title, $description, $Image)
+    {
+        if (empty($title)) {
+            throw new ErrorException("Title is required");
+        }
+        if (empty($description)) {
+            throw new ErrorException("Description is required");
+        }
+        if (isset($Image) && $Image['error'] === 0) {
+            $ImageURL = $this->uploadImage($Image, "/news");
+        } else {
+            throw new ErrorException("Image is required");
+        }
+
+        $pdo = $this->connect();
+        $sql = "INSERT INTO news (title, description, image) VALUES (:title, :description, :image)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'title' => $title,
+            'description' => $description,
+            'image' => $ImageURL
+        ]);
+        return $stmt->rowCount();
+    }
+
+    public function getNews()
+    {
+        $pdo = $this->connect();
+        $sql = "SELECT * FROM news";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getNewsById($id)
+    {
+        $pdo = $this->connect();
+        $sql = "SELECT * FROM news WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $id
+        ]);
+        return $stmt->fetch();
+    }
+
+    public function updateNews($id, $title, $description, $Image)
+    {
+        if (empty($title)) {
+            throw new ErrorException("Title is required");
+        }
+        if (empty($description)) {
+            throw new ErrorException("Description is required");
+        }
+        if (isset($Image) && $Image['error'] === 0) {
+            $ImageURL = $this->uploadImage($Image, "/news");
+        } else {
+            throw new ErrorException("Image is required");
+        }
+
+        $pdo = $this->connect();
+        $sql = "UPDATE news SET title = :title, description = :description, image = :image WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'title' => $title,
+            'description' => $description,
+            'image' => $ImageURL,
+            'id' => $id
+        ]);
+        return $stmt->rowCount();
+    }
+
+    public function deleteNews($id)
+    {
+        $pdo = $this->connect();
+        $sql = "DELETE FROM news WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $id
+        ]);
+        return $stmt->rowCount();
+    }
+
+}
+?>
