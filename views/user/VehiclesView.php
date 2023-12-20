@@ -63,7 +63,7 @@ class VehiclesView extends SharedUserView
             <div class="mt-4">
                 <h2 class="head">Vehicle Details</h2>
             </div>
-            <div class="w-100 mt-4" style="max-width: 1377px;">
+            <div class="w-100 mt-4" style="max-width: 1024px;">
                 <div class="card bg-light">
                     <img style="object-fit: contain;height: auto;" class="card-img-top d-flex"
                         src="/cars-comparer-2cs-project/<?= $vehicle["ImageURL"]; ?>" alt="<?= $vehicle["model"]; ?>">
@@ -102,7 +102,49 @@ class VehiclesView extends SharedUserView
                                 <?= $vehicle["speed"]; ?>km/h
                             </span>
                         </li>
-
+                        <li class="list-group-item">
+                            Acceleration (0-100 km/h) :
+                            <span class="text-primary">
+                                <?= $vehicle["acceleration"]; ?>s
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            Fuel Consumption :
+                            <span class="text-primary">
+                                <?= $vehicle["consumption"]; ?>L/100km
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            Engine :
+                            <span class="text-primary">
+                                <?= $vehicle["engine"]; ?>
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            Fuel type :
+                            <span class="text-primary">
+                                <?= $vehicle["fuel_type"]; ?>
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            Consumption :
+                            <span class="text-primary">
+                                <?= $vehicle["consumption"]; ?> L/100km
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            Pricing range :
+                            <span class="text-primary">
+                                <?= $vehicle["pricing_range_from"]; ?>EUR -
+                                <?= $vehicle["pricing_range_to"]; ?>EUR
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            Description :
+                            <span class="text-primary">
+                                <?= $vehicle["description"]; ?>
+                            </span>
+                        </li>
                     </ul>
                 </div>
             </div>
