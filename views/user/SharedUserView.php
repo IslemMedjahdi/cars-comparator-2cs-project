@@ -154,7 +154,7 @@ class SharedUserView
                         <h6 class="text-uppercase font-weight-bold mb-4">Useful links</h6>
                         <ul class="list-unstyled mb-0">
                             <li class="mb-2"><a href="/cars-comparer-2cs-project" class="text-white">Home</a></li>
-                            <li class="mb-2"><a href="#" class="text-white">News</a></li>
+                            <li class="mb-2"><a href="/cars-comparer-2cs-project/news" class="text-white">News</a></li>
                             <li class="mb-2"><a href="/cars-comparer-2cs-project/brands" class="text-white">Brands</a></li>
                             <li class="mb-2"><a href="/cars-comparer-2cs-project/compare" class="text-white">Comparator</a></li>
                             <li class="mb-2"><a href="#" class="text-white">Reviews</a></li>
