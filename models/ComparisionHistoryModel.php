@@ -96,7 +96,7 @@ class ComparisionHistoryModel extends Connection
             vh1.id, vh2.id
         ORDER BY 
             count DESC
-        LIMIT 10;
+        LIMIT 4;
         ";
 
             $stmt = $pdo->prepare($sql);
