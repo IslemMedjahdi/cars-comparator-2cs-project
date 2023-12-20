@@ -1,5 +1,7 @@
 <?php
 
+require_once(__DIR__ . "/../../controllers/StyleController.php");
+
 class SharedAdminView
 {
 
@@ -39,12 +41,17 @@ class SharedAdminView
 
     protected function displaySideBar()
     {
+
+        $styleController = new StyleController();
+        $logo = $styleController->getLogo()["data"]["logoUrl"] ?? "/assets/images/logo.svg";
+
+
         ?>
         <div class="position-relative d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
             style="width: 280px;height: 100vh">
             <div class="background-overlay"></div>
             <a href="/cars-comparer-2cs-project/admin" style="z-index: 100">
-                <img src="/cars-comparer-2cs-project/assets/images/logo.svg" alt="logo" class="logo  w-100 white-filter" />
+                <img src="/cars-comparer-2cs-project<?= $logo ?>" alt="logo" class="logo  w-100 white-filter" />
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto" style="z-index: 100">
