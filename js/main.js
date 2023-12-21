@@ -524,3 +524,32 @@ function updateStyles() {
     },
   });
 }
+
+function createVehicleReview() {
+  const vehicleId = $("#vehicleId").val();
+  const review = $("#review").val();
+  const rate = $("#rate").val();
+
+  startLoading();
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/vehicle/reviews/create.php",
+    method: "POST",
+    data: {
+      vehicleId: vehicleId,
+      review: review,
+      rate: rate,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}
