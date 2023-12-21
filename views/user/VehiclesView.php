@@ -54,6 +54,7 @@ class VehiclesView extends SharedUserView
         $this->displayHeader();
         $this->displayHorizontalMenu();
         $this->displayVehicleDetails($vehicle);
+        $this->displayVehicleReviews($vehicle["id"]);
         $this->addReviewForm($vehicle["id"]);
         $this->displayFooter();
     }
@@ -154,6 +155,88 @@ class VehiclesView extends SharedUserView
         <?php
     }
 
+    private function displayVehicleReviews($vehicleId)
+    {
+
+        $vehicleReviewController = new VehicleReviewController();
+
+        $response = $vehicleReviewController->getReviewsByVehicleId($vehicleId);
+
+        $vehicleReviews = $response["data"] ?? [];
+
+        $totalPages = $response["totalPages"] ?? 1;
+
+        $currentPage = $response["currentPage"] ?? 1;
+
+
+        ?>
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <div class="mt-4">
+                <h2 class="head">Vehicle Reviews</h2>
+            </div>
+            <div class="w-100 mt-4 border rounded card-body" style="max-width: 1024px;">
+                <?php
+                foreach ($vehicleReviews as $vehicleReview) {
+                    $this->displayVehicleReview($vehicleReview);
+                }
+                ?>
+                <div class="d-flex justify-content-center w-100">
+                    <?php
+                    $this->displayReviewsPagination($vehicleId, $totalPages, $currentPage);
+                    ?>
+                </div>
+            </div>
+            <?php
+    }
+
+    private function displayVehicleReview($vehicleReview)
+    {
+        ?>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <?= $vehicleReview["username"]; ?>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        <?= $vehicleReview["rate"]; ?> Stars / 5
+                    </h6>
+                    <p class="card-text">
+                        <?= $vehicleReview["review"]; ?>
+                    </p>
+                </div>
+            </div>
+            <?php
+    }
+
+    private function displayReviewsPagination($vehicleId, $totalPages, $currentPage)
+    {
+        ?>
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item <?= $currentPage == 1 ? "disabled" : ""; ?>">
+                        <a class="page-link"
+                            href="/cars-comparer-2cs-project/vehicles?id=<?= $vehicleId ?>&page=<?= $currentPage - 1; ?>">Previous</a>
+                    </li>
+                    <?php
+                    for ($i = 1; $i <= $totalPages; $i++) {
+                        ?>
+                        <li class="page-item <?= $i == $currentPage ? "active" : ""; ?>">
+                            <a class="page-link" href="/cars-comparer-2cs-project/vehicles?id=<?= $vehicleId ?>&page=<?= $i; ?>">
+                                <?= $i; ?>
+                            </a>
+                        </li>
+                        <?php
+                    }
+                    ?>
+                    <li class="page-item <?= $totalPages == $currentPage ? "disabled" : ""; ?>">
+                        <a class="page-link"
+                            href="/cars-comparer-2cs-project/admin/vehicles?id=<?= $vehicleId ?>&page=<?= $currentPage + 1; ?>">Next</a>
+                    </li>
+                </ul>
+            </nav>
+            <?php
+    }
+
     private function addReviewForm($vehicleId)
     {
 
@@ -168,28 +251,28 @@ class VehiclesView extends SharedUserView
         $existingReview = $vehicleReviewController->getReviewOfUserByVehicleId($vehicleId)["data"] ?? null;
 
         ?>
-        <div class="d-flex justify-content-center  align-items-center flex-column">
-            <div class="w-100 mt-4 border rounded card-body" style="max-width: 1024px;">
-                <div id="message"></div>
-                <div class="form-group">
-                    <label for="rate">Rate:</label>
-                    <select class="form-control" name="rate" id="rate">
-                        <?php for ($i = 1; $i <= 5; $i++) { ?>
-                            <option value="<?= $i; ?>" <?= $existingReview && $existingReview["rate"] == $i ? "selected" : "" ?>>
-                                <?= $i; ?> Stars
-                            </option>
-                        <?php } ?>
-                    </select>
+            <div class="d-flex justify-content-center  align-items-center flex-column w-100">
+                <div class="w-100 mt-4 border rounded card-body" style="max-width: 1024px;">
+                    <div id="message"></div>
+                    <div class="form-group">
+                        <label for="rate">Rate:</label>
+                        <select class="form-control" name="rate" id="rate">
+                            <?php for ($i = 1; $i <= 5; $i++) { ?>
+                                <option value="<?= $i; ?>" <?= $existingReview && $existingReview["rate"] == $i ? "selected" : "" ?>>
+                                    <?= $i; ?> Stars
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Review:</label>
+                        <input type="text" class="form-control" id="review" name="review"
+                            value="<?= $existingReview ? $existingReview["review"] : "" ?>">
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="addVehicleReview(<?= $vehicleId; ?>)">Submit</button>
                 </div>
-                <div class="form-group">
-                    <label for="name">Review:</label>
-                    <input type="text" class="form-control" id="review" name="review"
-                        value="<?= $existingReview ? $existingReview["review"] : "" ?>">
-                </div>
-                <button type="submit" class="btn btn-primary" onclick="addVehicleReview(<?= $vehicleId; ?>)">Submit</button>
             </div>
-        </div>
-        <?php
+            <?php
 
     }
 }

@@ -138,7 +138,7 @@ class SharedUserView
     protected function displayFooter()
     {
         ?>
-        <footer class="bg-primary text-white mt-4">
+        <footer class="bg-primary text-white mt-4 w-100">
             <div class="container py-5">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">

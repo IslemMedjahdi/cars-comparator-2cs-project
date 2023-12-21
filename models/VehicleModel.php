@@ -76,7 +76,7 @@ class VehicleModel extends Connection
 
         try {
 
-            $offset = ($page - 1) * 1;
+            $offset = ($page - 1) * $perPage;
 
             $sql = "SELECT vehicle.id, vehicle.model, vehicle.version, vehicle.year, vehicle.height, vehicle.width, vehicle.length, vehicle.consumption, vehicle.engine, vehicle.speed, vehicle.description, vehicle.fuel_type, vehicle.pricing_range_from, vehicle.pricing_range_to, vehicle.ImageURL, vehicle.acceleration, brand.name as brand_name FROM vehicle INNER JOIN brand ON vehicle.brand_id = brand.id LIMIT $perPage OFFSET $offset";
             $stmt = $pdo->prepare($sql);
