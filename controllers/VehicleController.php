@@ -174,14 +174,18 @@ class VehicleController
                 array_push($vehicles, $vehicle);
             }
 
-            $comparisionHistoryModel = new ComparisionHistoryModel();
+            $userId = SessionUtils::getSessionVariable('user')['id'] ?? null;
 
-            for ($i = 0; $i < count($vehicles); $i++) {
-                for ($j = $i + 1; $j < count($vehicles); $j++) {
-                    try {
-                        $comparisionHistoryModel->addComparision(SessionUtils::getSessionVariable('user')['id'], $vehicles[$i]['id'], $vehicles[$j]['id']);
-                    } catch (ErrorException $e) {
-                        // do nothing
+            if ($userId) {
+                $comparisionHistoryModel = new ComparisionHistoryModel();
+
+                for ($i = 0; $i < count($vehicles); $i++) {
+                    for ($j = $i + 1; $j < count($vehicles); $j++) {
+                        try {
+                            $comparisionHistoryModel->addComparision($userId, $vehicles[$i]['id'], $vehicles[$j]['id']);
+                        } catch (ErrorException $e) {
+                            // do nothing
+                        }
                     }
                 }
             }
