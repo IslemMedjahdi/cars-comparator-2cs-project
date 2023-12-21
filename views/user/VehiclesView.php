@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../../controllers/VehicleController.php";
+require_once __DIR__ . "/../../controllers/VehicleReviewController.php";
 
 require_once __DIR__ . "/SharedUserView.php";
 
@@ -162,6 +163,10 @@ class VehiclesView extends SharedUserView
             return;
         }
 
+        $vehicleReviewController = new VehicleReviewController();
+
+        $existingReview = $vehicleReviewController->getReviewOfUserByVehicleId($vehicleId)["data"] ?? null;
+
         ?>
         <div class="d-flex justify-content-center  align-items-center flex-column">
             <div class="w-100 mt-4 border rounded card-body" style="max-width: 1024px;">
@@ -169,16 +174,17 @@ class VehiclesView extends SharedUserView
                 <div class="form-group">
                     <label for="rate">Rate:</label>
                     <select name="rate" id="rate">
-                        <option value="1">1 star</option>
-                        <option value="2">2 stars</option>
-                        <option value="3">3 stars</option>
-                        <option value="4">4 stars</option>
-                        <option value="5">5 stars</option>
+                        <?php for ($i = 1; $i <= 5; $i++) { ?>
+                            <option value="<?= $i; ?>" <?= $existingReview && $existingReview["rate"] == $i ? "selected" : "" ?>>
+                                <?= $i; ?> Stars
+                            </option>
+                        <?php } ?>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="name">Review:</label>
-                    <input type="text" class="form-control" id="review" name="review">
+                    <input type="text" class="form-control" id="review" name="review"
+                        value="<?= $existingReview ? $existingReview["review"] : "" ?>">
                 </div>
                 <button type="submit" class="btn btn-primary" onclick="addVehicleReview(<?= $vehicleId; ?>)">Submit</button>
             </div>

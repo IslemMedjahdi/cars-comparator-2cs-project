@@ -32,5 +32,27 @@ class VehicleReviewController
         }
     }
 
+    public function getReviewOfUserByVehicleId($vehicleId)
+    {
+        $vehicleReviewModel = new VehicleReviewModel();
+
+        $userId = SessionUtils::getSessionVariable('user')['id'] ?? null;
+
+        try {
+            $review = $vehicleReviewModel->getReviewOfUserByVehicleId($userId, $vehicleId);
+
+            return array(
+                'status' => 200,
+                'data' => $review
+            );
+
+        } catch (Exception $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
+
 }
 ?>
