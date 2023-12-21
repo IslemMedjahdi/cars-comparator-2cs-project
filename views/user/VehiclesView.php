@@ -173,7 +173,7 @@ class VehiclesView extends SharedUserView
                 <div id="message"></div>
                 <div class="form-group">
                     <label for="rate">Rate:</label>
-                    <select name="rate" id="rate">
+                    <select class="form-control" name="rate" id="rate">
                         <?php for ($i = 1; $i <= 5; $i++) { ?>
                             <option value="<?= $i; ?>" <?= $existingReview && $existingReview["rate"] == $i ? "selected" : "" ?>>
                                 <?= $i; ?> Stars
