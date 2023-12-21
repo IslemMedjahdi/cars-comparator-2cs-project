@@ -1,4 +1,10 @@
 <?php
+
+require_once __DIR__ . '/../models/VehicleReviewModel.php';
+require_once __DIR__ . '/../utils/SessionUtils.php';
+
+SessionUtils::startSession();
+
 class VehicleReviewController
 {
 

@@ -525,15 +525,14 @@ function updateStyles() {
   });
 }
 
-function createVehicleReview() {
-  const vehicleId = $("#vehicleId").val();
+function addVehicleReview(vehicleId) {
   const review = $("#review").val();
   const rate = $("#rate").val();
 
   startLoading();
 
   $.ajax({
-    url: "/cars-comparer-2cs-project/api/vehicle/reviews/create.php",
+    url: "/cars-comparer-2cs-project/api/vehicles/reviews/create.php",
     method: "POST",
     data: {
       vehicleId: vehicleId,
@@ -544,7 +543,9 @@ function createVehicleReview() {
       stopLoading();
       response = JSON.parse(response);
       if (response.status === 200) {
-        window.location.reload();
+        $("#message").html(`<div class="alert alert-success" role="alert">
+        ${response.message}
+      </div>`);
       } else {
         $("#message").html(`<div class="alert alert-danger" role="alert">
         ${response.message}

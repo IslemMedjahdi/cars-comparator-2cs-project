@@ -18,6 +18,10 @@ class VehicleReviewModel extends Connection
             throw new Exception("Rate cannot be empty");
         }
 
+        if (empty($review)) {
+            $review = null;
+        }
+
         if ($rate < 1 || $rate > 5) {
             throw new Exception("Rate must be between 1 and 5");
         }
@@ -25,7 +29,7 @@ class VehicleReviewModel extends Connection
         $pdo = $this->connect();
 
         try {
-            $sql = "INSERT INTO vehicle_reviews (userId,vehicleId,rate,review) VALUES (:userId,:vehicleId,:rate,:review) ON DUPLICATE KEY UPDATE rate=:rate,review=:review";
+            $sql = "INSERT INTO vehicle_review (userId,vehicleId,rate,review) VALUES (:userId,:vehicleId,:rate,:review) ON DUPLICATE KEY UPDATE rate=:rate,review=:review";
 
             $stmt = $pdo->prepare($sql);
 

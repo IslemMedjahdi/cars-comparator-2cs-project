@@ -53,6 +53,7 @@ class VehiclesView extends SharedUserView
         $this->displayHeader();
         $this->displayHorizontalMenu();
         $this->displayVehicleDetails($vehicle);
+        $this->addReviewForm($vehicle["id"]);
         $this->displayFooter();
     }
 
@@ -150,6 +151,40 @@ class VehiclesView extends SharedUserView
             </div>
         </div>
         <?php
+    }
+
+    private function addReviewForm($vehicleId)
+    {
+
+        $user = SessionUtils::getSessionVariable('user') ?? null;
+
+        if (!$user) {
+            return;
+        }
+
+        ?>
+        <div class="d-flex justify-content-center  align-items-center flex-column">
+            <div class="w-100 mt-4 border rounded card-body" style="max-width: 1024px;">
+                <div id="message"></div>
+                <div class="form-group">
+                    <label for="rate">Rate:</label>
+                    <select name="rate" id="rate">
+                        <option value="1">1 star</option>
+                        <option value="2">2 stars</option>
+                        <option value="3">3 stars</option>
+                        <option value="4">4 stars</option>
+                        <option value="5">5 stars</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Review:</label>
+                    <input type="text" class="form-control" id="review" name="review">
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="addVehicleReview(<?= $vehicleId; ?>)">Submit</button>
+            </div>
+        </div>
+        <?php
+
     }
 }
 ?>
