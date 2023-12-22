@@ -27,6 +27,13 @@ class VehicleReviewController
             $vehicleReviewModel = new VehicleReviewModel();
             $vehicleReviewModel->addReview($userId, $vehicleId, $rate, $review);
 
+            if ($review == null) {
+                return array(
+                    'status' => 200,
+                    'message' => "Your review has been added"
+                );
+            }
+
             return array(
                 'status' => 200,
                 'message' => "Your review will be added after admin approval"
@@ -85,7 +92,6 @@ class VehicleReviewController
             );
 
         } catch (Exception $e) {
-            print_r($e->getMessage());
             return array(
                 'status' => 400,
                 'message' => $e->getMessage()

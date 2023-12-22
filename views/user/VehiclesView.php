@@ -12,18 +12,17 @@ class VehiclesView extends SharedUserView
     {
         $vehicleController = new VehicleController();
 
-        $vehicles = $vehicleController->getVehicles()["data"] ?? [];
+        $response = $vehicleController->getVehicles();
+
+        $vehicles = $response["data"] ?? [];
+
+        $totalPages = $response["totalPages"] ?? 1;
+
+        $currentPage = $response["currentPage"] ?? 1;
 
         $this->displayHeader();
         $this->displayHorizontalMenu();
 
-        $this->displayVehiclesList($vehicles);
-
-        $this->displayFooter();
-    }
-
-    private function displayVehiclesList($vehicles)
-    {
         ?>
         <div class="d-flex justify-content-center align-items-center flex-column">
             <div class="mt-4">
@@ -33,8 +32,43 @@ class VehiclesView extends SharedUserView
                 <?php foreach ($vehicles as $vehicle) {
                     $this->displayVehicleSummaryDetails($vehicle);
                 } ?>
+                <div class="d-flex justify-content-center w-100 mt-5">
+                    <?php
+                    $this->displayVehiclesListPagination($totalPages, $currentPage);
+                    ?>
+                </div>
             </div>
         </div>
+        <?php
+        $this->displayFooter();
+    }
+
+
+
+    private function displayVehiclesListPagination($totalPages, $currentPage)
+    {
+        ?>
+        <nav>
+            <ul class="pagination">
+                <li class="page-item <?= $currentPage == 1 ? "disabled" : ""; ?>">
+                    <a class="page-link" href="/cars-comparer-2cs-project/vehicles?page=<?= $currentPage - 1; ?>">Previous</a>
+                </li>
+                <?php
+                for ($i = 1; $i <= $totalPages; $i++) {
+                    ?>
+                    <li class="page-item <?= $i == $currentPage ? "active" : ""; ?>">
+                        <a class="page-link" href="/cars-comparer-2cs-project/vehicles?page=<?= $i; ?>">
+                            <?= $i; ?>
+                        </a>
+                    </li>
+                    <?php
+                }
+                ?>
+                <li class="page-item <?= $totalPages == $currentPage ? "disabled" : ""; ?>">
+                    <a class="page-link" href="/cars-comparer-2cs-project/vehicles?page=<?= $currentPage + 1; ?>">Next</a>
+                </li>
+            </ul>
+        </nav>
         <?php
     }
 
@@ -174,7 +208,7 @@ class VehiclesView extends SharedUserView
             <div class="mt-4">
                 <h2 class="head">Vehicle Reviews</h2>
             </div>
-            <div class="w-100 mt-4 border rounded card-body" style="max-width: 1024px;">
+            <div class="w-100 mt-4 border rounded card-body bg-light" style="max-width: 1024px;">
                 <?php
                 foreach ($vehicleReviews as $vehicleReview) {
                     $this->displayVehicleReview($vehicleReview);
@@ -192,7 +226,7 @@ class VehiclesView extends SharedUserView
     private function displayVehicleReview($vehicleReview)
     {
         ?>
-            <div class="card mb-3">
+            <div class="card mb-3 ">
                 <div class="card-body">
                     <h5 class="card-title">
                         <?= $vehicleReview["username"]; ?>

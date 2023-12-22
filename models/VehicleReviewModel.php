@@ -6,6 +6,8 @@ class VehicleReviewModel extends Connection
 
     public function addReview($userId, $vehicleId, $rate, $review = null)
     {
+        $status = 'pending';
+
         if (empty($userId)) {
             throw new Exception("User Id cannot be empty");
         }
@@ -20,6 +22,7 @@ class VehicleReviewModel extends Connection
 
         if (empty($review)) {
             $review = null;
+            $status = 'accepted';
         }
 
         if ($rate < 1 || $rate > 5) {
@@ -38,7 +41,7 @@ class VehicleReviewModel extends Connection
                 'vehicleId' => $vehicleId,
                 'rate' => $rate,
                 'review' => $review,
-                'status' => 'pending'
+                'status' => $status
             ]);
 
             $this->disconnect($pdo);
