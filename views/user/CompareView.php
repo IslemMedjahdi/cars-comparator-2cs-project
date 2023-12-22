@@ -133,6 +133,13 @@ class CompareView extends SharedUserView
                             <?= $vehicle["pricing_range_to"]; ?>EUR
                         </span>
                     </li>
+                    <li style="background-color: <?= $bestValues["average_rate"] === $vehicle["average_rate"] ? "#d4edda" : ($worstValues["average_rate"] === $vehicle["average_rate"] ? "#f8d7da" : "#fff3cd"); ?>;"
+                        class="list-group-item">
+                        Average Rating :
+                        <span class="text-primary">
+                            <?= round($vehicle["average_rate"]); ?> Stars / 5
+                        </span>
+                    </li>
                     <li class="list-group-item">
                         More Info :
                         <span class="text-primary">

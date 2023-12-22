@@ -194,7 +194,7 @@ class VehicleController
             $worstValues = array();
             foreach ($vehicles as $vehicle) {
                 foreach ($vehicle as $key => $value) {
-                    if ($key === "year" || $key === "speed") {
+                    if ($key === "year" || $key === "speed" || $key === "average_rate") {
                         if (!isset($bestValues[$key])) {
                             $bestValues[$key] = $value;
                         } else {
@@ -265,13 +265,6 @@ class VehicleController
 
         try {
             $vehicle = $vehicleModel->getVehicleById($id);
-
-            if (!$vehicle) {
-                return array(
-                    'status' => 400,
-                    'message' => "Vehicle with id $id does not exist"
-                );
-            }
 
             return array(
                 'status' => 200,

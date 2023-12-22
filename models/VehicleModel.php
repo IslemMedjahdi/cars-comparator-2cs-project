@@ -153,6 +153,15 @@ class VehicleModel extends Connection
             $stmt->execute(['id' => $id]);
             $vehicle = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            if (!$vehicle) {
+                throw new ErrorException("Vehicle not found");
+            }
+
+            $sql = "SELECT AVG(rate) FROM vehicle_review WHERE vehicleId = :vehicleId AND status='accepted'";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['vehicleId' => $id]);
+            $vehicle['average_rate'] = $stmt->fetchColumn() ?? 5;
+
             $this->disconnect($pdo);
 
             return $vehicle;
