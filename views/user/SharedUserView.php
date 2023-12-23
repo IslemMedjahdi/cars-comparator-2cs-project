@@ -376,5 +376,27 @@ class SharedUserView
         </div>
         <?php
     }
+
+    protected function showStars($rating, $maxRating = 5)
+    {
+        $fullStars = floor($rating);
+        $halfStars = ceil($rating - $fullStars);
+        $emptyStars = $maxRating - $fullStars - $halfStars;
+        for ($i = 0; $i < $fullStars; $i++) {
+            ?>
+            <i class="bi bi-star-fill text-warning"></i>
+            <?php
+        }
+        for ($i = 0; $i < $halfStars; $i++) {
+            ?>
+            <i class="bi bi-star-half text-warning"></i>
+            <?php
+        }
+        for ($i = 0; $i < $emptyStars; $i++) {
+            ?>
+            <i class="bi bi-star text-warning"></i>
+            <?php
+        }
+    }
 }
 ?>

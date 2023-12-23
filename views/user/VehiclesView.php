@@ -185,7 +185,7 @@ class VehiclesView extends SharedUserView
                         <li class="list-group-item">
                             Average Rating :
                             <span class="text-primary">
-                                <?= round($vehicle["average_rate"]); ?> Stars / 5
+                                <?= $this->showStars($vehicle["average_rate"]); ?>
                             </span>
                         </li>
                     </ul>
@@ -252,15 +252,17 @@ class VehiclesView extends SharedUserView
             <div class="card mb-3 ">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <h5 class="card-title">
-                            <?= $vehicleReview["username"]; ?>
-                        </h5>
+                        <div class="card-title">
+                            <div class="badge badge-pill badge-primary">
+                                <?= $vehicleReview["username"]; ?>
+                            </div>
+                        </div>
                         <h6 class="card-subtitle mb-2 text-muted" style="font-size: 0.8em;">
                             <?= date_format(date_create($vehicleReview['createdAt']), "Y/m/d H:i:s"); ?>
                         </h6>
                     </div>
                     <h6 class="card-subtitle mb-2 text-muted">
-                        <?= $vehicleReview["rate"]; ?> Stars / 5
+                        <?= $this->showStars($vehicleReview["rate"]); ?>
                     </h6>
                     <p class="card-text">
                         <?= $vehicleReview["review"]; ?>

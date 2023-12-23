@@ -136,8 +136,8 @@ class CompareView extends SharedUserView
                     <li style="background-color: <?= $bestValues["average_rate"] === $vehicle["average_rate"] ? "#d4edda" : ($worstValues["average_rate"] === $vehicle["average_rate"] ? "#f8d7da" : "#fff3cd"); ?>;"
                         class="list-group-item">
                         Average Rating :
-                        <span class="text-primary">
-                            <?= round($vehicle["average_rate"]); ?> Stars / 5
+                        <span>
+                            <?= $this->showStars($vehicle["average_rate"]); ?>
                         </span>
                     </li>
                     <li class="list-group-item">
