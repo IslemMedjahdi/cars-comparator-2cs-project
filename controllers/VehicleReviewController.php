@@ -12,20 +12,47 @@ class VehicleReviewController
     public function createReview()
     {
 
-        $userId = SessionUtils::getSessionVariable('user')['id'] ?? null;
+        $user = SessionUtils::getSessionVariable('user');
+
+        if ($user == null) {
+            throw new Exception("You must be logged in to add a review");
+        }
+
+        try {
+            $userModel = new UserModel();
+            $user = $userModel->getUserById($user['id']);
+
+            if ($user['status'] != 'accepted') {
+                return array(
+                    'status' => 400,
+                    'message' => "You are blocked"
+                );
+            }
+
+        } catch (Exception $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+
+
+        $userId = $user['id'] ?? null;
+
         $vehicleId = $_POST['vehicleId'] ?? null;
         $rate = $_POST['rate'] ?? null;
         $review = $_POST['review'] ?? null;
         try {
-            $userModel = new UserModel();
-            $user = $userModel->getUserById($userId);
-
-            if ($user['status'] != 'accepted') {
-                throw new Exception("You cannot add review because you are blocked");
-            }
-
             $vehicleReviewModel = new VehicleReviewModel();
             $vehicleReviewModel->addReview($userId, $vehicleId, $rate, $review);
+
+            if ($user['role'] == 'admin') {
+                $vehicleReviewModel->accepteReview($vehicleId, $userId);
+                return array(
+                    'status' => 200,
+                    'message' => "Review has been added"
+                );
+            }
 
             if ($review == null) {
                 return array(

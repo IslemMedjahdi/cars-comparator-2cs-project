@@ -32,6 +32,7 @@ class ReviewManagementView extends SharedAdminView
                             <div class="d-flex justify-content-between align-items-center">
                                 <h3 class="head">Reviews</h3>
                             </div>
+                            <div id="message"></div>
                             <?php
                             $this->displayReviewsTable($vehiclesReviews);
                             ?>
@@ -115,7 +116,7 @@ class ReviewManagementView extends SharedAdminView
                                                 onclick="acceptVehicleReview(<?= $review['vehicleId'] ?>,<?= $review['userId'] ?>)">
                                                 Accept</div>
                                             <div class="dropdown-item btn"
-                                                onclick="rejectVehicleReview(<?= $review['vehicleId'] ?>,<?= $review['userId'] ?>)">
+                                                onclick="blockVehicleReview(<?= $review['vehicleId'] ?>,<?= $review['userId'] ?>)">
                                                 Block
                                             </div>
                                             <?php
@@ -130,6 +131,10 @@ class ReviewManagementView extends SharedAdminView
                                                     <div class="dropdown-item btn"
                                                         onclick="activateVehicleReview(<?= $review['vehicleId'] ?>,<?= $review['userId'] ?>)">
                                                         Activate</div>
+                                                    <div class="dropdown-item btn" onclick="blockUser(<?= $review['userId'] ?>)">
+                                                        Block The User
+                                                    </div>
+
                                             <?php
                                         }
                                         ?>
