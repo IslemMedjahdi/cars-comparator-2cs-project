@@ -32,10 +32,16 @@ class SharedAdminView
             'icon' => 'bi bi-newspaper',
         ],
         [
+            'name' => 'Reviews',
+            'url' => '/cars-comparer-2cs-project/admin/reviews',
+            'icon' => 'bi bi-chat-left-text-fill',
+        ],
+        [
             'name' => 'Styles',
             'url' => '/cars-comparer-2cs-project/admin/styles',
             'icon' => 'bi bi-palette',
-        ]
+        ],
+
 
     ];
 
@@ -74,6 +80,28 @@ class SharedAdminView
             </button>
         </div>
         <?php
+    }
+
+    protected function showStars($rating, $maxRating = 5)
+    {
+        $fullStars = floor($rating);
+        $halfStars = ceil($rating - $fullStars);
+        $emptyStars = $maxRating - $fullStars - $halfStars;
+        for ($i = 0; $i < $fullStars; $i++) {
+            ?>
+            <i class="bi bi-star-fill text-warning"></i>
+            <?php
+        }
+        for ($i = 0; $i < $halfStars; $i++) {
+            ?>
+            <i class="bi bi-star-half text-warning"></i>
+            <?php
+        }
+        for ($i = 0; $i < $emptyStars; $i++) {
+            ?>
+            <i class="bi bi-star text-warning"></i>
+            <?php
+        }
     }
 
 }

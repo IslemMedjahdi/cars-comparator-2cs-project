@@ -155,6 +155,56 @@ class VehicleReviewModel extends Connection
         }
     }
 
+    public function getReviews($page, $perPage)
+    {
+        $offset = ($page - 1) * $perPage;
+
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT vr.*, u.username, v.model as vehicleModel, v.version as vehicleVersion, v.year AS vehicleYear 
+                FROM vehicle_review vr
+                INNER JOIN user u ON vr.userId = u.id
+                INNER JOIN vehicle v ON vr.vehicleId = v.id
+                ORDER BY vr.status DESC
+                LIMIT $perPage OFFSET $offset";
+
+
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->execute();
+
+            $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $this->disconnect($pdo);
+
+            return $reviews;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function getReviewsCount()
+    {
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT COUNT(*) FROM vehicle_review";
+
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->execute();
+
+            $count = $stmt->fetchColumn();
+
+            $this->disconnect($pdo);
+
+            return $count;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
 }
 
 ?>

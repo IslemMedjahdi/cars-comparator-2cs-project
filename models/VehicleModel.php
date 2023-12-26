@@ -129,7 +129,6 @@ class VehicleModel extends Connection
         $pdo = $this->connect();
 
         try {
-            // inner join with brand table
             $sql = "SELECT vehicle.id, vehicle.model, vehicle.version, vehicle.year, vehicle.height, vehicle.width, vehicle.length, vehicle.consumption, vehicle.engine, vehicle.speed, vehicle.description, vehicle.fuel_type, vehicle.pricing_range_from, vehicle.pricing_range_to, vehicle.ImageURL, vehicle.acceleration, brand.name as brand_name FROM vehicle INNER JOIN brand ON vehicle.brand_id = brand.id WHERE brand_id = :brandId";
             $stmt = $pdo->prepare($sql);
             $stmt->execute(['brandId' => $brandId]);

@@ -99,5 +99,38 @@ class VehicleReviewController
         }
     }
 
+    public function getReviews()
+    {
+
+        $vehicleReviewsModel = new VehicleReviewModel();
+
+        $page = $_GET['page'] ?? 1;
+
+        if ($page < 1) {
+            $page = 1;
+        }
+
+        $perPage = 10;
+
+        try {
+            $reviews = $vehicleReviewsModel->getReviews($page, $perPage);
+
+            $totalPages = ceil($vehicleReviewsModel->getReviewsCount() / $perPage);
+
+            return array(
+                'status' => 200,
+                'data' => $reviews,
+                'totalPages' => $totalPages,
+                'currentPage' => $page
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+
+    }
+
 }
 ?>

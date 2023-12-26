@@ -14,6 +14,7 @@ require_once __DIR__ . '/../views/user/CompareView.php';
 require_once __DIR__ . '/../views/user/VehiclesView.php';
 require_once __DIR__ . '/../views/admin/NewsManagementView.php';
 require_once __DIR__ . '/../views/user/NewsView.php';
+require_once __DIR__ . '/../views/admin/ReviewsManagementView.php';
 
 require_once __DIR__ . '/../utils/SessionUtils.php';
 
@@ -155,6 +156,18 @@ switch ($request) {
         }
         $newsManagementView = new NewsManagementView();
         $newsManagementView->displayCreateNewsPage();
+        break;
+    case '/admin/reviews':
+        if (!$user) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        if (!checkRoles(['admin'])) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        $reviewsManagementView = new ReviewManagementView();
+        $reviewsManagementView->displayReviewsPage();
         break;
     case '/admin/styles':
         if (!$user) {
