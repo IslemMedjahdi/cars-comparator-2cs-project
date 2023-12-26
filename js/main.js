@@ -554,3 +554,75 @@ function addVehicleReview(vehicleId) {
     },
   });
 }
+
+function acceptVehicleReview(vehicleId, userId) {
+  startLoading();
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/vehicles/reviews/accept.php",
+    method: "POST",
+    data: {
+      vehicleId: vehicleId,
+      userId: userId,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}
+
+function blockVehicleReview(vehicleId, userId) {
+  startLoading();
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/vehicles/reviews/block.php",
+    method: "POST",
+    data: {
+      vehicleId: vehicleId,
+      userId: userId,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}
+
+function activateVehicleReview(vehicleId, userId) {
+  startLoading();
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/vehicles/reviews/activate.php",
+    method: "POST",
+    data: {
+      vehicleId: vehicleId,
+      userId: userId,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}

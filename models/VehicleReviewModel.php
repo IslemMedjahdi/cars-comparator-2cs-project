@@ -205,6 +205,123 @@ class VehicleReviewModel extends Connection
         }
     }
 
+    public function accepteReview($vehicleId, $userId)
+    {
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT * FROM vehicle_review WHERE vehicleId=:vehicleId AND userId=:userId AND status='pending'";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                'vehicleId' => $vehicleId,
+                'userId' => $userId
+            ]);
+
+            $result = $stmt->fetch();
+
+            $this->disconnect($pdo);
+            if ($result) {
+                try {
+                    $sql = "UPDATE vehicle_review SET status='accepted' WHERE vehicleId=:vehicleId AND userId=:userId";
+
+                    $stmt = $pdo->prepare($sql);
+
+                    $stmt->execute([
+                        'vehicleId' => $vehicleId,
+                        'userId' => $userId
+                    ]);
+
+                    $this->disconnect($pdo);
+                } catch (PDOException $e) {
+                    throw new Exception($e->getMessage());
+                }
+            } else {
+                throw new Exception("Review not found");
+            }
+
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function blockReview($vehicleId, $userId)
+    {
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT * FROM vehicle_review WHERE vehicleId=:vehicleId AND userId=:userId AND status='pending' OR status='accepted'";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                'vehicleId' => $vehicleId,
+                'userId' => $userId
+            ]);
+
+            $result = $stmt->fetch();
+
+            $this->disconnect($pdo);
+            if ($result) {
+                try {
+                    $sql = "UPDATE vehicle_review SET status='blocked' WHERE vehicleId=:vehicleId AND userId=:userId";
+
+                    $stmt = $pdo->prepare($sql);
+
+                    $stmt->execute([
+                        'vehicleId' => $vehicleId,
+                        'userId' => $userId
+                    ]);
+
+                    $this->disconnect($pdo);
+                } catch (PDOException $e) {
+                    throw new Exception($e->getMessage());
+                }
+            } else {
+                throw new Exception("Review not found");
+            }
+
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function activateReview($vehicleId, $userId)
+    {
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT * FROM vehicle_review WHERE vehicleId=:vehicleId AND userId=:userId AND status='blocked'";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                'vehicleId' => $vehicleId,
+                'userId' => $userId
+            ]);
+
+            $result = $stmt->fetch();
+
+            $this->disconnect($pdo);
+            if ($result) {
+                try {
+                    $sql = "UPDATE vehicle_review SET status='accepted' WHERE vehicleId=:vehicleId AND userId=:userId";
+
+                    $stmt = $pdo->prepare($sql);
+
+                    $stmt->execute([
+                        'vehicleId' => $vehicleId,
+                        'userId' => $userId
+                    ]);
+
+                    $this->disconnect($pdo);
+                } catch (PDOException $e) {
+                    throw new Exception($e->getMessage());
+                }
+            } else {
+                throw new Exception("Review not found");
+            }
+
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
 }
 
 ?>

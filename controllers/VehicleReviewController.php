@@ -129,7 +129,90 @@ class VehicleReviewController
                 'message' => $e->getMessage()
             );
         }
+    }
 
+    public function accepteReview()
+    {
+        if (SessionUtils::getSessionVariable('user')['role'] != 'admin') {
+            return array(
+                'status' => 400,
+                'message' => "You must be an admin to create a vehicle"
+            );
+        }
+        $vehicleId = $_POST['vehicleId'] ?? null;
+        $userId = $_POST['userId'] ?? null;
+
+        $vehicleReviewModel = new VehicleReviewModel();
+
+        try {
+            $vehicleReviewModel->accepteReview($vehicleId, $userId);
+
+            return array(
+                'status' => 200,
+                'message' => "Review has been accepted"
+            );
+        } catch (Exception $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
+
+    public function blockReview()
+    {
+        if (SessionUtils::getSessionVariable('user')['role'] != 'admin') {
+            return array(
+                'status' => 400,
+                'message' => "You must be an admin to create a vehicle"
+            );
+        }
+        $vehicleId = $_POST['vehicleId'] ?? null;
+        $userId = $_POST['userId'] ?? null;
+
+        $vehicleReviewModel = new VehicleReviewModel();
+
+        try {
+            $vehicleReviewModel->blockReview($vehicleId, $userId);
+
+            return array(
+                'status' => 200,
+                'message' => "Review has been blocked"
+            );
+        } catch (Exception $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
+
+    public function activateReview()
+    {
+        if (SessionUtils::getSessionVariable('user')['role'] != 'admin') {
+            return array(
+                'status' => 400,
+                'message' => "You must be an admin to create a vehicle"
+            );
+        }
+        $vehicleId = $_POST['vehicleId'] ?? null;
+        $userId = $_POST['userId'] ?? null;
+
+        $vehicleReviewModel = new VehicleReviewModel();
+
+        try {
+            $vehicleReviewModel->activateReview($vehicleId, $userId);
+
+            return array(
+                'status' => 200,
+                'message' => "Review has been activated"
+            );
+        } catch (Exception $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
     }
 
 }
