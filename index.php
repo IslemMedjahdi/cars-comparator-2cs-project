@@ -82,6 +82,12 @@
         .badge-primary {
             background-color: var(--primary) !important;
         }
+
+        .dropdown-item:active,
+        .dropdown-item:focus,
+        .dropdown-item:hover {
+            background-color: var(--primary) !important;
+        }
     </style>
 
 </head>

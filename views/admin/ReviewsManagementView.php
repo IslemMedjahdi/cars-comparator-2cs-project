@@ -60,6 +60,7 @@ class ReviewManagementView extends SharedAdminView
                         <th scope="col">Review</th>
                         <th scope="col">Rate</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,6 +75,9 @@ class ReviewManagementView extends SharedAdminView
                                 <?= $review["vehicleModel"] ?> -
                                 <?= $review["vehicleVersion"] ?> -
                                 <?= $review["vehicleYear"] ?>
+                                <div class="badge badge-pill badge-primary">
+                                    Vehicle
+                                </div>
                             </th>
                             <th scope="row">
                                 <?= $review["review"] ?? "N/A"; ?>
@@ -93,6 +97,43 @@ class ReviewManagementView extends SharedAdminView
                                     <p class="text-muted" style="font-size: 0.7rem">
                                         <?= date_format(date_create($review['createdAt']), "Y/m/d H:i:s"); ?>
                                     </p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary btn-sm" type="button"
+                                        id="dropdownMenuButton-<?= $review['vehicleId'] ?>-<?= $review['userId'] ?>"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                    <div class="dropdown-menu"
+                                        aria-labelledby="dropdownMenuButton-<?= $review['vehicleId'] ?>-<?= $review['userId'] ?>">
+                                        <?php
+                                        if ($review['status'] === 'pending') {
+                                            ?>
+                                            <div class="dropdown-item btn"
+                                                onclick="acceptVehicleReview(<?= $review['vehicleId'] ?>,<?= $review['userId'] ?>)">
+                                                Accept</div>
+                                            <div class="dropdown-item btn"
+                                                onclick="rejectVehicleReview(<?= $review['vehicleId'] ?>,<?= $review['userId'] ?>)">
+                                                Block
+                                            </div>
+                                            <?php
+                                        } else if ($review['status'] === 'accepted') {
+                                            ?>
+                                                <div class="dropdown-item btn"
+                                                    onclick="blockVehicleReview(<?= $review['vehicleId'] ?>,<?= $review['userId'] ?>)">Block
+                                                </div>
+                                            <?php
+                                        } else if ($review['status'] === 'blocked') {
+                                            ?>
+                                                    <div class="dropdown-item btn"
+                                                        onclick="activateVehicleReview(<?= $review['vehicleId'] ?>,<?= $review['userId'] ?>)">
+                                                        Activate</div>
+                                            <?php
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
