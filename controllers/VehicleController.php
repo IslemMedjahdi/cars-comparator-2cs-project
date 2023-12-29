@@ -299,6 +299,27 @@ class VehicleController
 
     }
 
+    public function getMostComparedWithVehicle()
+    {
+        $id = $_GET['id'] ?? null;
+
+        $comparisionHistoryModel = new ComparisionHistoryModel();
+
+        try {
+            $mostComparedVehicles = $comparisionHistoryModel->getMostComparedWithVehicle($id);
+
+            return array(
+                'status' => 200,
+                'data' => $mostComparedVehicles
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
+
 
 }
 ?>
