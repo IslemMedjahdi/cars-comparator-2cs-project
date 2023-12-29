@@ -322,6 +322,38 @@ class VehicleReviewModel extends Connection
         }
     }
 
+    public function getBestReviewsOfVehicle($vehicleId)
+    {
+
+        if (empty($vehicleId)) {
+            throw new Exception("Vehicle Id cannot be empty");
+        }
+
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT vr.*, u.username 
+                FROM vehicle_review vr
+                INNER JOIN user u ON vr.userId = u.id
+                WHERE vr.vehicleId=:vehicleId AND vr.status='accepted' 
+                ORDER BY vr.rate DESC
+                LIMIT 3";
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->execute([
+                'vehicleId' => $vehicleId
+            ]);
+
+            $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $this->disconnect($pdo);
+
+            return $reviews;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
 }
 
 ?>

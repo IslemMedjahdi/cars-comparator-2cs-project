@@ -201,13 +201,9 @@ class VehiclesView extends SharedUserView
 
         $vehicleReviewController = new VehicleReviewController();
 
-        $response = $vehicleReviewController->getReviewsByVehicleId($vehicleId);
+        $response = $vehicleReviewController->getBestReviewsOfVehicle($vehicleId);
 
         $vehicleReviews = $response["data"] ?? [];
-
-        $totalPages = $response["totalPages"] ?? 1;
-
-        $currentPage = $response["currentPage"] ?? 1;
 
 
         ?>
@@ -236,70 +232,39 @@ class VehiclesView extends SharedUserView
                         $this->displayVehicleReview($vehicleReview);
                     }
                     ?>
-                    <div class="d-flex justify-content-center w-100">
-                        <?php
-                        $this->displayReviewsPagination($vehicleId, $totalPages, $currentPage);
-                        ?>
-                    </div>
                 </div>
                 <?php
             }
+            ?>
+        </div>
+        <?php
 
     }
 
     private function displayVehicleReview($vehicleReview)
     {
         ?>
-            <div class="card mb-3 ">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="card-title">
-                            <div class="badge badge-pill badge-primary">
-                                <?= $vehicleReview["username"]; ?>
-                            </div>
+        <div class="card mb-3 ">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="card-title">
+                        <div class="badge badge-pill badge-primary">
+                            <?= $vehicleReview["username"]; ?>
                         </div>
-                        <h6 class="card-subtitle mb-2 text-muted" style="font-size: 0.8em;">
-                            <?= date_format(date_create($vehicleReview['createdAt']), "Y/m/d H:i:s"); ?>
-                        </h6>
                     </div>
-                    <h6 class="card-subtitle mb-2 text-muted">
-                        <?= $this->showStars($vehicleReview["rate"]); ?>
+                    <h6 class="card-subtitle mb-2 text-muted" style="font-size: 0.8em;">
+                        <?= date_format(date_create($vehicleReview['createdAt']), "Y/m/d H:i:s"); ?>
                     </h6>
-                    <p class="card-text">
-                        <?= $vehicleReview["review"]; ?>
-                    </p>
                 </div>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    <?= $this->showStars($vehicleReview["rate"]); ?>
+                </h6>
+                <p class="card-text">
+                    <?= $vehicleReview["review"]; ?>
+                </p>
             </div>
-            <?php
-    }
-
-    private function displayReviewsPagination($vehicleId, $totalPages, $currentPage)
-    {
-        ?>
-            <nav>
-                <ul class="pagination">
-                    <li class="page-item <?= $currentPage == 1 ? "disabled" : ""; ?>">
-                        <a class="page-link"
-                            href="/cars-comparer-2cs-project/vehicles?id=<?= $vehicleId ?>&page=<?= $currentPage - 1; ?>">Previous</a>
-                    </li>
-                    <?php
-                    for ($i = 1; $i <= $totalPages; $i++) {
-                        ?>
-                        <li class="page-item <?= $i == $currentPage ? "active" : ""; ?>">
-                            <a class="page-link" href="/cars-comparer-2cs-project/vehicles?id=<?= $vehicleId ?>&page=<?= $i; ?>">
-                                <?= $i; ?>
-                            </a>
-                        </li>
-                        <?php
-                    }
-                    ?>
-                    <li class="page-item <?= $totalPages == $currentPage ? "disabled" : ""; ?>">
-                        <a class="page-link"
-                            href="/cars-comparer-2cs-project/vehicles?id=<?= $vehicleId ?>&page=<?= $currentPage + 1; ?>">Next</a>
-                    </li>
-                </ul>
-            </nav>
-            <?php
+        </div>
+        <?php
     }
 
     private function addReviewForm($vehicleId)
@@ -316,28 +281,28 @@ class VehiclesView extends SharedUserView
         $existingReview = $vehicleReviewController->getReviewOfUserByVehicleId($vehicleId)["data"] ?? null;
 
         ?>
-            <div class="d-flex justify-content-center  align-items-center flex-column w-100">
-                <div class="w-100 mt-4 border rounded card-body" style="max-width: 1024px;">
-                    <div id="message"></div>
-                    <div class="form-group">
-                        <label for="rate">Rate:</label>
-                        <select class="form-control" name="rate" id="rate">
-                            <?php for ($i = 1; $i <= 5; $i++) { ?>
-                                <option value="<?= $i; ?>" <?= $existingReview && $existingReview["rate"] == $i ? "selected" : "" ?>>
-                                    <?= $i; ?> Stars
-                                </option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Review:</label>
-                        <input type="text" class="form-control" id="review" name="review"
-                            value="<?= $existingReview ? $existingReview["review"] : "" ?>">
-                    </div>
-                    <button type="submit" class="btn btn-primary" onclick="addVehicleReview(<?= $vehicleId; ?>)">Submit</button>
+        <div class="d-flex justify-content-center  align-items-center flex-column w-100">
+            <div class="w-100 mt-4 border rounded card-body" style="max-width: 1024px;">
+                <div id="message"></div>
+                <div class="form-group">
+                    <label for="rate">Rate:</label>
+                    <select class="form-control" name="rate" id="rate">
+                        <?php for ($i = 1; $i <= 5; $i++) { ?>
+                            <option value="<?= $i; ?>" <?= $existingReview && $existingReview["rate"] == $i ? "selected" : "" ?>>
+                                <?= $i; ?> Stars
+                            </option>
+                        <?php } ?>
+                    </select>
                 </div>
+                <div class="form-group">
+                    <label for="name">Review:</label>
+                    <input type="text" class="form-control" id="review" name="review"
+                        value="<?= $existingReview ? $existingReview["review"] : "" ?>">
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="addVehicleReview(<?= $vehicleId; ?>)">Submit</button>
             </div>
-            <?php
+        </div>
+        <?php
     }
 
     protected function displayMostComparedVehiclesWith($vehicleId)
@@ -354,22 +319,22 @@ class VehiclesView extends SharedUserView
 
         ?>
 
-            <div class="w-100 d-flex justify-content-center">
-                <div class="w-100 mt-4 border rounded card-body d-flex justify-content-center  align-items-center flex-column "
-                    style="max-width: 1024px;">
-                    <div class="mt-5">
-                        <h2 class="head">Most Compared To</h2>
-                    </div>
-                    <div class="w-100 row">
-                        <?php
-                        foreach ($mostComparedVehiclesPairs as $pair) {
-                            $this->displayMostComparedCarsRow($pair["vehicle_1"], $pair["vehicle_2"], $pair["count"]);
-                        }
-                        ?>
-                    </div>
+        <div class="w-100 d-flex justify-content-center">
+            <div class="w-100 mt-4 border rounded card-body d-flex justify-content-center  align-items-center flex-column "
+                style="max-width: 1024px;">
+                <div class="mt-5">
+                    <h2 class="head">Most Compared To</h2>
+                </div>
+                <div class="w-100 row">
+                    <?php
+                    foreach ($mostComparedVehiclesPairs as $pair) {
+                        $this->displayMostComparedCarsRow($pair["vehicle_1"], $pair["vehicle_2"], $pair["count"]);
+                    }
+                    ?>
                 </div>
             </div>
-            <?php
+        </div>
+        <?php
     }
 
     private function displayMostComparedCarsRow($vehicle1, $vehicle2, $count)
@@ -378,42 +343,42 @@ class VehiclesView extends SharedUserView
         $vehicles = [$vehicle1, $vehicle2];
 
         ?>
-            <div class="p-1 col-md-6 w-100">
-                <div class="box-shadow-lg p-4 bg-light border">
-                    <div class="row">
-                        <?php
-                        foreach ($vehicles as $vehicle) {
-                            ?>
-                            <div class="col-md-6">
-                                <div style="overflow: hidden;">
-                                    <img class="img-hover-transition" style="height: 10rem;object-fit: cover;width: 100%;"
-                                        src="/cars-comparer-2cs-project<?= $vehicle["ImageURL"] ?>" />
-                                </div>
-                                <div class="form-group mt-4">
-                                    <label>Brand:</label>
-                                    <input disabled class="form-control" value=<?= $vehicle["brand_name"] ?> />
-                                </div>
-                                <div class="form-group">
-                                    <label>Vehicle:</label>
-                                    <input disabled class="form-control"
-                                        value="<?= $vehicle["model"] ?>-<?= $vehicle["version"] ?>-<?= $vehicle["year"] ?>" />
-                                </div>
-                            </div>
-                            <?php
-                        }
+        <div class="p-1 col-md-6 w-100">
+            <div class="box-shadow-lg p-4 bg-light border">
+                <div class="row">
+                    <?php
+                    foreach ($vehicles as $vehicle) {
                         ?>
-                    </div>
-                    <div>
-                        <a href="/cars-comparer-2cs-project/compare?id[]=<?= $vehicle1["id"] ?>&id[]=<?= $vehicle2["id"] ?>"
-                            class="btn btn-primary btn-block"><i class="bi bi-card-list"></i> Preview</a>
-                        <span class="text-muted" style="font-size: 0.8em;">Compared
-                            <?= $count ?> times
-                        </span>
-                    </div>
+                        <div class="col-md-6">
+                            <div style="overflow: hidden;">
+                                <img class="img-hover-transition" style="height: 10rem;object-fit: cover;width: 100%;"
+                                    src="/cars-comparer-2cs-project<?= $vehicle["ImageURL"] ?>" />
+                            </div>
+                            <div class="form-group mt-4">
+                                <label>Brand:</label>
+                                <input disabled class="form-control" value=<?= $vehicle["brand_name"] ?> />
+                            </div>
+                            <div class="form-group">
+                                <label>Vehicle:</label>
+                                <input disabled class="form-control"
+                                    value="<?= $vehicle["model"] ?>-<?= $vehicle["version"] ?>-<?= $vehicle["year"] ?>" />
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <div>
+                    <a href="/cars-comparer-2cs-project/compare?id[]=<?= $vehicle1["id"] ?>&id[]=<?= $vehicle2["id"] ?>"
+                        class="btn btn-primary btn-block"><i class="bi bi-card-list"></i> Preview</a>
+                    <span class="text-muted" style="font-size: 0.8em;">Compared
+                        <?= $count ?> times
+                    </span>
                 </div>
             </div>
+        </div>
 
-            <?php
+        <?php
     }
 
 }

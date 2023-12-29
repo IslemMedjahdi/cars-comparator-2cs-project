@@ -242,5 +242,26 @@ class VehicleReviewController
         }
     }
 
+    public function getBestReviewsOfVehicle($vehicleId)
+    {
+
+        $vehicleReviewModel = new VehicleReviewModel();
+
+        try {
+            $reviews = $vehicleReviewModel->getBestReviewsOfVehicle($vehicleId);
+
+            return array(
+                'status' => 200,
+                'data' => $reviews
+            );
+        } catch (Exception $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+
+        }
+    }
+
 }
 ?>
