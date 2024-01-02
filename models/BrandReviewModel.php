@@ -165,7 +165,7 @@ class BrandReviewModel extends Connection
             $sql = "SELECT br.*, u.username, b.name as brandName
                 FROM brand_review br
                 INNER JOIN user u ON br.userId = u.id
-                INNER JOIN vehicle v ON br.brandId = b.id
+                INNER JOIN brand b ON br.brandId = b.id
                 ORDER BY br.status DESC
                 LIMIT $perPage OFFSET $offset";
 
