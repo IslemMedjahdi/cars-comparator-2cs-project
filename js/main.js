@@ -626,3 +626,105 @@ function activateVehicleReview(vehicleId, userId) {
     },
   });
 }
+
+function addBrandReview(brandId) {
+  const review = $("#review").val();
+  const rate = $("#rate").val();
+
+  startLoading();
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/brands/reviews/create.php",
+    method: "POST",
+    data: {
+      brandId: brandId,
+      review: review,
+      rate: rate,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        $("#message").html(`<div class="alert alert-success" role="alert">
+        ${response.message}
+      </div>`);
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}
+
+function acceptBrandReview(brandId, userId) {
+  startLoading();
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/brands/reviews/accept.php",
+    method: "POST",
+    data: {
+      brandId: brandId,
+      userId: userId,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}
+
+function blockBrandReview(brandId, userId) {
+  startLoading();
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/brands/reviews/block.php",
+    method: "POST",
+    data: {
+      brandId: brandId,
+      userId: userId,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}
+
+function activateBrandReview(brandId, userId) {
+  startLoading();
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/brands/reviews/activate.php",
+    method: "POST",
+    data: {
+      brandId: brandId,
+      userId: userId,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}
