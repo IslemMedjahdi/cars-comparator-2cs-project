@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2023 at 01:49 AM
+-- Generation Time: Jan 04, 2024 at 01:37 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -53,6 +53,100 @@ INSERT INTO `brand` (`name`, `id`, `CountryOfOrigin`, `YearFounded`, `WebsiteURL
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `brand_review`
+--
+
+CREATE TABLE `brand_review` (
+  `userId` int(11) NOT NULL,
+  `brandId` int(11) NOT NULL,
+  `rate` int(11) NOT NULL,
+  `review` varchar(256) DEFAULT NULL,
+  `status` enum('pending','accepted','blocked') NOT NULL,
+  `createdAt` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `brand_review`
+--
+
+INSERT INTO `brand_review` (`userId`, `brandId`, `rate`, `review`, `status`, `createdAt`) VALUES
+(9, 10, 2, 'This Brand is good', 'accepted', '2024-01-02 12:02:53'),
+(13, 10, 5, 'BMW is the best brand', 'accepted', '2024-01-02 12:03:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comparison_history`
+--
+
+CREATE TABLE `comparison_history` (
+  `userId` int(11) NOT NULL,
+  `vehicle1Id` int(11) NOT NULL,
+  `vehicle2Id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comparison_history`
+--
+
+INSERT INTO `comparison_history` (`userId`, `vehicle1Id`, `vehicle2Id`) VALUES
+(9, 71, 72),
+(9, 71, 73),
+(9, 72, 73),
+(9, 73, 74),
+(12, 71, 72),
+(12, 71, 73),
+(12, 72, 73),
+(12, 73, 74),
+(13, 71, 72);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
+  `title` varchar(256) NOT NULL,
+  `description` text NOT NULL,
+  `ImageURL` varchar(256) NOT NULL,
+  `createdAt` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `title`, `description`, `ImageURL`, `createdAt`) VALUES
+(2, '2024 Lexus RZ300e with Front-Wheel Drive Costs Less, Goes Farther', 'The Lexus RZ is currently the luxury brand\'s only EV model, and it hasn\'t exactly lit the world on fire. Although the all-wheel-drive RZ450e we tested had the characteristics of a satisfying Lexus, it was mostly disappointing as an electric SUV. Among our chief complaints was its limited driving range. The good news for the 2024 model year is there\'s a new front-wheel-drive configuration that not only offers considerably more range, but it also costs less too.\r\n\r\nRZ300e Has More Range\r\nThe 2024 Lexus RZ300e arrives as the front-drive alternative to the all-wheel-drive RZ450e. The FWD RZ removes the 107-hp electric motor mounted on the AWD model\'s rear axle and replaces it with a unique subframe that Lexus says is designed to reduce vibration and noise.', '/uploads/news/658304bfe98b8_1703085247.jpg', '2023-12-20 16:14:07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `style`
+--
+
+CREATE TABLE `style` (
+  `id` int(11) NOT NULL,
+  `logoUrl` varchar(256) DEFAULT NULL,
+  `primary_color` varchar(10) DEFAULT NULL,
+  `facebook_url` varchar(128) DEFAULT NULL,
+  `linkedin_url` varchar(128) DEFAULT NULL,
+  `instagram_url` varchar(128) DEFAULT NULL,
+  `faviconUrl` varchar(128) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `style`
+--
+
+INSERT INTO `style` (`id`, `logoUrl`, `primary_color`, `facebook_url`, `linkedin_url`, `instagram_url`, `faviconUrl`) VALUES
+(1, '/uploads/style/658356de22046_1703106270.png', '#345cfe', NULL, NULL, NULL, '/uploads/style/658356de274d6_1703106270.png');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -76,7 +170,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `firstName`, `lastName`, `email`, `role`, `sexe`, `birthDate`, `password`, `createdAt`, `status`, `statusDate`) VALUES
-(9, 'admin', 'Admin', 'Admin', 'admin@carcompass.com', 'admin', 'male', '2002-05-06', '$2y$10$P0SnjKC6x60nPV5qk.alsemCrFoHgSSGED4Sis9s2fKc3L9T5YPkm', '2023-12-10 22:35:15.513885', 'accepted', '2023-12-10 22:35:15.513885');
+(9, 'admin', 'Admin', 'Admin', 'admin@carcompass.com', 'admin', 'male', '2002-05-06', '$2y$10$P0SnjKC6x60nPV5qk.alsemCrFoHgSSGED4Sis9s2fKc3L9T5YPkm', '2023-12-10 22:35:15.513885', 'accepted', '2023-12-26 22:27:27.000000'),
+(12, 'ki_medjahdi', 'Islem', 'Medjahdi', 'ki_medjahdi@esi.dz', 'user', 'male', '2002-05-06', '$2y$10$NXbw40XWZtmlapO1poutFemn75efR96MLT.DXQi2HR6FcmjRizft.', '2023-12-15 01:51:50.857843', 'accepted', '2023-12-29 02:05:54.000000'),
+(13, 'islem_medjahdi', 'Islem', 'Medjahdi', 'ki_medjahdi@esi.dz', 'user', 'male', '2002-05-06', '$2y$10$Sn/x8oqtnWeNMR9NoYpHO.MSRteEMVUyLMkvXyBX6Xlsbb2AYYKyi', '2023-12-20 20:20:20.658805', 'accepted', '2023-12-20 20:20:48.000000');
 
 -- --------------------------------------------------------
 
@@ -114,6 +210,34 @@ INSERT INTO `vehicle` (`id`, `brand_id`, `model`, `version`, `year`, `height`, `
 (73, 11, 'Chevrolet Bolt', 'LT Electric', 2022, 161, 177, 418, 10, 'Electric Motor', 150, 'All-electric hatchback with long range', 'electric', 40000, 50000, 7, '/uploads/vehicles/657b9fc79ced5_1702600647.jpg'),
 (74, 12, 'Peugeot 308', 'GT Line Hatch', 2023, 147, 180, 427, 6, '1.6L Turbocharged Inline-4', 220, 'Stylish hatchback with advanced safety features', 'gasoline', 28000, 38000, 8, '/uploads/vehicles/657ba08fb2fb9_1702600847.jpg');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vehicle_review`
+--
+
+CREATE TABLE `vehicle_review` (
+  `userId` int(11) NOT NULL,
+  `vehicleId` int(11) NOT NULL,
+  `rate` int(11) NOT NULL,
+  `review` varchar(256) DEFAULT NULL,
+  `status` enum('pending','accepted','blocked') NOT NULL,
+  `createdAt` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `vehicle_review`
+--
+
+INSERT INTO `vehicle_review` (`userId`, `vehicleId`, `rate`, `review`, `status`, `createdAt`) VALUES
+(9, 71, 1, NULL, 'accepted', '2023-12-23 02:06:01'),
+(9, 73, 1, 'This Car is horrible', 'accepted', '2023-12-25 14:18:14'),
+(9, 74, 4, 'I like this car but it\'s so expensive for its features', 'accepted', '2023-12-26 22:20:40'),
+(12, 71, 4, NULL, 'accepted', '2023-12-22 00:00:00'),
+(12, 72, 3, NULL, 'accepted', '2023-12-22 01:16:35'),
+(12, 73, 3, 'This car is bad', 'accepted', '2023-12-26 22:29:56'),
+(13, 71, 5, 'This car is good', 'accepted', '2023-12-22 00:00:00');
+
 --
 -- Indexes for dumped tables
 --
@@ -122,6 +246,33 @@ INSERT INTO `vehicle` (`id`, `brand_id`, `model`, `version`, `year`, `height`, `
 -- Indexes for table `brand`
 --
 ALTER TABLE `brand`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `brand_review`
+--
+ALTER TABLE `brand_review`
+  ADD PRIMARY KEY (`userId`,`brandId`),
+  ADD KEY `brandId` (`brandId`);
+
+--
+-- Indexes for table `comparison_history`
+--
+ALTER TABLE `comparison_history`
+  ADD PRIMARY KEY (`userId`,`vehicle1Id`,`vehicle2Id`),
+  ADD KEY `vehicle1Id` (`vehicle1Id`),
+  ADD KEY `vehicle2Id` (`vehicle2Id`);
+
+--
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `style`
+--
+ALTER TABLE `style`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -139,6 +290,13 @@ ALTER TABLE `vehicle`
   ADD KEY `brand_id` (`brand_id`);
 
 --
+-- Indexes for table `vehicle_review`
+--
+ALTER TABLE `vehicle_review`
+  ADD PRIMARY KEY (`userId`,`vehicleId`),
+  ADD KEY `vehicleId` (`vehicleId`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -149,10 +307,22 @@ ALTER TABLE `brand`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `style`
+--
+ALTER TABLE `style`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `vehicle`
@@ -165,10 +335,32 @@ ALTER TABLE `vehicle`
 --
 
 --
+-- Constraints for table `brand_review`
+--
+ALTER TABLE `brand_review`
+  ADD CONSTRAINT `brand_review_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `brand_review_ibfk_2` FOREIGN KEY (`brandId`) REFERENCES `brand` (`id`);
+
+--
+-- Constraints for table `comparison_history`
+--
+ALTER TABLE `comparison_history`
+  ADD CONSTRAINT `comparison_history_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `comparison_history_ibfk_2` FOREIGN KEY (`vehicle1Id`) REFERENCES `vehicle` (`id`),
+  ADD CONSTRAINT `comparison_history_ibfk_3` FOREIGN KEY (`vehicle2Id`) REFERENCES `vehicle` (`id`);
+
+--
 -- Constraints for table `vehicle`
 --
 ALTER TABLE `vehicle`
   ADD CONSTRAINT `vehicle_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`);
+
+--
+-- Constraints for table `vehicle_review`
+--
+ALTER TABLE `vehicle_review`
+  ADD CONSTRAINT `vehicle_review_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `vehicle_review_ibfk_2` FOREIGN KEY (`vehicleId`) REFERENCES `vehicle` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
