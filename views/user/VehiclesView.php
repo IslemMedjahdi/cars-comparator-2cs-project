@@ -209,7 +209,7 @@ class VehiclesView extends SharedUserView
         ?>
         <div class="d-flex justify-content-center align-items-center flex-column">
             <div class="mt-4">
-                <h2 class="head">Vehicle Reviews</h2>
+                <h2 class="head">Vehicle Best Reviews</h2>
             </div>
 
             <?php
