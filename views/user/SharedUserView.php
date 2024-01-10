@@ -138,17 +138,24 @@ class SharedUserView
 
     protected function displayFooter()
     {
+
+        $settingsController = new SettingsController();
+
+        $logo = $settingsController->getLogo()["data"]["logoUrl"] ?? "/assets/images/logo.svg";
+
+        $title = $settingsController->getContent()["data"]["title"] ?? "CarCompass";
+
+        $description = $settingsController->getContent()["data"]["description"] ?? "Discover your ideal ride with CarCompass – your ultimate destination for insightful car comparisons. Navigate through an extensive database, explore detailed specs, and make informed decisions on the perfect vehicle for your journey. Your trusted companion in the world of cars.";
+
         ?>
         <footer class="bg-primary text-white mt-4 w-100">
             <div class="container py-5">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                        <img src="/cars-comparer-2cs-project/assets/images/logo.svg" alt="logo" class="logo white-filter"
+                        <img src="/cars-comparer-2cs-project/<?= $logo ?>" alt="logo" class="logo white-filter"
                             style="width: 12rem; object-fit: contain;" />
                         <p class="mt-4">
-                            Discover your ideal ride with CarCompass – your ultimate destination for insightful car comparisons.
-                            Navigate through an extensive database, explore detailed specs, and make informed decisions on the
-                            perfect vehicle for your journey. Your trusted companion in the world of cars.
+                            <?= $description ?>
                         </p>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
@@ -175,7 +182,8 @@ class SharedUserView
             <div class="py-2 px-4 fw-sm d-flex justify-content-end">
                 <p>
                     ©
-                    <?= date("Y") ?> CarCompass. All rights reserved.
+                    <?= date("Y") ?>
+                    <?= $title ?> All rights reserved.
                 </p>
             </div>
         </footer>
