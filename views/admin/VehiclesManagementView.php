@@ -142,13 +142,14 @@ class VehiclesManagementView extends SharedAdminView
     {
         $vehicleController = new VehicleController();
 
-        $response = $vehicleController->getVehicles();
+        if (isset($_GET["brand_id"])) {
+            $response = $vehicleController->getVehiclesByBrandId($_GET["brand_id"]);
+        } else {
+            $response = $vehicleController->getAllVehicles();
+        }
 
         $vehicles = $response["data"];
 
-        $currentPage = $response["currentPage"];
-
-        $totalPages = $response["totalPages"];
 
 
         ?>
@@ -169,11 +170,7 @@ class VehiclesManagementView extends SharedAdminView
                             <?php
                             $this->displayVehiclesTable($vehicles);
                             ?>
-                            <div class="d-flex justify-content-center">
-                                <?php
-                                $this->displayVehicleTablePagination($totalPages, $currentPage);
-                                ?>
-                            </div>
+
                         </div>
                     </div>
                 </main>
@@ -186,19 +183,18 @@ class VehiclesManagementView extends SharedAdminView
     private function displayVehiclesTable($vehicles)
     {
         ?>
-
         <div class="table-responsive">
-            <table class="table  bg-white">
+            <table data-toggle="table" data-pagination="true" data-search="true" class="bg-white">
                 <thead class="thead-dark">
                     <tr>
 
-                        <th scope="col">ID</th>
-                        <th scope="col">Brand</th>
-                        <th scope="col">Model</th>
-                        <th scope="col">Version</th>
-                        <th scope="col">Year</th>
-                        <th scope="col">Speed</th>
-                        <th scope="col">Fuel Type</th>
+                        <th scope="col" data-field="id" data-sortable="true">ID</th>
+                        <th scope="col" data-field="brand" data-sortable="true">Brand</th>
+                        <th scope="col" data-field="model" data-sortable="true">Model</th>
+                        <th scope="col" data-field="version" data-sortable="true">Version</th>
+                        <th scope="col" data-field="year" data-sortable="true">Year</th>
+                        <th scope="col" data-field="speed" data-sortable="true">Speed</th>
+                        <th scope="col" data-field="type" data-sortable="true">Fuel Type</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -256,34 +252,7 @@ class VehiclesManagementView extends SharedAdminView
         <?php
     }
 
-    private function displayVehicleTablePagination($totalPages, $currentPage)
-    {
-        ?>
-        <nav>
-            <ul class="pagination">
-                <li class="page-item <?php echo $currentPage == 1 ? "disabled" : ""; ?>">
-                    <a class="page-link"
-                        href="/cars-comparer-2cs-project/admin/vehicles?page=<?php echo $currentPage - 1; ?>">Previous</a>
-                </li>
-                <?php
-                for ($i = 1; $i <= $totalPages; $i++) {
-                    ?>
-                    <li class="page-item <?php echo $i == $currentPage ? "active" : ""; ?>">
-                        <a class="page-link" href="/cars-comparer-2cs-project/admin/vehicles?page=<?php echo $i; ?>">
-                            <?php echo $i; ?>
-                        </a>
-                    </li>
-                    <?php
-                }
-                ?>
-                <li class="page-item <?php echo $totalPages == $currentPage ? "disabled" : ""; ?>">
-                    <a class="page-link"
-                        href="/cars-comparer-2cs-project/admin/vehicles?page=<?php echo $currentPage + 1; ?>">Next</a>
-                </li>
-            </ul>
-        </nav>
-        <?php
-    }
+
 
 }
 ?>

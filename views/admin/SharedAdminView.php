@@ -22,11 +22,6 @@ class SharedAdminView
             'icon' => 'bi bi-building'
         ],
         [
-            'name' => 'Vehicles',
-            'url' => '/cars-comparer-2cs-project/admin/vehicles',
-            'icon' => 'bi bi-car-front',
-        ],
-        [
             'name' => 'News',
             'url' => '/cars-comparer-2cs-project/admin/news',
             'icon' => 'bi bi-newspaper',

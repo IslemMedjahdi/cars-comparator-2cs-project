@@ -320,6 +320,25 @@ class VehicleController
         }
     }
 
+    public function getAllVehicles()
+    {
+        $vehicleModel = new VehicleModel();
+
+        try {
+            $vehicles = $vehicleModel->getAllVehicles();
+
+            return array(
+                'status' => 200,
+                'data' => $vehicles
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage(),
+            );
+        }
+    }
+
 
 }
 ?>

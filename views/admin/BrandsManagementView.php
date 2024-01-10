@@ -163,14 +163,17 @@ class BrandsManagementView extends SharedAdminView
                             <td><img src="/cars-comparer-2cs-project<?= $brand["LogoImageURL"] ?>" class="logo" /></td>
                             <td>
                                 <div class="d-flex gap-2">
+                                    <a href="/cars-comparer-2cs-project/admin/vehicles/?brand_id=<?= $brand["id"] ?>"
+                                        class="btn btn-primary btn-sm">
+                                        <i class="bi bi-eye"></i>
+                                        Show Vehicles
+                                    </a>
                                     <a href="/cars-comparer-2cs-project/admin/brands/edit?id=<?= $brand["id"] ?>"
                                         class="btn btn-primary btn-sm">
                                         <i class="bi bi-pencil-square"></i>
-                                        Edit
                                     </a>
                                     <button onclick="deleteBrand(<?= $brand["id"] ?>)" class="btn btn-danger btn-sm">
                                         <i class="bi bi-trash"></i>
-                                        Delete
                                     </button>
                                 </div>
                             </td>
