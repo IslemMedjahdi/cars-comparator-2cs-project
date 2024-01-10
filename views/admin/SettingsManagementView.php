@@ -151,5 +151,34 @@ class SettingsManagementView extends SharedAdminView
             <?php
     }
 
+    private function displayUpdateSocialMedia()
+    {
+        $settingsController = new SettingsController();
+
+        $socialMedia = $settingsController->getSocialMedia()["data"];
+
+        $facebook = $socialMedia["facebook_url"] ?? "";
+
+        ?>
+            <div class="container mt-5">
+                <h3 class="head">Update Social Media:</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="facebook">Facebook:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="facebook" name="facebook" value="<?= $facebook ?>"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+
+
+
+    }
+
 }
 ?>
