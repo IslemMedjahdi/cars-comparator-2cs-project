@@ -505,11 +505,41 @@ function updateStyles() {
   dataForm.append("primaryColor", primaryColor);
 
   $.ajax({
-    url: "/cars-comparer-2cs-project/api/styles/update.php",
+    url: "/cars-comparer-2cs-project/api/settings/styles/update.php",
     method: "POST",
     data: dataForm,
     contentType: false,
     processData: false,
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}
+
+function updateContact() {
+  startLoading();
+
+  const email = $("#email").val();
+  const phoneNumber = $("#phone_number").val();
+  const address = $("#address").val();
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/settings/contact/update.php",
+    method: "POST",
+    data: {
+      email: email,
+      phoneNumber: phoneNumber,
+      address: address,
+    },
     success: function (response) {
       stopLoading();
       response = JSON.parse(response);

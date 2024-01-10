@@ -181,7 +181,7 @@ switch ($request) {
             exit();
         }
         $settingsManagementView = new SettingsManagementView();
-        $settingsManagementView->displayUpdateStylesPage();
+        $settingsManagementView->displaySettingsPage();
         break;
 
     case '':

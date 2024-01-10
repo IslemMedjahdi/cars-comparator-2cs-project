@@ -114,6 +114,29 @@ class SettingsController
 
     }
 
+    public function updateContact()
+    {
+        $settingsModel = new SettingsModel();
+
+        $email = $_POST['email'] ?? null;
+        $phoneNumber = $_POST['phoneNumber'] ?? null;
+        $address = $_POST['address'] ?? null;
+
+        try {
+            $settingsModel->updateContent($email, $phoneNumber, $address);
+
+            return array(
+                'status' => 200,
+                'message' => "Contact updated successfully."
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
+
     public function getContact()
     {
         $settingsModel = new SettingsModel();

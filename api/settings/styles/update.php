@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "/../../controllers/SettingsController.php");
+require_once(__DIR__ . "/../../../controllers/SettingsController.php");
 
 $settingsController = new SettingsController();
 
