@@ -22,9 +22,7 @@ class ReviewManagementView extends SharedAdminView
 
         $brandsReviews = $brandsResponse["data"] ?? [];
 
-        $totalPages = max($vehicleResponse["totalPages"] ?? 1, $brandsResponse["totalPages"] ?? 1);
 
-        $currentPage = $vehicleResponse["currentPage"] ?? 1;
 
         ?>
         <div class="container-fluid">
@@ -42,11 +40,7 @@ class ReviewManagementView extends SharedAdminView
                             <?php
                             $this->displayReviewsTable($vehiclesReviews, $brandsReviews);
                             ?>
-                            <div class="d-flex justify-content-center">
-                                <?php
-                                $this->displayReviewsTablePagination($totalPages, $currentPage);
-                                ?>
-                            </div>
+
                         </div>
                     </div>
                 </main>
@@ -59,14 +53,14 @@ class ReviewManagementView extends SharedAdminView
     {
         ?>
         <div class="table-responsive">
-            <table class="table  bg-white">
+            <table data-toggle="table" data-pagination="true" data-search="true" class="bg-white">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">User</th>
-                        <th scope="col">Vehicle / Brand</th>
-                        <th scope="col">Review</th>
-                        <th scope="col">Rate</th>
-                        <th scope="col">Status</th>
+                        <th scope="col" data-field="user" data-sortable="true">User</th>
+                        <th scope="col" data-field="brand-vehicle" data-sortable="true">Vehicle / Brand</th>
+                        <th scope="col" data-field="review" data-sortable="true">Review</th>
+                        <th scope="col" data-field="rate" data-sortable="true">Rate</th>
+                        <th scope="col" data-field="status" data-sortable="true">Status</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -234,33 +228,6 @@ class ReviewManagementView extends SharedAdminView
         <?php
     }
 
-    private function displayReviewsTablePagination($totalPages, $currentPage)
-    {
-        ?>
-        <nav>
-            <ul class="pagination">
-                <li class="page-item <?php echo $currentPage == 1 ? "disabled" : ""; ?>">
-                    <a class="page-link"
-                        href="/cars-comparer-2cs-project/admin/reviews?page=<?php echo $currentPage - 1; ?>">Previous</a>
-                </li>
-                <?php
-                for ($i = 1; $i <= $totalPages; $i++) {
-                    ?>
-                    <li class="page-item <?php echo $i == $currentPage ? "active" : ""; ?>">
-                        <a class="page-link" href="/cars-comparer-2cs-project/admin/reviews?page=<?php echo $i; ?>">
-                            <?php echo $i; ?>
-                        </a>
-                    </li>
-                    <?php
-                }
-                ?>
-                <li class="page-item <?php echo $totalPages == $currentPage ? "disabled" : ""; ?>">
-                    <a class="page-link"
-                        href="/cars-comparer-2cs-project/admin/reviews?page=<?php echo $currentPage + 1; ?>">Next</a>
-                </li>
-            </ul>
-        </nav>
-        <?php
-    }
+
 }
 ?>

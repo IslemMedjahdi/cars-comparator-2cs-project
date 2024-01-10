@@ -155,9 +155,8 @@ class VehicleReviewModel extends Connection
         }
     }
 
-    public function getReviews($page, $perPage)
+    public function getReviews()
     {
-        $offset = ($page - 1) * $perPage;
 
         $pdo = $this->connect();
 
@@ -166,9 +165,7 @@ class VehicleReviewModel extends Connection
                 FROM vehicle_review vr
                 INNER JOIN user u ON vr.userId = u.id
                 INNER JOIN vehicle v ON vr.vehicleId = v.id
-                ORDER BY vr.status DESC
-                LIMIT $perPage OFFSET $offset";
-
+                ORDER BY vr.status DESC";
 
             $stmt = $pdo->prepare($sql);
 

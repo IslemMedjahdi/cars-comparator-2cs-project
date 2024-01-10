@@ -96,13 +96,13 @@ class NewsManagementView extends SharedAdminView
         ?>
 
         <div class="table-responsive">
-            <table class="table  bg-white">
+            <table data-toggle="table" data-pagination="true" data-search="true" class="bg-white">
                 <thead class="thead-dark">
                     <tr>
 
-                        <th scope="col">ID</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Created At</th>
+                        <th scope="col" data-field="id" data-sortable="true">ID</th>
+                        <th scope="col" data-field="title" data-sortable="true">Title</th>
+                        <th scope="col" data-field="createdAt" data-sortable="true">Created At</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>

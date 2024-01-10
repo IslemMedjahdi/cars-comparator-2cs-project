@@ -131,24 +131,15 @@ class BrandReviewController
 
         $brandReviewsModel = new BrandReviewModel();
 
-        $page = $_GET['page'] ?? 1;
 
-        if ($page < 1) {
-            $page = 1;
-        }
-
-        $perPage = 10;
 
         try {
-            $reviews = $brandReviewsModel->getReviews($page, $perPage);
+            $reviews = $brandReviewsModel->getReviews();
 
-            $totalPages = ceil($brandReviewsModel->getReviewsCount() / $perPage);
 
             return array(
                 'status' => 200,
                 'data' => $reviews,
-                'totalPages' => $totalPages,
-                'currentPage' => $page
             );
         } catch (ErrorException $e) {
             return array(

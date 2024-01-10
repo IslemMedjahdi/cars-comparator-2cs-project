@@ -155,9 +155,8 @@ class BrandReviewModel extends Connection
         }
     }
 
-    public function getReviews($page, $perPage)
+    public function getReviews()
     {
-        $offset = ($page - 1) * $perPage;
 
         $pdo = $this->connect();
 
@@ -166,8 +165,7 @@ class BrandReviewModel extends Connection
                 FROM brand_review br
                 INNER JOIN user u ON br.userId = u.id
                 INNER JOIN brand b ON br.brandId = b.id
-                ORDER BY br.status DESC
-                LIMIT $perPage OFFSET $offset";
+                ORDER BY br.status DESC";
 
 
             $stmt = $pdo->prepare($sql);

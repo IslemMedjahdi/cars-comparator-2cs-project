@@ -116,14 +116,14 @@ class BrandsManagementView extends SharedAdminView
     {
         ?>
         <div class="table-responsive">
-            <table class="table  bg-white">
+            <table data-toggle="table" data-pagination="true" data-search="true" class="bg-white">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Country of Origin</th>
-                        <th scope="col">Year Founded</th>
-                        <th scope="col">Website URL</th>
+                        <th scope="col" data-field="id" data-sortable="true">ID</th>
+                        <th scope="col" data-field="name" data-sortable="true">Name</th>
+                        <th scope="col" data-field="country" data-sortable="true">Country of Origin</th>
+                        <th scope="col" data-field="year" data-sortable="true">Year Founded</th>
+                        <th scope="col" data-field="website" data-sortable="true">Website URL</th>
                         <th scope="col">Logo</th>
                         <th scope="col">Actions</th>
                     </tr>
