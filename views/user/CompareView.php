@@ -44,6 +44,9 @@ class CompareView extends SharedUserView
                 }
                 ?>
             </div>
+            <?php
+            $this->displayColorsIndicators();
+            ?>
         </div>
 
         <?php
@@ -149,6 +152,26 @@ class CompareView extends SharedUserView
                     </li>
 
                 </ul>
+            </div>
+        </div>
+        <?php
+    }
+
+    private function displayColorsIndicators()
+    {
+        ?>
+        <div class="bg-light mt-4 d-flex gap-2 p-2">
+            <div class="d-flex align-items-center gap-2">
+                <div style="background-color: #d4edda;height: 16px;width:16px"></div>
+                <span>Best value</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <div style="background-color: #fff3cd;height: 16px;width:16px"></div>
+                <span>Average value</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <div style="background-color: #f8d7da;height: 16px;width:16px"></div>
+                <span>Worst value</span>
             </div>
         </div>
         <?php
