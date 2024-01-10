@@ -238,9 +238,12 @@ class VehiclesManagementView extends SharedAdminView
                             <td>
                                 <div class="d-flex gap-2">
                                     <a href="/cars-comparer-2cs-project/admin/vehicles/edit?id=<?php echo $vehicle["id"]; ?>"
-                                        class="btn btn-primary">Edit</a>
-                                    <button onclick="deleteVehicle(<?php echo $vehicle["id"]; ?>)"
-                                        class="btn btn-danger">Delete</button>
+                                        class="btn btn-primary btn-sm">
+                                        <i class="bi bi-pencil-square"></i>
+                                        Edit</a>
+                                    <button onclick="deleteVehicle(<?php echo $vehicle["id"]; ?>)" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash"></i>
+                                        Delete</button>
                                 </div>
                             </td>
                         </tr>
