@@ -263,5 +263,28 @@ class VehicleReviewController
         }
     }
 
+    public function getMyBestReviews()
+    {
+
+        $vehicleReviewModel = new VehicleReviewModel();
+
+        $userId = SessionUtils::getSessionVariable('user')['id'] ?? null;
+
+        try {
+            $reviews = $vehicleReviewModel->getBestReviewsByUser($userId);
+
+            return array(
+                'status' => 200,
+                'data' => $reviews
+            );
+        } catch (Exception $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+
+        }
+    }
+
 }
 ?>
