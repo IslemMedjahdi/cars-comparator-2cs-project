@@ -22,6 +22,7 @@ class SettingsManagementView extends SharedAdminView
                         <?php
                         $this->displayUpdateStyles($primaryColor);
                         $this->displayUpdateContact();
+                        $this->displayUpdateContent();
                         ?>
 
                     </div>
@@ -80,35 +81,72 @@ class SettingsManagementView extends SharedAdminView
         $contacts = $settingsController->getContact()["data"];
 
         ?>
-            <h3 class="head">Update Contact:</h3>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="email">Email:</label>
+            <div class="container mt-5">
+                <h3 class="head">Update Contact:</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <div class="input-group">
+                                <input type="email" class="form-control" id="email" name="email"
+                                    value="<?= $contacts["email"] ?>" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phone_number">Phone Number:</label>
                         <div class="input-group">
-                            <input type="email" class="form-control" id="email" name="email" value="<?= $contacts["email"] ?>"
-                                required>
+                            <input type="tel" class="form-control" id="phone_number" name="phone_number"
+                                value="<?= $contacts["phone_number"] ?>" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="address">Address:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="address" name="address"
+                                value="<?= $contacts["address"] ?>" required>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <label for="phone_number">Phone Number:</label>
-                    <div class="input-group">
-                        <input type="tel" class="form-control" id="phone_number" name="phone_number"
-                            value="<?= $contacts["phone_number"] ?>" required>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label for="address">Address:</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="address" name="address" value="<?= $contacts["address"] ?>"
-                            required>
-                    </div>
+                <div class="d-flex justify-content-end align-items-center">
+                    <button onclick="updateContact()" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i>
+                        Submit</button>
                 </div>
             </div>
-            <div class="d-flex justify-content-end align-items-center">
-                <button onclick="updateContact()" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i>
-                    Submit</button>
+            <?php
+    }
+
+    private function displayUpdateContent()
+    {
+        $settingsController = new SettingsController();
+
+        $content = $settingsController->getContent()["data"];
+
+        ?>
+            <div class="container mt-5">
+                <h3 class="head">Update Content:</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="title">Title:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="title" name="title" value="<?= $content["title"] ?>"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="description">Description:</label>
+                        <div class="input-group">
+                            <textarea class="form-control" id="description" name="description" rows="5"
+                                required><?= $content["description"] ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end align-items-center mt-2">
+                    <button onclick="updateContent()" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i>
+                        Submit</button>
+                </div>
             </div>
             <?php
     }

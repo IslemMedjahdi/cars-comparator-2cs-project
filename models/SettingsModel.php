@@ -157,5 +157,14 @@ class SettingsModel extends Connection
         return $result;
     }
 
+    public function getContent()
+    {
+        $sql = "SELECT title,description FROM content WHERE id = 1";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+    }
+
 }
 ?>

@@ -555,6 +555,34 @@ function updateContact() {
   });
 }
 
+function updateContent() {
+  startLoading();
+
+  const title = $("#title").val();
+  const description = $("#description").val();
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/settings/content/update.php",
+    method: "POST",
+    data: {
+      title: title,
+      description: description,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}
+
 function addVehicleReview(vehicleId) {
   const review = $("#review").val();
   const rate = $("#rate").val();

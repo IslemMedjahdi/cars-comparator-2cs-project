@@ -156,6 +156,47 @@ class SettingsController
         }
     }
 
+    public function getContent()
+    {
+        $settingsModel = new SettingsModel();
+
+        try {
+            $result = $settingsModel->getContent();
+
+            return array(
+                'status' => 200,
+                'data' => $result
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
+
+    public function updateContent()
+    {
+        $settingsModel = new SettingsModel();
+
+        $title = $_POST['title'] ?? null;
+        $description = $_POST['description'] ?? null;
+
+        try {
+            $settingsModel->updateContent(null, null, null, $title, $description);
+
+            return array(
+                'status' => 200,
+                'message' => "Content updated successfully."
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
+
 
 }
 ?>
