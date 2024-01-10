@@ -5,7 +5,7 @@ require_once __DIR__ . '/../views/admin/AdminHomeView.php';
 require_once __DIR__ . '/../views/admin/VehiclesManagementView.php';
 require_once __DIR__ . '/../views/admin/BrandsManagementView.php';
 require_once __DIR__ . '/../views/admin/UsersManagementView.php';
-require_once __DIR__ . '/../views/admin/StylesManagementView.php';
+require_once __DIR__ . '/../views/admin/SettingsManagementView.php';
 require_once __DIR__ . '/../views/user/HomeView.php';
 require_once __DIR__ . '/../views/user/SharedUserView.php';
 require_once __DIR__ . '/../views/user/BrandsView.php';
@@ -16,6 +16,7 @@ require_once __DIR__ . '/../views/admin/NewsManagementView.php';
 require_once __DIR__ . '/../views/user/NewsView.php';
 require_once __DIR__ . '/../views/admin/ReviewsManagementView.php';
 require_once __DIR__ . '/../views/user/ReviewsView.php';
+require_once __DIR__ . '/../views/user/ContactView.php';
 
 require_once __DIR__ . '/../utils/SessionUtils.php';
 
@@ -170,7 +171,7 @@ switch ($request) {
         $reviewsManagementView = new ReviewManagementView();
         $reviewsManagementView->displayReviewsPage();
         break;
-    case '/admin/styles':
+    case '/admin/settings':
         if (!$user) {
             header("Location: " . $base_path);
             exit();
@@ -179,8 +180,8 @@ switch ($request) {
             header("Location: " . $base_path);
             exit();
         }
-        $stylesManagementView = new StylesManagementView();
-        $stylesManagementView->displayUpdateStylesPage();
+        $settingsManagementView = new SettingsManagementView();
+        $settingsManagementView->displayUpdateStylesPage();
         break;
 
     case '':
@@ -235,7 +236,10 @@ switch ($request) {
         }
         $reviewsView->displayVehicleReviewsByIdPage();
         break;
-
+    case '/contact':
+        $sharedView = new ContactView();
+        $sharedView->displayContactPage();
+        break;
     default:
         $sharedView = new SharedUserView();
         $sharedView->displayNotFoundPage();

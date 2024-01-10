@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../controllers/UserController.php';
-require_once __DIR__ . '/../../controllers/StyleController.php';
+require_once __DIR__ . '/../../controllers/SettingsController.php';
 
 class SharedUserView
 {
@@ -24,9 +24,9 @@ class SharedUserView
     protected function displayHeader()
     {
 
-        $styleController = new StyleController();
+        $settingsController = new SettingsController();
 
-        $logo = $styleController->getLogo()["data"]["logoUrl"] ?? "/assets/images/logo.svg";
+        $logo = $settingsController->getLogo()["data"]["logoUrl"] ?? "/assets/images/logo.svg";
 
         ?>
         <div class="d-flex justify-content-center border-bottom">
@@ -127,7 +127,7 @@ class SharedUserView
                         <a class="nav-link text-white" href="#">Buying guides</a>
                     </li>
                     <li class="nav-item border-right">
-                        <a class="nav-link text-white" href="#">Contact</a>
+                        <a class="nav-link text-white" href="/cars-comparer-2cs-project/contact">Contact</a>
                     </li>
                 </ul>
             </nav>
@@ -159,7 +159,7 @@ class SharedUserView
                             <li class="mb-2"><a href="/cars-comparer-2cs-project/compare" class="text-white">Comparator</a></li>
                             <li class="mb-2"><a href="/cars-comparer-2cs-project/reviews" class="text-white">Reviews</a></li>
                             <li class="mb-2"><a href="#" class="text-white">Buying Guides</a></li>
-                            <li class="mb-2"><a href="#" class="text-white">Contact</a></li>
+                            <li class="mb-2"><a href="/cars-comparer-2cs-project/contact" class="text-white">Contact</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">

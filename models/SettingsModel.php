@@ -3,7 +3,7 @@
 require_once('Connection.php');
 
 
-class StyleModel extends Connection
+class SettingsModel extends Connection
 {
 
     public function updateStyles($logo = null, $favicon = null, $primaryColor = null, $facebook = null, $linkedin = null, $instagram = null)
@@ -99,6 +99,61 @@ class StyleModel extends Connection
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
+        return $result;
+    }
+
+
+    public function updateContent($email = null, $phone = null, $address = null, $title = null, $description = null)
+    {
+        try {
+
+            $pdo = $this->connect();
+
+            $sql = "UPDATE content SET ";
+            $params = [];
+
+            if ($email !== null) {
+                $sql .= "email = :email, ";
+                $params['email'] = $email;
+            }
+
+            if ($phone !== null) {
+                $sql .= "phone_number = :phone, ";
+                $params['phone'] = $phone;
+            }
+
+            if ($address !== null) {
+                $sql .= "address = :address, ";
+                $params['address'] = $address;
+            }
+
+            if ($title !== null) {
+                $sql .= "title = :title, ";
+                $params['title'] = $title;
+            }
+
+            if ($description !== null) {
+                $sql .= "description = :description, ";
+                $params['description'] = $description;
+            }
+
+            $sql = rtrim($sql, ", ");
+            $sql .= " WHERE id = 1";
+
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->execute($params);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getContact()
+    {
+        $sql = "SELECT email,phone_number,address FROM content WHERE id = 1";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch();
         return $result;
     }
 

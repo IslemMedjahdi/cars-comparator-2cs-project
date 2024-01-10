@@ -1,14 +1,14 @@
 <?php
-require_once(__DIR__ . "/../../controllers/StyleController.php");
+require_once(__DIR__ . "/../../controllers/SettingsController.php");
 
-class StylesManagementView extends SharedAdminView
+class SettingsManagementView extends SharedAdminView
 {
 
     public function displayUpdateStylesPage()
     {
-        $styleController = new StyleController();
+        $settingsController = new SettingsController();
 
-        $primaryColor = $styleController->getPrimaryColor()["data"]["primary_color"] ?? "#007bff";
+        $primaryColor = $settingsController->getPrimaryColor()["data"]["primary_color"] ?? "#007bff";
 
         ?>
         <div class="container-fluid">

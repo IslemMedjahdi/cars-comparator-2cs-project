@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . "/../../controllers/StyleController.php");
+require_once(__DIR__ . "/../../controllers/SettingsController.php");
 
 class SharedAdminView
 {
@@ -37,9 +37,9 @@ class SharedAdminView
             'icon' => 'bi bi-chat-left-text-fill',
         ],
         [
-            'name' => 'Styles',
-            'url' => '/cars-comparer-2cs-project/admin/styles',
-            'icon' => 'bi bi-palette',
+            'name' => 'Settings',
+            'url' => '/cars-comparer-2cs-project/admin/settings',
+            'icon' => 'bi bi-gear-fill',
         ],
 
 
@@ -48,8 +48,8 @@ class SharedAdminView
     protected function displaySideBar()
     {
 
-        $styleController = new StyleController();
-        $logo = $styleController->getLogo()["data"]["logoUrl"] ?? "/assets/images/logo.svg";
+        $settingsController = new SettingsController();
+        $logo = $settingsController->getLogo()["data"]["logoUrl"] ?? "/assets/images/logo.svg";
 
 
         ?>

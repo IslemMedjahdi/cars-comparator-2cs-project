@@ -37,7 +37,7 @@ class NewsView extends SharedUserView
     {
         ?>
         <div class="col-md-3 col-sm-6">
-            <div class="card">
+            <div class="card h-100">
                 <a href="/cars-comparer-2cs-project/news?id=<?= $newsItem["id"]; ?>" style="overflow: hidden;">
                     <img style="height: 10rem;object-fit: cover;" class="card-img-top d-flex img-hover-transition"
                         src="/cars-comparer-2cs-project/<?= $newsItem["ImageURL"]; ?>" alt="<?= $newsItem["title"]; ?>">

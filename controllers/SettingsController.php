@@ -1,13 +1,13 @@
 <?php
 
-require_once(__DIR__ . "/../models/StyleModel.php");
+require_once(__DIR__ . "/../models/SettingsModel.php");
 
-class StyleController
+class SettingsController
 {
 
     public function updateStyles()
     {
-        $styleModel = new StyleModel();
+        $settingsModel = new SettingsModel();
 
         $logo = $_FILES['logo'] ?? null;
         $favicon = $_FILES['favicon'] ?? null;
@@ -20,7 +20,7 @@ class StyleController
 
         try {
 
-            $styleModel->updateStyles($logo, $favicon, $primaryColor, $facebook, $linkedin, $instagram);
+            $settingsModel->updateStyles($logo, $favicon, $primaryColor, $facebook, $linkedin, $instagram);
 
             return array(
                 'status' => 200,
@@ -36,10 +36,10 @@ class StyleController
 
     public function getLogo()
     {
-        $styleModel = new StyleModel();
+        $settingsModel = new SettingsModel();
 
         try {
-            $result = $styleModel->getLogo();
+            $result = $settingsModel->getLogo();
 
             return array(
                 'status' => 200,
@@ -56,10 +56,10 @@ class StyleController
 
     public function getFavicon()
     {
-        $styleModel = new StyleModel();
+        $settingsModel = new SettingsModel();
 
         try {
-            $result = $styleModel->getFavicon();
+            $result = $settingsModel->getFavicon();
 
             return array(
                 'status' => 200,
@@ -76,10 +76,10 @@ class StyleController
 
     public function getPrimaryColor()
     {
-        $styleModel = new StyleModel();
+        $settingsModel = new SettingsModel();
 
         try {
-            $result = $styleModel->getPrimaryColor();
+            $result = $settingsModel->getPrimaryColor();
 
             return array(
                 'status' => 200,
@@ -96,10 +96,10 @@ class StyleController
 
     public function getSocialMedia()
     {
-        $styleModel = new StyleModel();
+        $settingsModel = new SettingsModel();
 
         try {
-            $result = $styleModel->getSocialMedia();
+            $result = $settingsModel->getSocialMedia();
 
             return array(
                 'status' => 200,
@@ -112,6 +112,25 @@ class StyleController
             );
         }
 
+    }
+
+    public function getContact()
+    {
+        $settingsModel = new SettingsModel();
+
+        try {
+            $result = $settingsModel->getContact();
+
+            return array(
+                'status' => 200,
+                'data' => $result
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
     }
 
 

@@ -1,10 +1,10 @@
 <?php
-require_once(__DIR__ . "/../../controllers/StyleController.php");
+require_once(__DIR__ . "/../../controllers/SettingsController.php");
 
-$styleController = new StyleController();
+$settingsController = new SettingsController();
 
 
-$response = $styleController->updateStyles();
+$response = $settingsController->updateStyles();
 
 echo json_encode($response);
 
