@@ -99,17 +99,15 @@ class UserModel extends Connection
         }
     }
 
-    public function getUsers($page, $perPage)
+    public function getUsers()
     {
 
         $pdo = $this->connect();
 
         try {
             // dont get admin
-            $sql = "SELECT * FROM user WHERE role != 'admin' LIMIT :page, :perPage";
+            $sql = "SELECT * FROM user WHERE role != 'admin'";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(':page', (int) ($page - 1) * $perPage, PDO::PARAM_INT);
-            $stmt->bindValue(':perPage', (int) $perPage, PDO::PARAM_INT);
             $stmt->execute();
 
             $result = $stmt->fetchAll();

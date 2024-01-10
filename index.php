@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/cars-comparer-2cs-project/css/main.css">
     <link rel="stylesheet" href="/cars-comparer-2cs-project/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css">
 
     <link rel="icon" type="image/x-icon" href="/cars-comparer-2cs-project<?= $faviconUrl ?>">
 
@@ -108,6 +109,7 @@
     <script src="/cars-comparer-2cs-project/js/popper.min.js"></script>
     <script src="/cars-comparer-2cs-project/js/jquery-3.7.1.min.js"></script>
     <script src="/cars-comparer-2cs-project/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
 
 </body>
 

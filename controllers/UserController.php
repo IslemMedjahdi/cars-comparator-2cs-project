@@ -91,23 +91,15 @@ class UserController
     {
         $userModel = new UserModel();
 
-        $page = $_GET['page'] ?? 1;
-        $perPage = 10;
 
-        if ($page < 1) {
-            $page = 1;
-        }
 
         try {
-            $users = $userModel->getUsers($page, $perPage);
+            $users = $userModel->getUsers();
 
-            $totalPages = ceil($userModel->getUsersCount() / $perPage);
 
             return array(
                 'status' => 200,
                 'data' => $users,
-                'currentPage' => $page,
-                'totalPages' => $totalPages
             );
         } catch (ErrorException $e) {
             return array(

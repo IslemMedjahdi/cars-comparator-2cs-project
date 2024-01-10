@@ -15,10 +15,6 @@ class UsersManagementView extends SharedAdminView
 
         $users = $response["data"];
 
-        $currentPage = $response["currentPage"];
-
-        $totalPages = $response["totalPages"];
-
         ?>
         <div class="container-fluid">
             <div class="row">
@@ -36,11 +32,6 @@ class UsersManagementView extends SharedAdminView
                             <?php
                             $this->displayUsersTable($users);
                             ?>
-                            <div class="d-flex justify-content-center">
-                                <?php
-                                $this->displayUsersTablePagination($totalPages, $currentPage);
-                                ?>
-                            </div>
                         </div>
                     </div>
                 </main>
@@ -54,19 +45,19 @@ class UsersManagementView extends SharedAdminView
     {
         ?>
         <div class="table-responsive">
-            <table class="table  bg-white">
+            <table data-toggle="table" data-pagination="true" data-search="true">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Email</th>
+                        <th scope="col" data-field="id" data-sortable="true">ID</th>
+                        <th scope="col" data-field="username" data-sortable="true">Username</th>
+                        <th scope="col" data-field="firstname" data-sortable="true">First Name</th>
+                        <th scope="col" data-field="lastname" data-sortable="true">Last Name</th>
+                        <th scope="col" data-field="email" data-sortable="true">Email</th>
                         <th scope="col">Status</th>
                         <th scope="col" class="text-center">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="background-color: white;">
                     <?php
                     foreach ($users as $user) {
                         ?>
@@ -143,33 +134,6 @@ class UsersManagementView extends SharedAdminView
         <?php
     }
 
-    private function displayUsersTablePagination($totalPages, $currentPage)
-    {
-        ?>
-        <nav>
-            <ul class="pagination">
-                <li class="page-item <?php echo $currentPage == 1 ? "disabled" : ""; ?>">
-                    <a class="page-link"
-                        href="/cars-comparer-2cs-project/admin/users?page=<?php echo $currentPage - 1; ?>">Previous</a>
-                </li>
-                <?php
-                for ($i = 1; $i <= $totalPages; $i++) {
-                    ?>
-                    <li class="page-item <?php echo $i == $currentPage ? "active" : ""; ?>">
-                        <a class="page-link" href="/cars-comparer-2cs-project/admin/users?page=<?php echo $i; ?>">
-                            <?php echo $i; ?>
-                        </a>
-                    </li>
-                    <?php
-                }
-                ?>
-                <li class="page-item <?php echo $totalPages == $currentPage ? "disabled" : ""; ?>">
-                    <a class="page-link"
-                        href="/cars-comparer-2cs-project/admin/users?page=<?php echo $currentPage + 1; ?>">Next</a>
-                </li>
-            </ul>
-        </nav>
-        <?php
-    }
+
 }
 ?>
