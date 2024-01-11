@@ -197,6 +197,68 @@ class SettingsController
         }
     }
 
+    public function addDiaporamaItem()
+    {
 
+        $url = $_POST['url'] ?? null;
+        $Image = $_FILES['image'] ?? null;
+
+        $settingsModel = new SettingsModel();
+
+        try {
+            $settingsModel->addDiaporamaItem($url, $Image);
+
+            return array(
+                'status' => 200,
+                'message' => "Diaporama added successfully."
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage(),
+            );
+        }
+    }
+
+
+    public function getDiaporamaItems()
+    {
+        $settingsModel = new SettingsModel();
+
+        try {
+            $result = $settingsModel->getDiaporamaItems();
+
+            return array(
+                'status' => 200,
+                'data' => $result
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage(),
+            );
+        }
+    }
+
+    public function deleteDiaporamaItem()
+    {
+        $id = $_POST['id'] ?? null;
+
+        $settingsModel = new SettingsModel();
+
+        try {
+            $settingsModel->deleteDiaporamaItem($id);
+
+            return array(
+                'status' => 200,
+                'message' => "Diaporama item deleted successfully."
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage(),
+            );
+        }
+    }
 }
 ?>

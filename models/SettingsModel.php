@@ -62,7 +62,7 @@ class SettingsModel extends Connection
 
             $stmt->execute($params);
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            throw new ErrorException($e->getMessage());
         }
     }
 
@@ -144,7 +144,7 @@ class SettingsModel extends Connection
 
             $stmt->execute($params);
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            throw new ErrorException($e->getMessage());
         }
     }
 
@@ -164,6 +164,61 @@ class SettingsModel extends Connection
         $stmt->execute();
         $result = $stmt->fetch();
         return $result;
+    }
+
+    public function addDiaporamaItem($url, $image)
+    {
+
+        if ($url === null)
+            throw new ErrorException("Url is required.");
+
+        $imageUrl = null;
+        if (isset($image) && $image['error'] === 0) {
+            $imageUrl = $this->uploadImage($image, "/diaporama");
+        } else {
+            throw new ErrorException("Image is required.");
+        }
+
+        try {
+            $pdo = $this->connect();
+
+            $sql = "INSERT INTO diaporama (url,image) VALUES (:url,:image)";
+
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->execute([
+                'url' => $url,
+                'image' => $imageUrl
+            ]);
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
+    public function getDiaporamaItems()
+    {
+        $sql = "SELECT * FROM diaporama";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function deleteDiaporamaItem($id)
+    {
+        try {
+            $pdo = $this->connect();
+
+            $sql = "DELETE FROM diaporama WHERE id = :id";
+
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->execute([
+                'id' => $id
+            ]);
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
     }
 
 }

@@ -18,11 +18,13 @@ class SettingsManagementView extends SharedAdminView
                 $this->displaySideBar();
                 ?>
                 <main class="bg-light" style="width: calc(100% - 280px);height: 100vh; overflow-y: auto;">
+                    <div id="message"></div>
                     <div class="d-flex justify-content-center w-100">
                         <?php
                         $this->displayUpdateStyles($primaryColor);
                         $this->displayUpdateContact();
                         $this->displayUpdateContent();
+                        $this->displayDiaporamaSettings();
                         ?>
 
                     </div>
@@ -37,7 +39,6 @@ class SettingsManagementView extends SharedAdminView
         ?>
         <div class="container mt-5">
             <h3 class="head">Update Styles:</h3>
-            <div id="message"></div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -175,10 +176,90 @@ class SettingsManagementView extends SharedAdminView
                 </div>
             </div>
             <?php
+    }
 
+    private function displayDiaporamaSettings()
+    {
+        ?>
+            <div class="container mt-5">
+                <h3 class="head">Diaporama:</h3>
+                <?php
+                $this->displayAddNewDiaporamaItem();
+                $this->displayDiaporamaItems();
+                ?>
+            </div>
+            <?php
+    }
 
+    private function displayDiaporamaItems()
+    {
+        $settingsController = new SettingsController();
+
+        $diaporamaItems = $settingsController->getDiaporamaItems()["data"] ?? [];
+
+        ?>
+            <div class="container mt-2 w-100">
+                <table data-toggle="table" class="bg-white">
+                    <thead>
+                        <tr>
+                            <th data-sortable="true" scope="col">URL</th>
+                            <th data-sortable="true" scope="col">Image</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($diaporamaItems as $diaporamaItem) {
+                            ?>
+                            <tr>
+                                <td>
+                                    <a href="<?= $diaporamaItem["url"] ?>" target="_blank">
+                                        <?= $diaporamaItem["url"] ?>
+                                    </a>
+                                </td>
+                                <td><img src="/cars-comparer-2cs-project/<?= $diaporamaItem["image"] ?>" alt="" width="200px"></td>
+                                <td>
+                                    <button onclick="deleteDiaporamaItem(<?= $diaporamaItem["id"] ?>)" class="btn btn-danger"><i
+                                            class="bi bi-trash-fill"></i></button>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            <?php
 
     }
+
+    private function displayAddNewDiaporamaItem()
+    {
+        ?>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="url">URL:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="url" name="url" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Image">Image:</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="Image" name="Image" accept="image/*" required>
+                            <label class="custom-file-label" for="Image">Choose file</label>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center mt-2">
+                        <button onclick="addDiaporama()" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i>
+                            Submit</button>
+                    </div>
+                </div>
+            </div>
+            <?php
+    }
+
 
 }
 ?>

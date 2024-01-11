@@ -583,6 +583,55 @@ function updateContent() {
   });
 }
 
+function addDiaporama() {
+  startLoading();
+
+  const dataForm = new FormData();
+
+  const url = $("#url").val();
+  const image = $("#Image")[0].files[0];
+
+  dataForm.append("url", url);
+  dataForm.append("image", image);
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/settings/diaporama/create.php",
+    method: "POST",
+    data: dataForm,
+    contentType: false,
+    processData: false,
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+          ${response.message}
+        </div>`);
+      }
+    },
+  });
+}
+
+function deleteDiaporamaItem(id) {
+  startLoading();
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/settings/diaporama/delete.php",
+    method: "POST",
+
+    data: {
+      id: id,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) window.location.reload();
+    },
+  });
+}
+
 function addVehicleReview(vehicleId) {
   const review = $("#review").val();
   const rate = $("#rate").val();
