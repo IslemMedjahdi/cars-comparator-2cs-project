@@ -105,9 +105,9 @@ class NewsView extends SharedUserView
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <span>
+                            <p style="white-space: pre-wrap;">
                                 <?= $news["description"]; ?>
-                            </span>
+                            </p>
                         </li>
                     </ul>
                 </div>

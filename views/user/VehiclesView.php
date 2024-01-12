@@ -28,7 +28,7 @@ class VehiclesView extends SharedUserView
             <div class="mt-4">
                 <h2 class="head">Vehicles</h2>
             </div>
-            <div class="w-100 mt-4 row" style="max-width: 1377px;">
+            <div class="w-100 mt-4 row" style="max-width: 1377px;row-gap: 1rem;">
                 <?php foreach ($vehicles as $vehicle) {
                     $this->displayVehicleSummaryDetails($vehicle);
                 } ?>

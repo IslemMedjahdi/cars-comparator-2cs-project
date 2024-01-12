@@ -143,6 +143,13 @@ class SettingsManagementView extends SharedAdminView
                                 required><?= $content["description"] ?></textarea>
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <label for="buying_guide">Buying Guide:</label>
+                        <div class="input-group">
+                            <textarea class="form-control" id="buying_guide" name="buying_guide" rows="5"
+                                required><?= $content["buying_guide"] ?></textarea>
+                        </div>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-end align-items-center mt-2">
                     <button onclick="updateContent()" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i>

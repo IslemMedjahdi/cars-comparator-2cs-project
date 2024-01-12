@@ -103,7 +103,7 @@ class SettingsModel extends Connection
     }
 
 
-    public function updateContent($email = null, $phone = null, $address = null, $title = null, $description = null)
+    public function updateContent($email = null, $phone = null, $address = null, $title = null, $description = null, $buyingGuide = null)
     {
         try {
 
@@ -137,6 +137,11 @@ class SettingsModel extends Connection
                 $params['description'] = $description;
             }
 
+            if ($buyingGuide !== null) {
+                $sql .= "buying_guide = :buyingGuide, ";
+                $params['buyingGuide'] = $buyingGuide;
+            }
+
             $sql = rtrim($sql, ", ");
             $sql .= " WHERE id = 1";
 
@@ -159,7 +164,7 @@ class SettingsModel extends Connection
 
     public function getContent()
     {
-        $sql = "SELECT title,description FROM content WHERE id = 1";
+        $sql = "SELECT title,description,buying_guide FROM content WHERE id = 1";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch();
@@ -219,6 +224,15 @@ class SettingsModel extends Connection
         } catch (PDOException $e) {
             throw new ErrorException($e->getMessage());
         }
+    }
+
+    public function getBuyingGuide()
+    {
+        $sql = "SELECT buying_guide FROM content WHERE id = 1";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result["buying_guide"];
     }
 
 }

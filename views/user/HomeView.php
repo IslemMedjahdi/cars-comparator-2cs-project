@@ -46,7 +46,8 @@ class HomeView extends SharedUserView
                             </a>
                         </div>
                         <img src="/cars-comparer-2cs-project/<?= $diaporamaItem["image"]; ?>" class="d-block w-100"
-                            style="height: 30rem;object-fit: cover;object-position: center;" alt="<?= $key . "-carousel" ?>">
+                            style="height: 30rem;object-fit: cover;object-position: center;pointer-events: none"
+                            alt="<?= $key . "-carousel" ?>">
                     </div>
                 <?php } ?>
             </div>
@@ -87,8 +88,20 @@ class HomeView extends SharedUserView
     private function displayLinkToBuyingGuid()
     {
         ?>
-        <div class="d-flex align-items-center justify-content-center bg-light mt-4" style="height: 24rem;">
-            <h1>Link to Buying Guide</h1>
+        <div class="d-flex align-items-center justify-content-center bg-light mt-4" style="height: 24rem;position: relative;">
+            <img src="/cars-comparer-2cs-project/assets/images/buying-guide-bg.jpg" alt="buying-guide" class="w-100 "
+                style="height: 25rem;object-fit: cover; object-position: center;filter: blur(2px);">
+            <div style="position: absolute;bottom: 5rem;left: 5rem;" class="d-flex flex-column align-items-start gap-2">
+                <h1 style="color: white;font-weight: bold;">
+                    Buying Guide
+                </h1>
+                <a class="fancy" href="/cars-comparer-2cs-project/buying-guide">
+                    <span class="top-key"></span>
+                    <span class="text">Read More</span>
+                    <span class="bottom-key-1"></span>
+                    <span class="bottom-key-2"></span>
+                </a>
+            </div>
         </div>
         <?php
     }

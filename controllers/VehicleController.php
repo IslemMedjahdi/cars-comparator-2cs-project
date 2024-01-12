@@ -63,7 +63,7 @@ class VehicleController
             $page = 1;
         }
 
-        $perPage = 10;
+        $perPage = 8;
 
         try {
             $vehicles = $vehicleModel->getVehicles($page, $perPage);

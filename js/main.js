@@ -560,6 +560,7 @@ function updateContent() {
 
   const title = $("#title").val();
   const description = $("#description").val();
+  const buyingGuide = $("#buying_guide").val();
 
   $.ajax({
     url: "/cars-comparer-2cs-project/api/settings/content/update.php",
@@ -567,6 +568,7 @@ function updateContent() {
     data: {
       title: title,
       description: description,
+      buyingGuide: buyingGuide,
     },
     success: function (response) {
       stopLoading();

@@ -181,9 +181,10 @@ class SettingsController
 
         $title = $_POST['title'] ?? null;
         $description = $_POST['description'] ?? null;
+        $buyingGuide = $_POST['buyingGuide'] ?? null;
 
         try {
-            $settingsModel->updateContent(null, null, null, $title, $description);
+            $settingsModel->updateContent(null, null, null, $title, $description, $buyingGuide);
 
             return array(
                 'status' => 200,
@@ -252,6 +253,25 @@ class SettingsController
             return array(
                 'status' => 200,
                 'message' => "Diaporama item deleted successfully."
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage(),
+            );
+        }
+    }
+
+    public function getBuyingGuide()
+    {
+        $settingsModel = new SettingsModel();
+
+        try {
+            $result = $settingsModel->getBuyingGuide();
+
+            return array(
+                'status' => 200,
+                'data' => $result
             );
         } catch (ErrorException $e) {
             return array(
