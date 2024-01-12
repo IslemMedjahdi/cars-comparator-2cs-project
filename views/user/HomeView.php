@@ -23,9 +23,33 @@ class HomeView extends SharedUserView
 
     private function displayDiaporama()
     {
+        $settingsController = new SettingsController();
+
+        $diaporamaItems = $settingsController->getDiaporamaItems()["data"] ?? [];
         ?>
-        <div class="d-flex align-items-center justify-content-center bg-light" style="height: 24rem;">
-            <h1>Diaporama</h1>
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <?php foreach ($diaporamaItems as $key => $diaporamaItem) { ?>
+                    <li style="cursor: pointer;" data-target="#carouselExampleSlidesOnly" data-slide-to="<?= $key; ?>"
+                        class="<?= $key == 0 ? "active" : ""; ?>"></li>
+                <?php } ?>
+            </ol>
+            <div style="position: relative;" class="carousel-inner">
+                <?php foreach ($diaporamaItems as $key => $diaporamaItem) { ?>
+                    <div class="carousel-item <?= $key == 0 ? "active" : ""; ?>">
+                        <div style="position: absolute;bottom: 5rem;left: 5rem;">
+                            <a class="fancy" href="<?= $diaporamaItem["url"]; ?>" target="_blank">
+                                <span class="top-key"></span>
+                                <span class="text">Read More</span>
+                                <span class="bottom-key-1"></span>
+                                <span class="bottom-key-2"></span>
+                            </a>
+                        </div>
+                        <img src="/cars-comparer-2cs-project/<?= $diaporamaItem["image"]; ?>" class="d-block w-100"
+                            style="height: 30rem;object-fit: cover;object-position: center;" alt="<?= $key . "-carousel" ?>">
+                    </div>
+                <?php } ?>
+            </div>
         </div>
         <?php
     }
