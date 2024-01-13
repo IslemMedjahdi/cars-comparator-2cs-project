@@ -18,6 +18,7 @@ require_once __DIR__ . '/../views/admin/ReviewsManagementView.php';
 require_once __DIR__ . '/../views/user/ReviewsView.php';
 require_once __DIR__ . '/../views/user/ContactView.php';
 require_once __DIR__ . '/../views/user/BuyingGuideView.php';
+require_once __DIR__ . '/../views/user/CompanyView.php';
 
 require_once __DIR__ . '/../utils/SessionUtils.php';
 
@@ -244,6 +245,10 @@ switch ($request) {
     case '/buying-guide':
         $buyingGuideView = new BuyingGuideView();
         $buyingGuideView->displayBuyingGuidePage();
+        break;
+    case '/company':
+        $companyView = new CompanyView();
+        $companyView->displayCompanyPage();
         break;
     default:
         $sharedView = new SharedUserView();

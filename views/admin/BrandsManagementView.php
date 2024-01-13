@@ -123,7 +123,6 @@ class BrandsManagementView extends SharedAdminView
                         <th scope="col" data-field="name" data-sortable="true">Name</th>
                         <th scope="col" data-field="country" data-sortable="true">Country of Origin</th>
                         <th scope="col" data-field="year" data-sortable="true">Year Founded</th>
-                        <th scope="col" data-field="website" data-sortable="true">Website URL</th>
                         <th scope="col">Logo</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -145,24 +144,15 @@ class BrandsManagementView extends SharedAdminView
                             <td>
                                 <?= $brand["YearFounded"] ?>
                             </td>
-                            <td>
-                                <?php
-                                if ($brand["WebsiteURL"] != null) {
-                                    ?>
-                                    <a href="<?= $brand["WebsiteURL"] ?>">
-                                        <?= $brand["WebsiteURL"] ?>
-                                    </a>
-                                    <?php
-                                } else {
-                                    ?>
-                                    N/A
-                                    <?php
-                                }
-                                ?>
-                            </td>
+
                             <td><img src="/cars-comparer-2cs-project<?= $brand["LogoImageURL"] ?>" class="logo" /></td>
                             <td>
                                 <div class="d-flex gap-2">
+                                    <a href="/cars-comparer-2cs-project/brands/?id=<?= $brand["id"] ?>" target="_blank"
+                                        class="btn btn-primary btn-sm">
+                                        <i class="bi bi-eye"></i>
+                                        View
+                                    </a>
                                     <a href="/cars-comparer-2cs-project/admin/vehicles/?brand_id=<?= $brand["id"] ?>"
                                         class="btn btn-primary btn-sm">
                                         <i class="bi bi-eye"></i>

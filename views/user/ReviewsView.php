@@ -83,8 +83,9 @@ class ReviewsView extends SharedUserView
 
                 </ul>
                 <div class="card-body justify-content-end d-flex">
-                    <a href="/cars-comparer-2cs-project/reviews?id=<?= $vehicle["id"]; ?>" class="btn btn-primary">Show
-                        Reviews</a>
+                    <a href="/cars-comparer-2cs-project/reviews?id=<?= $vehicle["id"]; ?>" class="btn btn-primary">
+                        <i class="bi bi-eye"></i>
+                        Show Reviews</a>
                 </div>
             </div>
         </div>

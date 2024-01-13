@@ -209,8 +209,9 @@ class SettingsManagementView extends SharedAdminView
                 <table data-toggle="table" class="bg-white">
                     <thead>
                         <tr>
+                            <th data-sortable="true">Title</th>
                             <th data-sortable="true" scope="col">URL</th>
-                            <th data-sortable="true" scope="col">Image</th>
+                            <th scope="col">Image</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -219,6 +220,9 @@ class SettingsManagementView extends SharedAdminView
                         foreach ($diaporamaItems as $diaporamaItem) {
                             ?>
                             <tr>
+                                <td>
+                                    <?= $diaporamaItem["title"] ?? "N/A" ?>
+                                </td>
                                 <td>
                                     <a href="<?= $diaporamaItem["url"] ?>" target="_blank">
                                         <?= $diaporamaItem["url"] ?>
@@ -246,9 +250,15 @@ class SettingsManagementView extends SharedAdminView
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
+                        <label for="diaporama-title">Title:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="diaporama-title" name="diaporama-title" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="url">URL:</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="url" name="url" required>
+                            <input type="url" class="form-control" id="url" name="url" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -258,6 +268,7 @@ class SettingsManagementView extends SharedAdminView
                             <label class="custom-file-label" for="Image">Choose file</label>
                         </div>
                     </div>
+
                     <div class="d-flex justify-content-end align-items-center mt-2">
                         <button onclick="addDiaporama()" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i>
                             Submit</button>

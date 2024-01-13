@@ -203,11 +203,12 @@ class SettingsController
 
         $url = $_POST['url'] ?? null;
         $Image = $_FILES['image'] ?? null;
+        $title = $_POST['title'] ?? null;
 
         $settingsModel = new SettingsModel();
 
         try {
-            $settingsModel->addDiaporamaItem($url, $Image);
+            $settingsModel->addDiaporamaItem($url, $Image, $title);
 
             return array(
                 'status' => 200,

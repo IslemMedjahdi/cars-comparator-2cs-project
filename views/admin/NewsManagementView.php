@@ -123,9 +123,12 @@ class NewsManagementView extends SharedAdminView
                             <td>
                                 <div class="d-flex gap-2">
                                     <a href="/cars-comparer-2cs-project/admin/news/edit?id=<?php echo $newsItem["id"]; ?>"
-                                        class="btn btn-primary">Edit</a>
-                                    <button onclick="deleteNewsById(<?php echo $newsItem["id"]; ?>)"
-                                        class="btn btn-danger">Delete</button>
+                                        class="btn btn-primary btn-sm">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </a>
+                                    <button onclick="deleteNewsById(<?php echo $newsItem["id"]; ?>)" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>
                                 </div>
                             </td>
                         </tr>

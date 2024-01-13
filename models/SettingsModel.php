@@ -171,7 +171,7 @@ class SettingsModel extends Connection
         return $result;
     }
 
-    public function addDiaporamaItem($url, $image)
+    public function addDiaporamaItem($url, $image, $title = null)
     {
 
         if ($url === null)
@@ -187,13 +187,14 @@ class SettingsModel extends Connection
         try {
             $pdo = $this->connect();
 
-            $sql = "INSERT INTO diaporama (url,image) VALUES (:url,:image)";
+            $sql = "INSERT INTO diaporama (url,image,title) VALUES (:url,:image,:title)";
 
             $stmt = $pdo->prepare($sql);
 
             $stmt->execute([
                 'url' => $url,
-                'image' => $imageUrl
+                'image' => $imageUrl,
+                'title' => $title
             ]);
         } catch (PDOException $e) {
             throw new ErrorException($e->getMessage());

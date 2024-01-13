@@ -592,9 +592,11 @@ function addDiaporama() {
 
   const url = $("#url").val();
   const image = $("#Image")[0].files[0];
+  const title = $("#diaporama-title").val();
 
   dataForm.append("url", url);
   dataForm.append("image", image);
+  dataForm.append("title", title);
 
   $.ajax({
     url: "/cars-comparer-2cs-project/api/settings/diaporama/create.php",

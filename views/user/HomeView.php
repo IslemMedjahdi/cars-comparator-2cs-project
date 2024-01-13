@@ -26,6 +26,8 @@ class HomeView extends SharedUserView
         $settingsController = new SettingsController();
 
         $diaporamaItems = $settingsController->getDiaporamaItems()["data"] ?? [];
+
+
         ?>
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -37,7 +39,16 @@ class HomeView extends SharedUserView
             <div style="position: relative;" class="carousel-inner">
                 <?php foreach ($diaporamaItems as $key => $diaporamaItem) { ?>
                     <div class="carousel-item <?= $key == 0 ? "active" : ""; ?>">
-                        <div style="position: absolute;bottom: 5rem;left: 5rem;">
+                        <div style="position: absolute;bottom: 5rem;left: 5rem;" class="d-flex flex-column align-items-start gap-2">
+                            <div style="position: relative">
+                                <h1
+                                    style="color: white;font-weight: bold;position: relative; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);z-index: 10;">
+                                    <?= $diaporamaItem["title"]; ?>
+                                </h1>
+                                <div style="position: absolute;height: 100%;width: 100%;background: black;top: 0;left:0;filter: blur(8px);opacity: 0.3;"
+                                    class="">
+                                </div>
+                            </div>
                             <a class="fancy" href="<?= $diaporamaItem["url"]; ?>" target="_blank">
                                 <span class="top-key"></span>
                                 <span class="text">Read More</span>
@@ -46,7 +57,7 @@ class HomeView extends SharedUserView
                             </a>
                         </div>
                         <img src="/cars-comparer-2cs-project/<?= $diaporamaItem["image"]; ?>" class="d-block w-100"
-                            style="height: 30rem;object-fit: cover;object-position: center;pointer-events: none"
+                            style="height: 30rem;object-fit: cover;object-position: center;pointer-events: none;"
                             alt="<?= $key . "-carousel" ?>">
                     </div>
                 <?php } ?>

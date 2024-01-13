@@ -174,8 +174,10 @@ class SharedUserView
                     <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
                         <h6 class="text-uppercase font-weight-bold mb-4">Company</h6>
                         <ul class="list-unstyled mb-0">
-                            <li class="mb-2"><a href="#" class="text-white">Terms of Use</a></li>
-                            <li class="mb-2"><a href="#" class="text-white">Privacy Policy</a></li>
+                            <li class="mb-2"><a href="/cars-comparer-2cs-project/company#terms-of-use" class="text-white">Terms
+                                    of Use</a></li>
+                            <li class="mb-2"><a href="/cars-comparer-2cs-project/company#privacy-policy"
+                                    class="text-white">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>
@@ -379,8 +381,9 @@ class SharedUserView
 
                 </ul>
                 <div class="card-body justify-content-end d-flex">
-                    <a href="/cars-comparer-2cs-project/vehicles?id=<?= $vehicle["id"]; ?>" class="btn btn-primary">Show
-                        more</a>
+                    <a href="/cars-comparer-2cs-project/vehicles?id=<?= $vehicle["id"]; ?>" class="btn btn-primary">
+                        <i class="bi bi-eye"></i>
+                        Show more</a>
                 </div>
             </div>
         </div>
