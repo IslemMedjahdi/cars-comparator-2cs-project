@@ -238,7 +238,7 @@ class SharedUserView
         <?php
     }
 
-    private function selectVehicleToCompareForm($brands, $index)
+    protected function selectVehicleToCompareForm($brands, $index)
     {
         ?>
         <div style="overflow: hidden;">

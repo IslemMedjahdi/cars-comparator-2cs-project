@@ -91,6 +91,7 @@ class VehiclesView extends SharedUserView
         $this->displayVehicleReviews($vehicle["id"]);
         $this->addReviewForm($vehicle["id"]);
         $this->displayMostComparedVehiclesWith($vehicle["id"]);
+        $this->displayComparatorToVehicle($vehicle["id"]);
         $this->displayFooter();
     }
 
@@ -380,6 +381,51 @@ class VehiclesView extends SharedUserView
 
         <?php
     }
+
+    protected function displayComparatorToVehicle($vehicleId)
+    {
+
+        $brandController = new BrandController();
+        $brands = $brandController->getBrands()["data"] ?? [];
+
+        ?>
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <div class="mt-5">
+                <h2 class="head">Compare This vehicle </h2>
+            </div>
+            <div style="max-width: 1024px;"
+                class="w-100 d-flex justify-content-center flex-column align-items-center bg-light  mt-4 p-4">
+                <div id="message" class="w-100">
+
+                </div>
+                <div class="row w-100">
+                    <input type="hidden" id="vehicle-1" value="<?= $vehicleId; ?>" />
+                    <div class="col-md-4 border-right">
+                        <?php
+                        $this->selectVehicleToCompareForm($brands, 2);
+                        ?>
+                    </div>
+                    <div class="col-md-4 border-right">
+                        <?php
+                        $this->selectVehicleToCompareForm($brands, 3);
+                        ?>
+                    </div>
+                    <div class="col-md-4">
+                        <?php
+                        $this->selectVehicleToCompareForm($brands, 4);
+                        ?>
+                    </div>
+                </div>
+                <div class="mt-4 w-100">
+                    <button class="btn btn-primary btn-block" onclick="onCompareClick()"><i class="bi bi-card-list"></i>
+                        Compare</button>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+
+
 
 }
 ?>
