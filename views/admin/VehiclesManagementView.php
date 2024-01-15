@@ -138,6 +138,160 @@ class VehiclesManagementView extends SharedAdminView
         <?php
     }
 
+    public function displayEditVehiclePage()
+    {
+        $vehicleId = $_GET["id"];
+
+        $brandsController = new BrandController();
+        $brands = $brandsController->getBrands()["data"];
+
+        $vehicleController = new VehicleController();
+        $vehicle = $vehicleController->getVehicleById()["data"] ?? null;
+
+        if (!$vehicle) {
+            header("Location: " . "/cars-comparer-2cs-project/admin/brands");
+            exit();
+        }
+
+        ?>
+        <div class="container-fluid">
+            <div class="row">
+                <?php
+                $this->displaySideBar();
+                ?>
+                <main class="bg-light" style="width: calc(100% - 280px);height: 100vh; overflow-y: auto;">
+                    <div class="d-flex justify-content-center w-100">
+                        <div class="container mt-5">
+                            <h3 class="head">Edit Vehicle:</h3>
+                            <div id="message"></div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Brand:</label>
+                                            <select class="form-control" id="brand" name="brand" required>
+                                                <option value="">Select Brand</option>
+                                                <?php
+                                                foreach ($brands as $brand) {
+                                                    $selected = ($brand["id"] == $vehicle["brand_id"]) ? "selected" : "";
+                                                    ?>
+                                                    <option value="<?php echo $brand["id"]; ?>" <?php echo $selected; ?>>
+                                                        <?php echo $brand["name"]; ?>
+                                                    </option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="model">Model:</label>
+                                            <input type="text" class="form-control" id="model" name="model" required
+                                                value="<?php echo $vehicle["model"]; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="engine">Engine:</label>
+                                            <input type="text" class="form-control" id="engine" name="engine" required
+                                                value="<?php echo $vehicle["engine"]; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="year">Year:</label>
+                                            <input type="number" class="form-control" id="year" name="year" required
+                                                value="<?php echo $vehicle["year"]; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="version">Version:</label>
+                                            <input type="text" class="form-control" id="version" name="version" required
+                                                value="<?php echo $vehicle["version"]; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="speed">Speed:</label>
+                                            <input type="number" class="form-control" id="speed" name="speed" required
+                                                value="<?php echo $vehicle["speed"]; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="acceleration">Acceleration (0-100 km/h):</label>
+                                            <input type="number" class="form-control" id="acceleration" name="acceleration"
+                                                required value="<?php echo $vehicle["acceleration"]; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Fuel Type:</label>
+                                            <select class="form-control" id="fuel_type" name="fuel_type" required>
+                                                <option value="">Select Fuel Type</option>
+                                                <option value="gasoline" <?php echo ($vehicle["fuel_type"] == "gasoline") ? "selected" : ""; ?>>Gasoline</option>
+                                                <option value="diesel" <?php echo ($vehicle["fuel_type"] == "diesel") ? "selected" : ""; ?>>Diesel</option>
+                                                <option value="electric" <?php echo ($vehicle["fuel_type"] == "electric") ? "selected" : ""; ?>>Electric</option>
+                                                <option value="hybrid" <?php echo ($vehicle["fuel_type"] == "hybrid") ? "selected" : ""; ?>>Hybrid</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="consumption">Consumption:</label>
+                                            <input type="number" class="form-control" id="consumption" name="consumption"
+                                                required value="<?php echo $vehicle["consumption"]; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="height">Height:</label>
+                                            <input type="number" class="form-control" id="height" name="height" required
+                                                value="<?php echo $vehicle["height"]; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="width">Width:</label>
+                                            <input type="number" class="form-control" id="width" name="width" required
+                                                value="<?php echo $vehicle["width"]; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="length">Length:</label>
+                                            <input type="number" class="form-control" id="length" name="length" required
+                                                value="<?php echo $vehicle["length"]; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Image">Image:</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="Image" name="Image"
+                                                    accept="image/*">
+                                                <label class="custom-file-label" for="Image">Choose file</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="pricing_range_from">Pricing From:</label>
+                                            <input type="number" class="form-control" id="pricing_range_from"
+                                                name="pricing_range_from" required
+                                                value="<?php echo $vehicle["pricing_range_from"]; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="pricing_range_to">Pricing To:</label>
+                                            <input type="number" class="form-control" id="pricing_range_to"
+                                                name="pricing_range_to" required
+                                                value="<?php echo $vehicle["pricing_range_to"]; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="description">Description:</label>
+                                            <textarea class="form-control" id="description" name="description"
+                                                rows="3"><?php echo $vehicle["description"]; ?></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a href="/cars-comparer-2cs-project/admin/vehicles" class="btn btn-secondary">Back</a>
+                                    <button onclick="editVehicle(<?= $vehicleId; ?>)" class="btn btn-primary"><i
+                                            class="bi bi-check-circle-fill"></i> Update</button>
+                                </div>
+                            </div>
+                </main>
+            </div>
+        </div>
+
+        <?php
+    }
+
+
     public function displayVehiclesPage()
     {
         $vehicleController = new VehicleController();

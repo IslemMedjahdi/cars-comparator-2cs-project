@@ -215,6 +215,68 @@ function createVehicle() {
   });
 }
 
+function editVehicle(vehicleId) {
+  const dataForm = new FormData();
+
+  const brandId = $("#brand").val();
+  const model = $("#model").val();
+  const year = $("#year").val();
+  const image = $("#Image")[0].files[0];
+  const description = $("#description").val();
+  const engine = $("#engine").val();
+  const speed = $("#speed").val();
+  const height = $("#height").val();
+  const width = $("#width").val();
+  const length = $("#length").val();
+  const consumption = $("#consumption").val();
+  const fuel_type = $("#fuel_type").val();
+  const version = $("#version").val();
+  const pricing_range_from = $("#pricing_range_from").val();
+  const pricing_range_to = $("#pricing_range_to").val();
+  const acceleration = $("#acceleration").val();
+
+  dataForm.append("id", vehicleId);
+  dataForm.append("brand_id", brandId);
+  dataForm.append("model", model);
+  dataForm.append("year", year);
+  dataForm.append("Image", image);
+  dataForm.append("description", description);
+  dataForm.append("engine", engine);
+  dataForm.append("speed", speed);
+  dataForm.append("height", height);
+  dataForm.append("width", width);
+  dataForm.append("length", length);
+  dataForm.append("consumption", consumption);
+  dataForm.append("fuel_type", fuel_type);
+  dataForm.append("version", version);
+  dataForm.append("pricing_range_from", pricing_range_from);
+  dataForm.append("pricing_range_to", pricing_range_to);
+  dataForm.append("acceleration", acceleration);
+
+  startLoading();
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/vehicles/edit.php",
+    method: "POST",
+    data: dataForm,
+    contentType: false,
+    processData: false,
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        $("#message").html(`<div class="alert alert-success" role="alert">
+        ${response.message}
+      </div>`);
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}
+
 function deleteVehicle(id) {
   startLoading();
   $.ajax({

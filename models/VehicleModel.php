@@ -147,7 +147,7 @@ class VehicleModel extends Connection
         $pdo = $this->connect();
 
         try {
-            $sql = "SELECT vehicle.id, vehicle.model, vehicle.version, vehicle.year, vehicle.height, vehicle.width, vehicle.length, vehicle.consumption, vehicle.engine, vehicle.speed, vehicle.description, vehicle.fuel_type, vehicle.pricing_range_from, vehicle.pricing_range_to, vehicle.ImageURL, vehicle.acceleration, brand.name as brand_name FROM vehicle INNER JOIN brand ON vehicle.brand_id = brand.id WHERE vehicle.id = :id";
+            $sql = "SELECT vehicle.id, vehicle.model, vehicle.version, vehicle.year, vehicle.height, vehicle.width, vehicle.length, vehicle.consumption, vehicle.engine, vehicle.speed, vehicle.description, vehicle.fuel_type, vehicle.pricing_range_from, vehicle.pricing_range_to, vehicle.ImageURL, vehicle.acceleration, brand.name as brand_name, brand.id as brand_id FROM vehicle INNER JOIN brand ON vehicle.brand_id = brand.id WHERE vehicle.id = :id";
             $stmt = $pdo->prepare($sql);
             $stmt->execute(['id' => $id]);
             $vehicle = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -186,5 +186,99 @@ class VehicleModel extends Connection
             throw new ErrorException($e->getMessage());
         }
     }
+
+    public function editVehicle($id, $brand_id, $model, $version, $year, $height, $width, $length, $consumption, $engine, $speed, $description, $fuel_type, $pricing_range_from, $pricing_range_to, $Image, $acceleration)
+    {
+        if (empty($id)) {
+            throw new ErrorException("Vehicle ID is required");
+        }
+
+        $pdo = $this->connect();
+
+        try {
+            $existingVehicle = $this->getVehicleById($id);
+
+            $ImageURL = $existingVehicle['ImageURL'];
+
+            if (empty($brand_id)) {
+                throw new ErrorException("Brand is required");
+            }
+            if (empty($model)) {
+                throw new ErrorException("Model is required");
+            }
+            if (empty($version)) {
+                throw new ErrorException("Version is required");
+            }
+            if (empty($year)) {
+                throw new ErrorException("Year is required");
+            }
+            if (empty($height)) {
+                throw new ErrorException("Height is required");
+            }
+            if (empty($width)) {
+                throw new ErrorException("Width is required");
+            }
+            if (empty($length)) {
+                throw new ErrorException("Length is required");
+            }
+            if (empty($consumption)) {
+                throw new ErrorException("Consumption is required");
+            }
+            if (empty($engine)) {
+                throw new ErrorException("Engine is required");
+            }
+            if (empty($speed)) {
+                throw new ErrorException("Speed is required");
+            }
+            if (empty($description)) {
+                throw new ErrorException("Description is required");
+            }
+            if (empty($fuel_type)) {
+                throw new ErrorException("Fuel type is required");
+            }
+            if (empty($pricing_range_from)) {
+                throw new ErrorException("Pricing range from is required");
+            }
+            if (empty($pricing_range_to)) {
+                throw new ErrorException("Pricing range to is required");
+            }
+            if (empty($acceleration)) {
+                throw new ErrorException("Acceleration is required");
+            }
+
+            if (isset($Image) && $Image['error'] === 0) {
+                $ImageURL = $this->uploadImage($Image, "/vehicles");
+            }
+
+            // Update the existing record
+            $sql = "UPDATE vehicle SET brand_id=:brand_id, model=:model, version=:version, year=:year, height=:height, width=:width, length=:length, consumption=:consumption, engine=:engine, speed=:speed, description=:description, fuel_type=:fuel_type, pricing_range_from=:pricing_range_from, pricing_range_to=:pricing_range_to, ImageURL=:ImageURL, acceleration=:acceleration WHERE id=:id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                'id' => $id,
+                'brand_id' => $brand_id,
+                'model' => $model,
+                'version' => $version,
+                'year' => $year,
+                'height' => $height,
+                'width' => $width,
+                'length' => $length,
+                'consumption' => $consumption,
+                'engine' => $engine,
+                'speed' => $speed,
+                'description' => $description,
+                'fuel_type' => $fuel_type,
+                'pricing_range_from' => $pricing_range_from,
+                'pricing_range_to' => $pricing_range_to,
+                'ImageURL' => $ImageURL,
+                'acceleration' => $acceleration,
+            ]);
+
+            $this->disconnect($pdo);
+
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
 }
 ?>

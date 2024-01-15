@@ -339,6 +339,51 @@ class VehicleController
         }
     }
 
+    public function editVehicle()
+    {
+        if (SessionUtils::getSessionVariable('user')['role'] != 'admin') {
+            return array(
+                'status' => 400,
+                'message' => "You must be an admin to edit a vehicle"
+            );
+        }
+
+        $vehicleModel = new VehicleModel();
+
+        $id = $_POST['id'] ?? null;
+        $brand_id = $_POST['brand_id'] ?? null;
+        $model = $_POST['model'] ?? null;
+        $version = $_POST['version'] ?? null;
+        $year = $_POST['year'] ?? null;
+        $height = $_POST['height'] ?? null;
+        $width = $_POST['width'] ?? null;
+        $length = $_POST['length'] ?? null;
+        $consumption = $_POST['consumption'] ?? null;
+        $engine = $_POST['engine'] ?? null;
+        $speed = $_POST['speed'] ?? null;
+        $description = $_POST['description'] ?? null;
+        $fuel_type = $_POST['fuel_type'] ?? null;
+        $pricing_range_from = $_POST['pricing_range_from'] ?? null;
+        $pricing_range_to = $_POST['pricing_range_to'] ?? null;
+        $acceleration = $_POST['acceleration'] ?? null;
+        $Image = $_FILES['Image'] ?? null;
+
+        try {
+            $vehicleModel->editVehicle($id, $brand_id, $model, $version, $year, $height, $width, $length, $consumption, $engine, $speed, $description, $fuel_type, $pricing_range_from, $pricing_range_to, $Image, $acceleration);
+
+            return array(
+                'status' => 200,
+                'message' => "Vehicle edited successfully"
+            );
+        } catch (ErrorException $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+    }
+
+
 
 }
 ?>

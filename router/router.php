@@ -101,6 +101,22 @@ switch ($request) {
         $vehiclesManagementView = new VehiclesManagementView();
         $vehiclesManagementView->displayCreateVehiclePage();
         break;
+    case '/admin/vehicles/edit':
+        if (!$user) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        if (!checkRoles(['admin'])) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        if (!isset($_GET['id'])) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        $vehiclesManagementView = new VehiclesManagementView();
+        $vehiclesManagementView->displayEditVehiclePage();
+        break;
     case '/admin/brands':
         if (!$user) {
             header("Location: " . $base_path);
