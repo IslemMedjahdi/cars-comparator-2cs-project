@@ -233,7 +233,12 @@ class VehiclesView extends SharedUserView
                         $this->displayVehicleReview($vehicleReview);
                     }
                     ?>
+                    <div>
+                        <a href="/cars-comparer-2cs-project/reviews?id=<?= $vehicleId; ?>" class="btn btn-primary btn-block"><i
+                                class="bi bi-card-list"></i> View All Reviews</a>
+                    </div>
                 </div>
+
                 <?php
             }
             ?>
