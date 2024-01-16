@@ -262,6 +262,14 @@ switch ($request) {
             header("Location: " . $base_path);
             exit();
         }
+
+        if (isset($_GET["id"])) {
+            if (!checkRoles(['admin'])) {
+                header("Location: " . $base_path);
+                exit();
+            }
+        }
+
         $myProfileView = new MyProfileView();
         $myProfileView->displayProfilePage();
         break;
