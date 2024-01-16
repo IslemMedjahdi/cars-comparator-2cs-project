@@ -57,8 +57,8 @@ class CompareView extends SharedUserView
     function displayVehicleInfo($vehicle, $bestValues, $worstValues)
     {
         ?>
-        <div class="col-md-3 col-sm-6">
-            <div class="card bg-light">
+        <div class="col-md-3 col-sm-6 h-100">
+            <div class="card bg-light ">
                 <a href="/cars-comparer-2cs-project/vehicles?id=<?= $vehicle["id"]; ?>" target="_blank"
                     style="overflow: hidden;">
                     <img style="height: 10rem;object-fit: cover;" class="card-img-top d-flex img-hover-transition"

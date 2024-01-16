@@ -125,7 +125,7 @@ class VehiclesManagementView extends SharedAdminView
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <a href="/cars-comparer-2cs-project/admin/vehicles" class="btn btn-secondary">Back</a>
+                                    <a href="/cars-comparer-2cs-project/admin/brands" class="btn btn-secondary">Back</a>
                                     <button onclick="createVehicle()" class="btn btn-primary"><i
                                             class="bi bi-plus-circle-fill"></i>
                                         Submit</button>
@@ -279,7 +279,7 @@ class VehiclesManagementView extends SharedAdminView
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <a href="/cars-comparer-2cs-project/admin/vehicles" class="btn btn-secondary">Back</a>
+                                    <a href="/cars-comparer-2cs-project/admin/brands" class="btn btn-secondary">Back</a>
                                     <button onclick="editVehicle(<?= $vehicleId; ?>)" class="btn btn-primary"><i
                                             class="bi bi-check-circle-fill"></i> Update</button>
                                 </div>

@@ -261,10 +261,24 @@ class SharedUserView
             </select>
         </div>
         <div class="form-group">
-            <label>Vehicle:</label>
-            <select onchange="onVehicleChange(<?= $index ?>)" disabled class="form-control" id="vehicle-<?= $index ?>"
-                name="brand" required>
-                <option value="">Select Vehicle</option>
+            <label>Model:</label>
+            <select onchange="onModelChange(<?= $index ?>)" disabled class="form-control" name="model" required
+                id="model-<?= $index ?>">
+                <option value="">Select Model</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Version:</label>
+            <select onchange="onVersionChange(<?= $index ?>)" disabled class="form-control" name="version" required
+                id="version-<?= $index ?>">
+                <option value="">Select Version</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Year:</label>
+            <select onChange="onYearChange(<?= $index ?>)" disabled class="form-control" name="year" required
+                id="vehicle-<?= $index ?>">
+                <option value="">Select Year</option>
             </select>
         </div>
         <?php

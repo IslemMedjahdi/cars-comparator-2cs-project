@@ -392,7 +392,13 @@ function onBrandChange(formIndex) {
   const brandId = $(`#brand-${formIndex}`).val();
 
   if (brandId === "") {
-    $(`#vehicle-${formIndex}`).html(`<option value="">Select Vehicle</option>`);
+    $(`#model-${formIndex}`).html(`<option value="">Select Model</option>`);
+    $(`#model-${formIndex}`).attr("disabled", "disabled");
+
+    $(`#version-${formIndex}`).html(`<option value="">Select Version</option>`);
+    $(`#version-${formIndex}`).attr("disabled", "disabled");
+
+    $(`#vehicle-${formIndex}`).html(`<option value="">Select Year</option>`);
     $(`#vehicle-${formIndex}`).attr("disabled", "disabled");
     return;
   }
@@ -407,9 +413,95 @@ function onBrandChange(formIndex) {
     success: function (response) {
       response = JSON.parse(response);
       if (response.status === 200) {
-        let options = "<option value=''>Select Vehicle</option>";
+        let options = "<option value=''>Select Model</option>";
+
+        const models = new Set();
         response.data.forEach((vehicle) => {
-          options += `<option value="${vehicle.id}">${vehicle.model}-${vehicle.version}-${vehicle.year}</option>`;
+          models.add(vehicle.model);
+        });
+
+        models.forEach((model) => {
+          options += `<option value="${model}">${model}</option>`;
+        });
+
+        $(`#model-${formIndex}`).html(options);
+
+        $(`#model-${formIndex}`).removeAttr("disabled");
+      }
+    },
+  });
+}
+
+function onModelChange(formIndex) {
+  const brandId = $(`#brand-${formIndex}`).val();
+
+  const model = $(`#model-${formIndex}`).val();
+
+  if (model === "") {
+    $(`#version-${formIndex}`).html(`<option value="">Select Version</option>`);
+    $(`#version-${formIndex}`).attr("disabled", "disabled");
+
+    $(`#vehicle-${formIndex}`).html(`<option value="">Select Year</option>`);
+    $(`#vehicle-${formIndex}`).attr("disabled", "disabled");
+    return;
+  }
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/vehicles/get-vehicles-by-brand.php",
+    method: "GET",
+
+    data: {
+      brandId: brandId,
+    },
+    success: function (response) {
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        let options = "<option value=''>Select Version</option>";
+
+        const versions = new Set();
+        response.data.forEach((vehicle) => {
+          if (vehicle.model === model) versions.add(vehicle.version);
+        });
+
+        versions.forEach((version) => {
+          options += `<option value="${version}">${version}</option>`;
+        });
+        $(`#version-${formIndex}`).html(options);
+
+        $(`#version-${formIndex}`).removeAttr("disabled");
+      }
+    },
+  });
+}
+
+function onVersionChange(formIndex) {
+  const brandId = $(`#brand-${formIndex}`).val();
+
+  const model = $(`#model-${formIndex}`).val();
+
+  const version = $(`#version-${formIndex}`).val();
+
+  if (version === "") {
+    $(`#vehicle-${formIndex}`).html(`<option value="">Select Year</option>`);
+    $(`#vehicle-${formIndex}`).attr("disabled", "disabled");
+    return;
+  }
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/vehicles/get-vehicles-by-brand.php",
+    method: "GET",
+
+    data: {
+      brandId: brandId,
+    },
+    success: function (response) {
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        let options = "<option value=''>Select Year</option>";
+        response.data.forEach((vehicle) => {
+          if (vehicle.model === model && vehicle.version === version) {
+            options += `<option value="${vehicle.id}">${vehicle.year}</option>`;
+          }
         });
         $(`#vehicle-${formIndex}`).html(options);
 
@@ -462,7 +554,7 @@ function onCompareClick() {
   window.location.href = url.href;
 }
 
-function onVehicleChange(formIndex) {
+function onYearChange(formIndex) {
   const vehicleId = $(`#vehicle-${formIndex}`).val();
 
   // get the vehicle then set the image src
