@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2024 at 01:37 AM
+-- Generation Time: Jan 16, 2024 at 09:11 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -48,7 +48,8 @@ INSERT INTO `brand` (`name`, `id`, `CountryOfOrigin`, `YearFounded`, `WebsiteURL
 ('Toyota', 15, 'Japan', 1937, 'https://www.toyota.com/', 'Toyota Motor Corporation is a Japanese multinational automotive manufacturer headquartered in Toyota City, Aichi, Japan. It was founded by Kiichiro Toyoda and incorporated on August 28, 1937. Toyota is the largest automobile manufacturer in the world, producing about 10 million vehicles per year.', '/uploads/brands/6575eb4cd4a42_1702226764.png'),
 ('Dacia', 16, 'Romania', 1966, 'https://www.dacia.fr/', 'S.C. Automobile Dacia S.A., commonly known as Dacia, is a Romanian car manufacturer that takes its name from the historical region that constitutes present-day Romania. The company was established in 1966. In 1999, after 33 years, the Romanian government sold Dacia to the French car manufacturer Groupe Renault.', '/uploads/brands/6575ebae3b64c_1702226862.png'),
 ('Renault', 17, 'France', 1899, 'https://www.renault.dz', 'Groupe Renault is a French multinational automobile manufacturer established in 1899. The company produces a range of cars and vans and in the past, has manufactured trucks, tractors, tanks, buses/coaches, aircraft and aircraft engines, and autorail vehicles.', '/uploads/brands/6575ebf6ce113_1702226934.png'),
-('Mercedes', 18, 'Germany', 1926, 'https://www.mercedes-benz.com', 'Mercedes-Benz, commonly referred to as Mercedes and sometimes as Benz, is a German luxury and commercial vehicle automotive brand established in 1926. Mercedes-Benz AG is headquartered in Stuttgart, Baden-Württemberg, Germany.', '/uploads/brands/6575ec5a947a8_1702227034.png');
+('Mercedes', 18, 'Germany', 1926, 'https://www.mercedes-benz.com', 'Mercedes-Benz, commonly referred to as Mercedes and sometimes as Benz, is a German luxury and commercial vehicle automotive brand established in 1926. Mercedes-Benz AG is headquartered in Stuttgart, Baden-Württemberg, Germany.', '/uploads/brands/6575ec5a947a8_1702227034.png'),
+('Kia', 20, 'Italy', 1944, 'https://www.kia.com/us/en', 'Kia and Kia Motors Corporation, is a South Korean multinational automobile manufacturer headquartered in Seoul, South Korea. It is South Korea\'s second largest automobile manufacturer, after its parent company, Hyundai Motor Company, with sales of over 2.8 million vehicles in 2019.', '/uploads/brands/65a677923fa4f_1705408402.png');
 
 -- --------------------------------------------------------
 
@@ -154,6 +155,27 @@ INSERT INTO `diaporama` (`id`, `url`, `image`, `title`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `message`
+--
+
+CREATE TABLE `message` (
+  `id` int(11) NOT NULL,
+  `email` varchar(256) NOT NULL,
+  `subject` varchar(256) NOT NULL,
+  `message` varchar(1024) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`id`, `email`, `subject`, `message`) VALUES
+(1, 'admin@carcompass.com', 'Test Message', 'Hello world'),
+(2, 'yalitec.com@gmail.com', 'Test', 'Hello world this is a test message lorem ipsum');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `news`
 --
 
@@ -195,7 +217,7 @@ CREATE TABLE `style` (
 --
 
 INSERT INTO `style` (`id`, `logoUrl`, `primary_color`, `facebook_url`, `linkedin_url`, `instagram_url`, `faviconUrl`) VALUES
-(1, '/uploads/style/65a30c34b60c3_1705184308.png', '#5c67ff', NULL, NULL, NULL, '/uploads/style/658356de274d6_1703106270.png');
+(1, '/uploads/style/65a30c34b60c3_1705184308.png', '#70a0ff', NULL, NULL, NULL, '/uploads/style/658356de274d6_1703106270.png');
 
 -- --------------------------------------------------------
 
@@ -228,7 +250,7 @@ INSERT INTO `user` (`id`, `username`, `firstName`, `lastName`, `email`, `role`, 
 (13, 'islem_medjahdi', 'Islem', 'Medjahdi', 'ki_medjahdi@esi.dz', 'user', 'male', '2002-05-06', '$2y$10$Sn/x8oqtnWeNMR9NoYpHO.MSRteEMVUyLMkvXyBX6Xlsbb2AYYKyi', '2023-12-20 20:20:20.658805', 'accepted', '2023-12-20 20:20:48.000000'),
 (14, 'badro_medjahdi', 'IslemBadro', 'Medjahdi', 'test@gmail.com', 'user', 'male', '2002-05-06', '$2y$10$qj2FHbu.Vx4WmwTz.61EHuv1hH5JfhMh1QNi0VXP/d0mgnZcsT0GO', '2024-01-10 13:43:01.142087', 'accepted', '2024-01-10 13:44:19.000000'),
 (15, 'moncef_moussaoui', 'Moncef', 'Moussaoui', 'moncef@esi.dz', 'user', 'male', '1966-02-11', '$2y$10$xCoKhHRcH5AiTEFfEZOhs.FdqJYq6wkZs9c3Q9kx2Snu.WU9yYIym', '2024-01-10 13:43:27.582786', 'accepted', '2024-01-10 13:44:21.000000'),
-(16, 'kk_habouche', 'Abderrahmene', 'Habouche', 'kk_habouche@esi.dz', 'user', 'male', '2002-05-02', '$2y$10$eDfmLCk9X6dZ/V/L8cu.M.lzC0./dBHX4defr7V89BY1e14lWQ402', '2024-01-10 13:43:52.394018', 'accepted', '2024-01-10 13:44:23.000000');
+(16, 'kk_habouche', 'Abderrahmene', 'Habouche', 'kk_habouche@esi.dz', 'user', 'male', '2002-05-02', '$2y$10$eDfmLCk9X6dZ/V/L8cu.M.lzC0./dBHX4defr7V89BY1e14lWQ402', '2024-01-10 13:43:52.394018', 'accepted', '2024-01-16 16:33:48.000000');
 
 -- --------------------------------------------------------
 
@@ -343,6 +365,12 @@ ALTER TABLE `diaporama`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `news`
 --
 ALTER TABLE `news`
@@ -383,7 +411,7 @@ ALTER TABLE `vehicle_review`
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `content`
@@ -396,6 +424,12 @@ ALTER TABLE `content`
 --
 ALTER TABLE `diaporama`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `message`
+--
+ALTER TABLE `message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `news`
