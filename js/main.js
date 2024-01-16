@@ -1074,3 +1074,35 @@ function activateBrandReview(brandId, userId) {
     },
   });
 }
+
+function sendMessage() {
+  startLoading();
+
+  const email = $("#email").val();
+  const subject = $("#subject").val();
+  const message = $("#messageBody").val();
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/contact/send.php",
+    method: "POST",
+    data: {
+      email: email,
+      subject: subject,
+      message: message,
+    },
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+
+      if (response.status === 200) {
+        $("#message").html(`<div class="alert alert-success" role="alert">
+          ${response.message}
+        </div>`);
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+          ${response.message}
+        </div>`);
+      }
+    },
+  });
+}

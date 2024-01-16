@@ -383,6 +383,36 @@ class VehicleReviewModel extends Connection
         }
     }
 
+    public function getReviewsOfUser($userId)
+    {
+        if (empty($userId)) {
+            throw new Exception("User Id cannot be empty");
+        }
+
+        $pdo = $this->connect();
+
+        try {
+            $sql = "SELECT vr.*, u.username,v.ImageURL as vehicleImage, v.model as vehicleModel, v.version as vehicleVersion, v.year AS vehicleYear 
+                FROM vehicle_review vr
+                INNER JOIN user u ON vr.userId = u.id
+                INNER JOIN vehicle v ON vr.vehicleId = v.id
+                WHERE vr.userId=:userId";
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->execute([
+                'userId' => $userId
+            ]);
+
+            $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $this->disconnect($pdo);
+
+            return $reviews;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
 }
 
 ?>

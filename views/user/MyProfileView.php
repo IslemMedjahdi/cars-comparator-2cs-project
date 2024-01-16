@@ -22,6 +22,7 @@ class MyProfileView extends SharedUserView
         $this->displayHorizontalMenu();
         $this->displayProfile($user);
         $this->displayFavoriteVehicles();
+        $this->displayReviewsHistory();
         $this->displayFooter();
     }
 
@@ -131,6 +132,80 @@ class MyProfileView extends SharedUserView
                         </span>
                     </li>
                 </ul>
+            </div>
+        </div>
+        <?php
+    }
+
+    private function displayReviewsHistory()
+    {
+
+        $vehicleReviewController = new VehicleReviewController();
+
+        $reviews = $vehicleReviewController->getMyReviewsHistory()["data"] ?? null;
+
+        ?>
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <div class="mt-4">
+                <h2 class="head">Reviews History</h2>
+            </div>
+            <?php
+
+            if (empty($reviews)) {
+                ?>
+                <div class="w-100 mt-4 border rounded card-body bg-light" style="max-width: 1024px;">
+                    <div class="d-flex justify-content-center align-items-center flex-column">
+                        <div class="py-4">
+                            <h2>No reviews yet</h2>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            } else {
+                ?>
+                <div class="w-100 mt-4 border rounded card-body bg-light" style="max-width: 1024px;">
+                    <?php
+                    foreach ($reviews as $vehicleReview) {
+                        $this->displayVehicleReview($vehicleReview);
+                    }
+                    ?>
+                </div>
+                <?php
+            }
+            ?>
+        </div>
+        <?php
+    }
+
+    private function displayVehicleReview($vehicleReview)
+    {
+        ?>
+        <div class="card mb-3 ">
+            <div class="card-body">
+                <div class="badge badge-pill badge-primary">
+                    <?= $vehicleReview['vehicleModel'] ?> -
+                    <?= $vehicleReview['vehicleVersion'] ?> -
+                    <?= $vehicleReview['vehicleYear'] ?>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="card-title">
+                        <?php
+                        $statusColor = ($vehicleReview['status'] === 'accepted') ? 'success' : (($vehicleReview['status'] === 'pending') ? 'warning' : (($vehicleReview['status'] == 'blocked') ? 'danger' : 'dark'));
+                        ?>
+                        <div class="badge badge-pill badge-<?= $statusColor ?> text-uppercase">
+                            <?= $vehicleReview['status'] ?>
+                        </div>
+                    </div>
+                    <h6 class="card-subtitle mb-2 text-muted" style="font-size: 0.8em;">
+                        <?= date_format(date_create($vehicleReview['createdAt']), "Y/m/d H:i:s"); ?>
+                    </h6>
+                </div>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    <?= $this->showStars($vehicleReview["rate"]); ?>
+                </h6>
+                <p class="card-text">
+                    <?= $vehicleReview["review"]; ?>
+                </p>
             </div>
         </div>
         <?php

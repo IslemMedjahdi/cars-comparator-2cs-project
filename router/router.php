@@ -19,6 +19,7 @@ require_once __DIR__ . '/../views/user/ReviewsView.php';
 require_once __DIR__ . '/../views/user/ContactView.php';
 require_once __DIR__ . '/../views/user/BuyingGuideView.php';
 require_once __DIR__ . '/../views/user/CompanyView.php';
+require_once __DIR__ . '/../views/admin/MessagesManagementView.php';
 
 require_once __DIR__ . '/../utils/SessionUtils.php';
 
@@ -232,7 +233,18 @@ switch ($request) {
         $settingsManagementView = new SettingsManagementView();
         $settingsManagementView->displaySettingsPage();
         break;
-
+    case '/admin/messages':
+        if (!$user) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        if (!checkRoles(['admin'])) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        $messagesManagementView = new MessagesManagementView();
+        $messagesManagementView->displayMessagesPage();
+        break;
     case '':
         $homeView = new HomeView();
         $homeView->displayHomePage();
