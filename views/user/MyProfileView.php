@@ -47,6 +47,12 @@ class MyProfileView extends SharedUserView
                 <div class="rounded-0 bg-light border p-4 d-flex gap-4">
                     <ul class="list-group list-group-flush w-100">
                         <li class="list-group-item">
+                            User Name :
+                            <span class="text-primary">
+                                <?= $user["username"] ?>
+                            </span>
+                        </li>
+                        <li class="list-group-item">
                             Full Name :
                             <span class="text-primary">
                                 <?= $user["firstName"] . " " . $user["lastName"] ?>
