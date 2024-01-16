@@ -32,6 +32,11 @@ class SharedAdminView
             'icon' => 'bi bi-chat-left-text-fill',
         ],
         [
+            'name' => 'Messages',
+            'url' => '/cars-comparer-2cs-project/admin/messages',
+            'icon' => 'bi bi-chat-left-dots-fill'
+        ],
+        [
             'name' => 'Settings',
             'url' => '/cars-comparer-2cs-project/admin/settings',
             'icon' => 'bi bi-gear-fill',
