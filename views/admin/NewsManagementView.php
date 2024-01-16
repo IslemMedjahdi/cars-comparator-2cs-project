@@ -122,6 +122,11 @@ class NewsManagementView extends SharedAdminView
                             </td>
                             <td>
                                 <div class="d-flex gap-2">
+                                    <a target="_blank" href="/cars-comparer-2cs-project/news?id=<?= $newsItem["id"]; ?>"
+                                        class="btn btn-primary btn-sm">
+                                        <i class="bi bi-eye-fill"></i>
+                                        View
+                                    </a>
                                     <a href="/cars-comparer-2cs-project/admin/news/edit?id=<?php echo $newsItem["id"]; ?>"
                                         class="btn btn-primary btn-sm">
                                         <i class="bi bi-pencil-fill"></i>
@@ -140,6 +145,63 @@ class NewsManagementView extends SharedAdminView
         </div>
         <?php
     }
+
+    public function displayEditNewsPage()
+    {
+        $newsController = new NewsController();
+        $newsItem = $newsController->getNewsById()['data'];
+
+        if (!$newsItem) {
+            header("Location: /cars-comparer-2cs-project/admin/news");
+        }
+
+        ?>
+        <div class="container-fluid">
+            <div class="row">
+                <?php
+                $this->displaySideBar();
+                ?>
+                <main class="bg-light" style="width: calc(100% - 280px);height: 100vh; overflow-y: auto;">
+                    <div class="d-flex justify-content-center w-100">
+                        <div class="container mt-5">
+                            <h3 class="head">Edit News:</h3>
+                            <div id="message"></div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="title">Title:</label>
+                                            <input type="text" class="form-control" id="title" name="title"
+                                                value="<?php echo $newsItem['title']; ?>" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Image">Image:</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="Image" name="Image"
+                                                    accept="image/*" required>
+                                                <label class="custom-file-label" for="Image">Choose file</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Description:</label>
+                                            <textarea class="form-control" id="description" name="description"
+                                                rows="3"><?php echo $newsItem['description']; ?></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a href="/cars-comparer-2cs-project/admin/news" class="btn btn-secondary">Back</a>
+                                    <button onclick="editNews(<?= $newsItem['id']; ?>)" class="btn btn-primary"><i
+                                            class="bi bi-pencil-fill"></i> Update</button>
+                                </div>
+                            </div>
+                </main>
+            </div>
+        </div>
+        </div>
+        <?php
+    }
+
 
 
 }

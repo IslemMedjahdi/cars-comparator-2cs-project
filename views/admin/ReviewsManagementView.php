@@ -70,7 +70,9 @@ class ReviewManagementView extends SharedAdminView
                         ?>
                         <tr>
                             <th>
-                                <?= $review["username"] ?>
+                                <div class="badge badge-pill badge-primary">
+                                    <?= $review["username"] ?>
+                                </div>
                             </th>
                             <th>
                                 <?= $review["vehicleModel"] ?> -
@@ -150,11 +152,13 @@ class ReviewManagementView extends SharedAdminView
                         ?>
                         <tr>
                             <th>
-                                <?= $review["username"] ?>
+                                <div class="badge badge-pill badge-primary">
+                                    <?= $review["username"] ?>
+                                </div>
                             </th>
                             <th>
-                                <?= $review["brandName"] ?> -
-                                <div class="badge badge-pill badge-primary">
+                                <?= $review["brandName"] ?>
+                                <div class="badge badge-pill badge-secondary">
                                     Brand
                                 </div>
                             </th>

@@ -434,15 +434,16 @@ function activateUser(id) {
 function onBrandChange(formIndex) {
   const brandId = $(`#brand-${formIndex}`).val();
 
+  $(`#version-${formIndex}`).html(`<option value="">Select Version</option>`);
+  $(`#version-${formIndex}`).attr("disabled", "disabled");
+
+  $(`#vehicle-${formIndex}`).html(`<option value="">Select Year</option>`);
+  $(`#vehicle-${formIndex}`).attr("disabled", "disabled");
+
   if (brandId === "") {
     $(`#model-${formIndex}`).html(`<option value="">Select Model</option>`);
     $(`#model-${formIndex}`).attr("disabled", "disabled");
 
-    $(`#version-${formIndex}`).html(`<option value="">Select Version</option>`);
-    $(`#version-${formIndex}`).attr("disabled", "disabled");
-
-    $(`#vehicle-${formIndex}`).html(`<option value="">Select Year</option>`);
-    $(`#vehicle-${formIndex}`).attr("disabled", "disabled");
     return;
   }
 
@@ -480,12 +481,12 @@ function onModelChange(formIndex) {
 
   const model = $(`#model-${formIndex}`).val();
 
+  $(`#vehicle-${formIndex}`).html(`<option value="">Select Year</option>`);
+  $(`#vehicle-${formIndex}`).attr("disabled", "disabled");
+
   if (model === "") {
     $(`#version-${formIndex}`).html(`<option value="">Select Version</option>`);
     $(`#version-${formIndex}`).attr("disabled", "disabled");
-
-    $(`#vehicle-${formIndex}`).html(`<option value="">Select Year</option>`);
-    $(`#vehicle-${formIndex}`).attr("disabled", "disabled");
     return;
   }
 
@@ -648,6 +649,43 @@ function createNews() {
 
   $.ajax({
     url: "/cars-comparer-2cs-project/api/news/create.php",
+    method: "POST",
+
+    data: dataForm,
+    contentType: false,
+    processData: false,
+    success: function (response) {
+      stopLoading();
+      response = JSON.parse(response);
+      if (response.status === 200) {
+        $("#message").html(`<div class="alert alert-success" role="alert">
+        ${response.message}
+      </div>`);
+      } else {
+        $("#message").html(`<div class="alert alert-danger" role="alert">
+        ${response.message}
+      </div>`);
+      }
+    },
+  });
+}
+
+function editNews(newsId) {
+  const dataForm = new FormData();
+
+  const title = $("#title").val();
+  const description = $("#description").val();
+  const image = $("#Image")[0].files[0];
+
+  dataForm.append("id", newsId);
+  dataForm.append("title", title);
+  dataForm.append("description", description);
+  dataForm.append("Image", image);
+
+  startLoading();
+
+  $.ajax({
+    url: "/cars-comparer-2cs-project/api/news/edit.php",
     method: "POST",
 
     data: dataForm,

@@ -50,32 +50,6 @@ class NewsModel extends Connection
         return $stmt->fetch();
     }
 
-    public function updateNews($id, $title, $description, $Image)
-    {
-        if (empty($title)) {
-            throw new ErrorException("Title is required");
-        }
-        if (empty($description)) {
-            throw new ErrorException("Description is required");
-        }
-        if (isset($Image) && $Image['error'] === 0) {
-            $ImageURL = $this->uploadImage($Image, "/news");
-        } else {
-            throw new ErrorException("Image is required");
-        }
-
-        $pdo = $this->connect();
-        $sql = "UPDATE news SET title = :title, description = :description, image = :image WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([
-            'title' => $title,
-            'description' => $description,
-            'image' => $ImageURL,
-            'id' => $id
-        ]);
-        return $stmt->rowCount();
-    }
-
     public function deleteNews($id)
     {
         $pdo = $this->connect();
@@ -86,6 +60,41 @@ class NewsModel extends Connection
         ]);
         return $stmt->rowCount();
     }
+
+    public function updateNews($id, $title, $description, $Image)
+    {
+        if (empty($title)) {
+            throw new ErrorException("Title is required");
+        }
+        if (empty($description)) {
+            throw new ErrorException("Description is required");
+        }
+
+        $existingVehicle = $this->getNewsById($id);
+
+        if (!$existingVehicle) {
+            throw new ErrorException("News not found");
+        }
+
+        $ImageURL = $existingVehicle['ImageURL'];
+
+        if (isset($Image) && $Image['error'] === 0) {
+            $ImageURL = $this->uploadImage($Image, "/news");
+        }
+
+        $pdo = $this->connect();
+        $sql = "UPDATE news SET title = :title, description = :description, ImageURL = :image WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'title' => $title,
+            'description' => $description,
+            'image' => $ImageURL,
+            'id' => $id
+        ]);
+        return $stmt->rowCount();
+    }
+
+
 
 }
 ?>

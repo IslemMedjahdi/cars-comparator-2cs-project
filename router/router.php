@@ -194,6 +194,20 @@ switch ($request) {
         $newsManagementView = new NewsManagementView();
         $newsManagementView->displayCreateNewsPage();
         break;
+    case '/admin/news/edit':
+        if (!$user) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        if (!checkRoles(['admin'])) {
+        }
+        if (!isset($_GET['id'])) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        $newsManagementView = new NewsManagementView();
+        $newsManagementView->displayEditNewsPage();
+        break;
     case '/admin/reviews':
         if (!$user) {
             header("Location: " . $base_path);
