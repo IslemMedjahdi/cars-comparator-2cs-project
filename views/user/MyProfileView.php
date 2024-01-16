@@ -11,7 +11,15 @@ class MyProfileView extends SharedUserView
 
         $userController = new UserController();
 
-        $user = $userController->getSessionUser()["data"] ?? null;
+        if (!isset($_GET["id"])) {
+            $user = $userController->getSessionUser()["data"] ?? null;
+        } else {
+            $user = $userController->getUserById()["data"] ?? null;
+
+            if ($user === null) {
+                $user = $userController->getSessionUser()["data"] ?? null;
+            }
+        }
 
         if (!$user) {
             header("Location: /cars-comparer-2cs-project/auth/login");
@@ -80,13 +88,23 @@ class MyProfileView extends SharedUserView
 
         $vehicleReviewController = new VehicleReviewController();
 
-        $vehicles = $vehicleReviewController->getMyBestReviews()["data"] ?? null;
+        if (!isset($_GET["id"])) {
+            $vehicles = $vehicleReviewController->getMyBestReviews()["data"] ?? null;
+        } else {
+            $vehicles = $vehicleReviewController->getBestReviewsOfUser()["data"];
+
+            if ($vehicles === null) {
+                $vehicles = $vehicleReviewController->getMyBestReviews()["data"];
+
+            }
+        }
+
 
         ?>
         <div class="w-100">
             <div class="d-flex justify-content-center align-items-center flex-column w-100">
                 <div class="mt-4">
-                    <h2 class="head">My Best Vehicles</h2>
+                    <h2 class="head">Best Vehicles</h2>
                 </div>
                 <div class="w-100 mt-4 row" style="max-width: 1377px;">
                     <?php foreach ($vehicles as $vehicle) {
@@ -142,7 +160,16 @@ class MyProfileView extends SharedUserView
 
         $vehicleReviewController = new VehicleReviewController();
 
-        $reviews = $vehicleReviewController->getMyReviewsHistory()["data"] ?? null;
+
+        if (!isset($_GET["id"])) {
+            $reviews = $vehicleReviewController->getMyReviewsHistory()["data"] ?? null;
+        } else {
+            $reviews = $vehicleReviewController->getReviewsHistoryOfUser()["data"] ?? null;
+
+            if ($reviews === null) {
+                $reviews = $vehicleReviewController->getMyReviewsHistory()["data"] ?? null;
+            }
+        }
 
         ?>
         <div class="d-flex justify-content-center align-items-center flex-column">

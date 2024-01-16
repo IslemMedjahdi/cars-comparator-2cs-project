@@ -96,6 +96,11 @@ class UsersManagementView extends SharedAdminView
                             </td>
                             <td>
                                 <div class="dropdown">
+                                    <a href="/cars-comparer-2cs-project/auth/profile/?id=<?= $user["id"] ?>" target="_blank"
+                                        class="btn btn-primary btn-sm">
+                                        <i class="bi bi-eye"></i>
+                                        View
+                                    </a>
                                     <button class="btn btn-secondary btn-sm" type="button" id="dropdownMenuButton<?= $user['id'] ?>"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="bi bi-three-dots"></i>

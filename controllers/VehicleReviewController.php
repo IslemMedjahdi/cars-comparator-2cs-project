@@ -275,6 +275,28 @@ class VehicleReviewController
         }
     }
 
+    public function getBestReviewsOfUser()
+    {
+        $vehicleReviewModel = new VehicleReviewModel();
+
+        $userId = $_GET["id"];
+
+        try {
+            $reviews = $vehicleReviewModel->getBestReviewsByUser($userId);
+
+            return array(
+                'status' => 200,
+                'data' => $reviews
+            );
+        } catch (Exception $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+
+        }
+    }
+
     public function getMyReviewsHistory()
     {
         $vehicleReviewModel = new VehicleReviewModel();
@@ -296,6 +318,31 @@ class VehicleReviewController
                 'message' => $e->getMessage()
             );
         }
+    }
+
+    public function getReviewsHistoryOfUser()
+    {
+
+        $vehicleReviewModel = new VehicleReviewModel();
+
+        $userId = $_GET["id"];
+
+        try {
+
+            $reviews = $vehicleReviewModel->getReviewsOfUser($userId);
+
+            return array(
+                'status' => 400,
+                'data' => $reviews
+            );
+
+        } catch (Exception $e) {
+            return array(
+                'status' => 400,
+                'message' => $e->getMessage()
+            );
+        }
+
     }
 
 }
