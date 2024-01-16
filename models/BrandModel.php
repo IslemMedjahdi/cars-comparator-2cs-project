@@ -102,6 +102,68 @@ class BrandModel extends Connection
         }
     }
 
+    public function editBrand($id, $name, $CountryOfOrigin, $YearFounded, $WebsiteURL = null, $Description = null, $LogoImage = null)
+    {
+        if (empty($id)) {
+            throw new ErrorException("Brand ID is required");
+        }
+
+        if (empty($name)) {
+            throw new ErrorException("Name is required");
+        }
+
+        if (empty($CountryOfOrigin)) {
+            throw new ErrorException("Country of origin is required");
+        }
+
+        if (empty($YearFounded)) {
+            throw new ErrorException("Year founded is required");
+        }
+
+        if (!is_numeric($YearFounded)) {
+            throw new ErrorException("Year founded must be a number");
+        }
+
+        if (!empty($WebsiteURL) && !filter_var($WebsiteURL, FILTER_VALIDATE_URL)) {
+            throw new ErrorException("Website URL is not valid");
+        }
+
+        $pdo = $this->connect();
+
+        try {
+            $existingBrand = $this->getBrandById($id);
+            if (!$existingBrand) {
+                throw new ErrorException("Brand with ID $id not found");
+            }
+
+            $LogoImageURL = $existingBrand['LogoImageURL'];
+            if ($LogoImage !== null && $LogoImage['error'] === 0) {
+                $LogoImageURL = $this->uploadImage($LogoImage, "/brands");
+            }
+
+            $sql = "UPDATE brand 
+                SET name = :name, CountryOfOrigin = :CountryOfOrigin, YearFounded = :YearFounded, 
+                    WebsiteURL = :WebsiteURL, Description = :Description, LogoImageURL = :LogoImageURL 
+                WHERE id = :id";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                'id' => $id,
+                'name' => $name,
+                'CountryOfOrigin' => $CountryOfOrigin,
+                'YearFounded' => $YearFounded,
+                'WebsiteURL' => $WebsiteURL,
+                'Description' => $Description,
+                'LogoImageURL' => $LogoImageURL
+            ]);
+
+            $this->disconnect($pdo);
+        } catch (PDOException $e) {
+            throw new ErrorException($e->getMessage());
+        }
+    }
+
+
 
 }
 

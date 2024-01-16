@@ -141,6 +141,23 @@ switch ($request) {
         $brandsManagementView = new BrandsManagementView();
         $brandsManagementView->displayCreateBrandPage();
         break;
+    case '/admin/brands/edit':
+        if (!$user) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        if (!checkRoles(['admin'])) {
+            header("Location: " . $base_path);
+            exit();
+        }
+
+        if (!isset($_GET['id'])) {
+            header("Location: " . $base_path);
+            exit();
+        }
+        $brandsManagementView = new BrandsManagementView();
+        $brandsManagementView->displayEditBrandPage();
+        break;
     case '/admin/users':
         if (!$user) {
             header("Location: " . $base_path);
