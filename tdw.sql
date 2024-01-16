@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2024 at 12:06 AM
+-- Generation Time: Jan 16, 2024 at 01:37 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -95,6 +95,9 @@ INSERT INTO `comparison_history` (`userId`, `vehicle1Id`, `vehicle2Id`) VALUES
 (9, 71, 73),
 (9, 71, 74),
 (9, 72, 73),
+(9, 72, 74),
+(9, 72, 75),
+(9, 72, 82),
 (9, 73, 74),
 (12, 71, 72),
 (12, 71, 73),
@@ -115,15 +118,38 @@ CREATE TABLE `content` (
   `phone_number` varchar(20) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `title` varchar(100) DEFAULT NULL,
-  `description` text DEFAULT NULL
+  `description` text DEFAULT NULL,
+  `buying_guide` text NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `content`
 --
 
-INSERT INTO `content` (`id`, `email`, `phone_number`, `address`, `title`, `description`) VALUES
-(1, 'cars-comparer@gmail.com', '123-456-789', '123 Main S', 'Carcompass', 'Discover your ideal ride with CarCompass – your ultimate destination for insightful car comparisons. Navigate through an extensive database, explore detailed specs, and make informed decisions on the perfect vehicle for your journey. Your trusted companion in the world of cars');
+INSERT INTO `content` (`id`, `email`, `phone_number`, `address`, `title`, `description`, `buying_guide`) VALUES
+(1, 'cars-comparer@gmail.com', '123-456-789', '123 Main S', 'CarCompass ', 'Discover your ideal ride with CarCompass – your ultimate destination for insightful car comparisons. Navigate through an extensive database, explore detailed specs, and make informed decisions on the perfect vehicle for your journey. Your trusted companion in the world of cars', 'Welcome to the ultimate buying guide for vehicles, where we\'ll take you through a comprehensive journey to help you make informed choices when it comes to purchasing your next ride. Whether you\'re in the market for a sleek sedan, a rugged SUV, a fuel-efficient hybrid, or a powerful truck, this guide covers all the essential aspects to consider before making a decision. Let\'s dive into the key factors that will shape your vehicle-buying experience.\n\nDefine Your Needs and Budget:\nBefore you start browsing through dealerships or online listings, take the time to define your needs and establish a realistic budget. Consider the number of passengers, cargo space, fuel efficiency, and desired features. Determine whether you need a vehicle for daily commuting, family trips, off-road adventures, or towing capabilities. Establishing a clear budget early on will help you narrow down your options and avoid unnecessary financial strain.\n\nNew vs. Used:\nOne of the first decisions you\'ll need to make is whether to buy a new or used vehicle. New cars offer the latest technology, warranties, and that \"brand-new\" feeling, but they also come with a higher price tag. Used cars, on the other hand, can provide significant cost savings while still offering reliable performance. Evaluate the pros and cons of each option based on your preferences and budget.\n\nResearch Vehicle Models:\nOnce you\'ve identified your needs and budget, research different vehicle models that align with your criteria. Consider factors such as reliability, fuel efficiency, safety ratings, maintenance costs, and resale value. Online reviews, expert opinions, and user experiences can provide valuable insights into the real-world performance of a particular model.\n\nTest Drives:\nNever underestimate the importance of a test drive. Schedule test drives for the top contenders on your list to get a firsthand feel for each vehicle\'s handling, comfort, and performance. Pay attention to details such as visibility, noise levels, and ease of use for features like infotainment systems and driver-assistance technologies.\n\nCompare Pricing and Financing Options:\nOnce you\'ve narrowed down your options, compare pricing from different dealerships. Don\'t hesitate to negotiate, and be aware of any manufacturer incentives or special financing offers. Explore financing options, including loans and leases, and understand the terms and interest rates before committing to a deal.\n\nConsider Total Ownership Costs:\nBeyond the initial purchase price, factor in the total ownership costs, including insurance, maintenance, fuel, and potential repair expenses. Some vehicles may have higher upfront costs but lower long-term ownership expenses, while others may have the opposite dynamic.\n\nCheck Vehicle History for Used Cars:\nIf you\'re considering a used vehicle, obtain a comprehensive vehicle history report. This report can reveal important information about the car\'s past, including accidents, title issues, odometer discrepancies, and maintenance records. A transparent history can provide peace of mind and help you make a more informed decision.\n\nExplore Warranty Options:\nUnderstanding the warranty coverage is crucial, especially when purchasing a new vehicle. Different manufacturers offer varying warranty packages, so be sure to inquire about the length of coverage and what is included. Some brands may also provide extended warranty options for added peace of mind.\n\nEnvironmental Considerations:\nIf environmental impact is a priority for you, consider the fuel efficiency and emissions of the vehicles you\'re interested in. Hybrid and electric options are becoming more prevalent, offering eco-friendly alternatives with potential long-term cost savings.\n\nFinalize the Deal:\nOnce you\'ve done your research, taken test drives, and compared pricing, it\'s time to finalize the deal. Review all the paperwork carefully, ensuring you understand the terms and conditions. Don\'t hesitate to ask questions and seek clarification on any aspects that may be unclear. Once you\'re satisfied, sign on the dotted line and enjoy the excitement of your new (or new-to-you) vehicle.\n\nConclusion:\nChoosing the right vehicle involves careful consideration of your needs, budget, and the available options in the market. By following this comprehensive buying guide, you\'ll be well-equipped to navigate the process and make a decision that aligns with your preferences and lifestyle. Happy driving!');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `diaporama`
+--
+
+CREATE TABLE `diaporama` (
+  `id` int(11) NOT NULL,
+  `url` varchar(512) NOT NULL,
+  `image` varchar(512) NOT NULL,
+  `title` varchar(256) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `diaporama`
+--
+
+INSERT INTO `diaporama` (`id`, `url`, `image`, `title`) VALUES
+(5, 'http://localhost/cars-comparer-2cs-project/news?id=3', '/uploads/diaporama/65a138948b068_1705064596.jpg', 'Revolutionizing the Roads: Futuristic Solar-Powered Vehicles Take Center Stage'),
+(6, 'http://localhost/cars-comparer-2cs-project/news?id=4', '/uploads/diaporama/65a138bd3cd6f_1705064637.jpg', 'Electric Adventure Unleashed: Off-Road Electric Vehicle Series Promises Thrilling Escapades'),
+(7, 'https://www.honestjohn.co.uk/news/new-cars/2023-10/2024-peugeot-e-3008/', '/uploads/diaporama/65a13b5d82ac8_1705065309.jpg', '2024 Peugeot e-3008: Prices, specs and release date');
 
 -- --------------------------------------------------------
 
@@ -169,7 +195,7 @@ CREATE TABLE `style` (
 --
 
 INSERT INTO `style` (`id`, `logoUrl`, `primary_color`, `facebook_url`, `linkedin_url`, `instagram_url`, `faviconUrl`) VALUES
-(1, '/uploads/style/658356de22046_1703106270.png', '#5c67ff', NULL, NULL, NULL, '/uploads/style/658356de274d6_1703106270.png');
+(1, '/uploads/style/65a30c34b60c3_1705184308.png', '#5c67ff', NULL, NULL, NULL, '/uploads/style/658356de274d6_1703106270.png');
 
 -- --------------------------------------------------------
 
@@ -245,7 +271,9 @@ INSERT INTO `vehicle` (`id`, `brand_id`, `model`, `version`, `year`, `height`, `
 (78, 11, 'Malibu', 'Premier', 2023, 146, 184, 494, 7, '1.5L Turbocharged Inline-4', 210, 'The Chevrolet Malibu Premier offers a stylish and comfortable ride, with advanced safety features and modern technology.', 'gasoline', 25000, 32000, 8, '/uploads/vehicles/659e8eb0414da_1704890032.jpg'),
 (79, 12, '308', 'GT Line', 2022, 147, 180, 425, 4, '1.6L BlueHDi Diesel', 200, 'The Peugeot 308 GT Line combines sporty design with fuel efficiency, making it a practical and stylish choice for urban driving.', 'diesel', 30000, 36000, 9, '/uploads/vehicles/659e8f064377e_1704890118.jpg'),
 (80, 16, 'Duster', 'Prestige', 2023, 167, 180, 434, 7, '1.3L TCe Turbocharged', 190, 'The Dacia Duster Prestige is a rugged and affordable SUV, designed for off-road adventures and everyday practicality.', 'gasoline', 20000, 26000, 10, '/uploads/vehicles/659e8f7313676_1704890227.jpg'),
-(81, 17, 'Megane', 'R.S. Trophy', 2024, 142, 187, 463, 4, ' 1.6L TCe E-TECH ', 260, 'The Renault Megane R.S. Trophy brings together performance and eco-friendliness with its hybrid engine, delivering an exhilarating driving experience in a stylish and compact package.', 'hybrid', 38000, 46000, 7, '/uploads/vehicles/659e8feca8d71_1704890348.jpg');
+(81, 17, 'Megane', 'R.S. Trophy', 2024, 142, 187, 463, 4, ' 1.6L TCe E-TECH ', 260, 'The Renault Megane R.S. Trophy brings together performance and eco-friendliness with its hybrid engine, delivering an exhilarating driving experience in a stylish and compact package.', 'hybrid', 38000, 46000, 7, '/uploads/vehicles/659e8feca8d71_1704890348.jpg'),
+(82, 10, 'BMW X5', 'xDrive40i', 2022, 500, 200, 175, 11, '2.5L TwinPower Turbo Inline-6L', 210, 'The BMW X5 is a mid-size luxury SUV produced by BMW. The X5 made its debut in 1999 as the E53 model. It was BMW\'s first SUV. At launch, it featured all-wheel drive and was available with either a manual or automatic gearbox. The second generation was launched in 2006, and was known internally as the E70. The E70 featured the torque-split capable xDrive all-wheel drive system mated to an automatic gearbox. In 2009, the X5 M performance variant was released as a 2010 model.', 'gasoline', 40000, 50000, 5, '/uploads/vehicles/65a5befa6a7ee_1705361146.jpg'),
+(83, 10, '7 Series', '750i xDrive', 2024, 147, 190, 523, 12, 'V8 TwinPower Turbo', 250, 'The BMW 7 Series is a full-size luxury sedan manufactured and marketed by the German automaker BMW since 1977. It is the successor to the BMW E3 \"New Six\" sedan and is now in its seventh generation.', 'gasoline', 60000, 70000, 4, '/uploads/vehicles/65a5c3a5bc139_1705362341.jpg');
 
 -- --------------------------------------------------------
 
@@ -274,7 +302,8 @@ INSERT INTO `vehicle_review` (`userId`, `vehicleId`, `rate`, `review`, `status`,
 (12, 71, 4, NULL, 'accepted', '2023-12-22 00:00:00'),
 (12, 72, 3, NULL, 'accepted', '2023-12-22 01:16:35'),
 (12, 73, 3, 'This car is bad', 'accepted', '2023-12-26 22:29:56'),
-(13, 71, 5, 'This car is good', 'accepted', '2023-12-22 00:00:00');
+(13, 71, 5, 'This car is good', 'accepted', '2023-12-22 00:00:00'),
+(13, 77, 5, 'This car is superrr', 'accepted', '2024-01-15 18:29:40');
 
 --
 -- Indexes for dumped tables
@@ -305,6 +334,12 @@ ALTER TABLE `comparison_history`
 -- Indexes for table `content`
 --
 ALTER TABLE `content`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `diaporama`
+--
+ALTER TABLE `diaporama`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -357,6 +392,12 @@ ALTER TABLE `content`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `diaporama`
+--
+ALTER TABLE `diaporama`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
@@ -378,7 +419,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- Constraints for dumped tables
